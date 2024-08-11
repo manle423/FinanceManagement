@@ -217,7 +217,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="App.config" />
-    <None Include="App.config.example" />
     <None Include="config.json.example" />
     <None Include="config.json" />
     <None Include="packages.config" />
