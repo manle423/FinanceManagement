@@ -1,4 +1,5 @@
-﻿using FinanceManagement.Services;
+﻿using FinanceManagement.Forms;
+using FinanceManagement.Services;
 using FinanceManagement.Utils;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,10 @@ using System.Windows.Forms;
 
 namespace FinanceManagement
 {
+
     public partial class LoginForm : Form
     {
+
         public LoginForm()
         {
             InitializeComponent();
@@ -47,7 +50,9 @@ namespace FinanceManagement
                     throw new Exception("Invalid Credentials");
                 }
                 MessageBox.Show("Login successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                DashboardForm dashboardForm = new DashboardForm();
+                this.Hide();
+                dashboardForm.Show();
             }
             catch (Exception ex)
             {
@@ -75,6 +80,11 @@ namespace FinanceManagement
         private void chkShowPass_CheckedChanged(object sender, EventArgs e)
         {
             txtPassword.PasswordChar = chkShowPass.Checked ? '\0' : '*';
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

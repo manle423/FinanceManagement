@@ -46,7 +46,7 @@ namespace FinanceManagement
 
                 if (!ValidationHelper.IsValidPassword(password))
                 {
-                    throw new Exception("Password is required");
+                    throw new Exception("Password is not valid");
                 }
 
                 if (confirm != password)

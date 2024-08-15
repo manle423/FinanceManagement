@@ -175,11 +175,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DatabaseConnection.cs" />
+    <Compile Include="Forms\AddCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddCategoryForm.Designer.cs">
+      <DependentUpon>AddCategoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Auth\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Auth\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DashboardForm.Designer.cs">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -195,14 +207,22 @@
     <Compile Include="Forms\Auth\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\UserSession.cs" />
     <Compile Include="Utils\HashingHelper.cs" />
     <Compile Include="Utils\ValidationHelper.cs" />
+    <EmbeddedResource Include="Forms\AddCategoryForm.resx">
+      <DependentUpon>AddCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Auth\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Auth\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DashboardForm.resx">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
