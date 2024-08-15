@@ -39,8 +39,9 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.rdoExpense = new System.Windows.Forms.RadioButton();
             this.rdoIncome = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
+            this.grpCateType = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
+            this.grpCateType.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -137,7 +138,7 @@
             // rdoExpense
             // 
             this.rdoExpense.AutoSize = true;
-            this.rdoExpense.Location = new System.Drawing.Point(146, 132);
+            this.rdoExpense.Location = new System.Drawing.Point(13, 19);
             this.rdoExpense.Name = "rdoExpense";
             this.rdoExpense.Size = new System.Drawing.Size(66, 17);
             this.rdoExpense.TabIndex = 7;
@@ -148,24 +149,26 @@
             // 
             // rdoIncome
             // 
-            this.rdoIncome.AutoCheck = false;
             this.rdoIncome.AutoSize = true;
-            this.rdoIncome.Location = new System.Drawing.Point(244, 132);
+            this.rdoIncome.Location = new System.Drawing.Point(125, 19);
             this.rdoIncome.Name = "rdoIncome";
             this.rdoIncome.Size = new System.Drawing.Size(60, 17);
             this.rdoIncome.TabIndex = 8;
             this.rdoIncome.TabStop = true;
             this.rdoIncome.Text = "Income";
             this.rdoIncome.UseVisualStyleBackColor = true;
+            this.rdoIncome.CheckedChanged += new System.EventHandler(this.rdoIncome_CheckedChanged);
             // 
-            // label3
+            // grpCateType
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(143, 116);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Type:";
+            this.grpCateType.Controls.Add(this.rdoExpense);
+            this.grpCateType.Controls.Add(this.rdoIncome);
+            this.grpCateType.Location = new System.Drawing.Point(142, 115);
+            this.grpCateType.Name = "grpCateType";
+            this.grpCateType.Size = new System.Drawing.Size(200, 49);
+            this.grpCateType.TabIndex = 9;
+            this.grpCateType.TabStop = false;
+            this.grpCateType.Text = "Type";
             // 
             // AddCategoryForm
             // 
@@ -174,9 +177,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(500, 300);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.rdoIncome);
-            this.Controls.Add(this.rdoExpense);
+            this.Controls.Add(this.grpCateType);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lblDes);
@@ -192,6 +193,8 @@
             this.Load += new System.EventHandler(this.AddCategory_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.grpCateType.ResumeLayout(false);
+            this.grpCateType.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,6 +213,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.RadioButton rdoExpense;
         private System.Windows.Forms.RadioButton rdoIncome;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox grpCateType;
     }
 }

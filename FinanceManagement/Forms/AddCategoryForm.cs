@@ -3,18 +3,22 @@ using FinanceManagement.Utils;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace FinanceManagement
 {
     public partial class AddCategoryForm : Form
     {
         public Point mouseLocation;
+        string cateType = string.Empty;
 
         public AddCategoryForm()
         {
             InitializeComponent();
             this.AcceptButton = btnAdd;
-            rdoIncome.Checked = true;
+            this.CancelButton = btnCancel;
+            rdoExpense.AutoCheck = true;
+            btnClose.TabStop = false;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -26,17 +30,6 @@ namespace FinanceManagement
         {
             try
             {
-                string categoryType = string.Empty;
-
-                if (rdoExpense.Checked)
-                {
-                    categoryType = "EXPENSE";
-                }
-                else if (rdoIncome.Checked)
-                {
-                    categoryType = "INCOME";
-                }
-
                 string name = txtName.Text;
                 string description = txtDescription.Text;
 
@@ -45,7 +38,7 @@ namespace FinanceManagement
                     throw new Exception("Name of category is required");
                 }
 
-                bool isAdded = CategoryService.AddCategory(name, categoryType, description);
+                bool isAdded = CategoryService.AddCategory(name, cateType, description);
 
                 if (isAdded)
                 {
@@ -72,7 +65,7 @@ namespace FinanceManagement
 
         private void AddCategory_Load(object sender, EventArgs e)
         {
-
+            rdoExpense.Checked = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -94,9 +87,20 @@ namespace FinanceManagement
             }
         }
 
+
+
+        private void grpCateType_Enter(object sender, EventArgs e)
+        {
+        }
+
         private void rdoExpense_CheckedChanged(object sender, EventArgs e)
         {
+            cateType = "EXPENSE";
+        }
 
+        private void rdoIncome_CheckedChanged(object sender, EventArgs e)
+        {
+            cateType = "INCOME";
         }
     }
 }

@@ -22,7 +22,7 @@ namespace FinanceManagement
 
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-
+            btnClose.TabStop = false;
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -90,6 +90,21 @@ namespace FinanceManagement
         private void chkShow_CheckedChanged(object sender, EventArgs e)
         {
             txtPassword.PasswordChar = chkShowPass.Checked ? '\0' : '*';
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkShowConf_CheckedChanged(object sender, EventArgs e)
+        {
+            txtConfirm.PasswordChar = chkShowConf.Checked ? '\0' : '*';
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

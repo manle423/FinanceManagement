@@ -67,6 +67,9 @@ namespace FinanceManagement
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            txtUsername.TabIndex = 0;
+            txtPassword.TabIndex = 1;
+            btnClose.TabStop = false;
 
         }
 

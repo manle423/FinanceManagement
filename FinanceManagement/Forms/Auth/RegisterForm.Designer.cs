@@ -43,6 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.chkShowPass = new System.Windows.Forms.CheckBox();
+            this.chkShowConf = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,7 @@
             this.btnClose.Location = new System.Drawing.Point(570, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(30, 30);
-            this.btnClose.TabIndex = 7;
+            this.btnClose.TabIndex = 99;
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -86,7 +87,7 @@
             this.label1.Location = new System.Drawing.Point(256, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 25);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 99;
             this.label1.Text = "Register";
             // 
             // btnToLoginForm
@@ -124,6 +125,7 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(230, 20);
             this.txtPassword.TabIndex = 3;
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // txtEmail
             // 
@@ -138,6 +140,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(230, 20);
             this.txtUsername.TabIndex = 1;
+            this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
             // 
             // label5
             // 
@@ -186,11 +189,23 @@
             this.chkShowPass.UseVisualStyleBackColor = true;
             this.chkShowPass.CheckedChanged += new System.EventHandler(this.chkShow_CheckedChanged);
             // 
+            // chkShowConf
+            // 
+            this.chkShowConf.AutoSize = true;
+            this.chkShowConf.Location = new System.Drawing.Point(395, 273);
+            this.chkShowConf.Name = "chkShowConf";
+            this.chkShowConf.Size = new System.Drawing.Size(101, 17);
+            this.chkShowConf.TabIndex = 100;
+            this.chkShowConf.Text = "Show password";
+            this.chkShowConf.UseVisualStyleBackColor = true;
+            this.chkShowConf.CheckedChanged += new System.EventHandler(this.chkShowConf_CheckedChanged);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 400);
+            this.Controls.Add(this.chkShowConf);
             this.Controls.Add(this.chkShowPass);
             this.Controls.Add(this.btnToLoginForm);
             this.Controls.Add(this.btnRegister);
@@ -233,5 +248,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chkShowPass;
+        private System.Windows.Forms.CheckBox chkShowConf;
     }
 }
