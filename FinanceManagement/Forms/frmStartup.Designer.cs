@@ -1,6 +1,8 @@
-﻿namespace FinanceManagement
+﻿using System.Windows.Forms;
+
+namespace FinanceManagement
 {
-    partial class MainForm
+    partial class frmStartUp : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -68,6 +70,7 @@
             this.label1.Size = new System.Drawing.Size(375, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "Finance Management System";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // MainForm
             // 
@@ -80,6 +83,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -93,5 +97,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label1;
     }
+
 }
 

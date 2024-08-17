@@ -1,6 +1,6 @@
 ﻿namespace FinanceManagement
 {
-    partial class RegisterForm
+    partial class frmRegister
     {
         /// <summary>
         /// Required designer variable.

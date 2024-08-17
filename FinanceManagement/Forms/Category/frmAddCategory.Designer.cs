@@ -1,6 +1,6 @@
 ﻿namespace FinanceManagement
 {
-    partial class AddCategoryForm
+    partial class frmAddCategory
     {
         /// <summary>
         /// Required designer variable.
@@ -79,6 +79,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(500, 30);
             this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouse_Down);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mouse_Move);
             // 
@@ -170,7 +171,7 @@
             this.grpCateType.TabStop = false;
             this.grpCateType.Text = "Type";
             // 
-            // AddCategoryForm
+            // frmAddCategory
             // 
             this.AcceptButton = this.btnAdd;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,7 +187,7 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "AddCategoryForm";
+            this.Name = "frmAddCategory";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddCategory";

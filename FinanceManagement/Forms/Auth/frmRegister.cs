@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace FinanceManagement
 {
-    public partial class RegisterForm : Form
+    public partial class frmRegister : Form
     {
-        public RegisterForm()
+        public frmRegister()
         {
             InitializeComponent();
             AcceptButton = btnRegister;
@@ -61,7 +61,7 @@ namespace FinanceManagement
                     MessageBox.Show("Registration successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     this.Hide();
-                    LoginForm loginForm = new LoginForm();
+                    frmLogin loginForm = new frmLogin();
                     loginForm.Show();
                 }
                 else
@@ -77,7 +77,7 @@ namespace FinanceManagement
 
         private void btnToLoginForm_Click(object sender, EventArgs e)
         {
-            LoginForm loginForm = new LoginForm();
+            frmLogin loginForm = new frmLogin();
             this.Hide();
             loginForm.Show();
         }

@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace FinanceManagement.Forms
 {
-    public partial class DashboardForm : Form
+    public partial class frmDashboard : Form
     {
         public Point mouseLocation;
 
-        public DashboardForm()
+        public frmDashboard()
         {
             InitializeComponent();
         }
@@ -25,8 +25,8 @@ namespace FinanceManagement.Forms
 
         private void btnAddCate_Click(object sender, EventArgs e)
         {
-            AddCategoryForm addCategoryForm = new AddCategoryForm();
-            addCategoryForm.ShowDialog();
+            frmCategoryManagement frmCategoryManagement = new frmCategoryManagement();
+            frmCategoryManagement.Show();
         }
 
         private void mouse_Down(object sender, MouseEventArgs e)

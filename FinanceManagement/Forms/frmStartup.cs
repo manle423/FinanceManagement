@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FinanceManagement
 {
-    public partial class MainForm : Form
+    public partial class frmStartUp : Form
     {
-        public MainForm()
+        public frmStartUp()
         {
             InitializeComponent();
         }
@@ -24,9 +24,19 @@ namespace FinanceManagement
             {
                 timer1.Stop();
                 this.Hide();
-                LoginForm loginForm = new LoginForm();
+                frmLogin loginForm = new frmLogin();
                 loginForm.Show();
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

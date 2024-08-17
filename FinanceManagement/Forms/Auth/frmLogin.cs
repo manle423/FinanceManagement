@@ -14,10 +14,10 @@ using System.Windows.Forms;
 namespace FinanceManagement
 {
 
-    public partial class LoginForm : Form
+    public partial class frmLogin : Form
     {
 
-        public LoginForm()
+        public frmLogin()
         {
             InitializeComponent();
             AcceptButton = btnLogin;
@@ -50,9 +50,14 @@ namespace FinanceManagement
                     throw new Exception("Invalid Credentials");
                 }
                 MessageBox.Show("Login successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DashboardForm dashboardForm = new DashboardForm();
+                //frmDashboard dashboardForm = new frmDashboard();
+                //this.Hide();
+                //dashboardForm.Show();
+
+                frmMain main = new frmMain();
                 this.Hide();
-                dashboardForm.Show();
+                main.Show();
+
             }
             catch (Exception ex)
             {
@@ -75,7 +80,7 @@ namespace FinanceManagement
 
         private void btnToRegister_Click(object sender, EventArgs e)
         {
-            RegisterForm registerform = new RegisterForm();
+            frmRegister registerform = new frmRegister();
             registerform.Show();
             this.Hide();
         }

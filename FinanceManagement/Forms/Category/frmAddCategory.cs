@@ -7,12 +7,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace FinanceManagement
 {
-    public partial class AddCategoryForm : Form
+    public partial class frmAddCategory : Form
     {
         public Point mouseLocation;
         string cateType = string.Empty;
 
-        public AddCategoryForm()
+        public frmAddCategory()
         {
             InitializeComponent();
             this.AcceptButton = btnAdd;
@@ -101,6 +101,11 @@ namespace FinanceManagement
         private void rdoIncome_CheckedChanged(object sender, EventArgs e)
         {
             cateType = "INCOME";
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
