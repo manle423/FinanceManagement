@@ -2,6 +2,8 @@
 using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using FinanceManagement.Models;
+using System.Collections.Generic;
 
 namespace FinanceManagement.Services
 {
@@ -80,6 +82,53 @@ namespace FinanceManagement.Services
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+        }
+
+        public static List<Category> GetAllCategories()
+        {
+            List<Category> categories = new List<Category>();
+
+            try
+            {
+                DatabaseConnection dbConnection = new DatabaseConnection();
+                using (SqlConnection conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    // Query to get all categories
+                    string query = "SELECT * FROM Categories";
+
+                    // Creating SQL command
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Create a Category object from the data
+                                Category category = new Category
+                                {
+                                    Id = reader.GetInt32(0),
+                                    Name = reader.GetString(1),
+                                    Type = reader.GetString(2),
+                                    Description = reader.GetString(3),
+                                    CreatedAt = reader.GetDateTime(4),
+                                    UpdatedAt = reader.GetDateTime(5),
+                                };
+
+                                // Add the Category object to the list
+                                categories.Add(category);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return categories;
         }
     }
 }

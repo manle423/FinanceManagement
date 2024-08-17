@@ -21,20 +21,7 @@ namespace FinanceManagement
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            frmDashboard dashboard = new frmDashboard();
-            AddFormToTabPage(dashboard, tabDashboard);
-
-            frmCategoryManagement categoryManagement = new frmCategoryManagement();
-            AddFormToTabPage(categoryManagement, tabCategory);
-        }
-
-        private void AddFormToTabPage(Form form, TabPage tabPage)
-        {
-            form.TopLevel = false;
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.Dock = DockStyle.Fill;
-            tabPage.Controls.Add(form);
-            form.Show();
+            ShowUserControl(new frmDashboard());
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -50,23 +37,6 @@ namespace FinanceManagement
         {
         }
 
-        private void tabCtrlMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Kiểm tra tab được chọn và thay đổi tiêu đề Form
-            switch (tabCtrlMain.SelectedIndex)
-            {
-                case 0:
-                    lblMain.Text = "Finance Management | Dashboard";
-                    break;
-                case 1:
-                    lblMain.Text = "Finance Management | Category";
-                    break;
-                default:
-                    this.Text = "Finance Management";
-                    break;
-            }
-        }
-
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             mouseLocation = new Point(-e.X, -e.Y);
@@ -79,6 +49,40 @@ namespace FinanceManagement
                 Point mousePose = Control.MousePosition;
                 mousePose.Offset(mouseLocation.X, mouseLocation.Y);
                 Location = mousePose;
+            }
+        }
+
+        private void UpdateMainContent(UserControl control, string headerText)
+        {
+            ShowUserControl(control);
+            lblMain.Text = headerText;
+        }
+
+        private void ShowUserControl(UserControl control)
+        {
+            pnlContent.Controls.Clear();
+            control.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(control);
+        }
+
+        private void btnToDashBoard_Click(object sender, EventArgs e)
+        {
+            UpdateMainContent(new frmDashboard(), "Finance Management | Dashboard");
+        }
+
+        private void btnToCategory_Click(object sender, EventArgs e)
+        {
+            UpdateMainContent(new frmCategoryManagement(), "Finance Management | Category");
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult check = MessageBox.Show("Are you sure you want to log out?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (check == DialogResult.Yes)
+            {
+                this.Hide();
+                frmLogin frmLogin = new frmLogin();
+                frmLogin.Show();
             }
         }
     }

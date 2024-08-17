@@ -31,11 +31,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblMain = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.tabCtrlMain = new System.Windows.Forms.TabControl();
-            this.tabDashboard = new System.Windows.Forms.TabPage();
-            this.tabCategory = new System.Windows.Forms.TabPage();
+            this.pnlControl = new System.Windows.Forms.Panel();
+            this.pnlContent = new System.Windows.Forms.Panel();
+            this.btnToDashBoard = new System.Windows.Forms.Button();
+            this.btnToCategory = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.tabCtrlMain.SuspendLayout();
+            this.pnlControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -46,7 +48,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 30);
+            this.panel1.Size = new System.Drawing.Size(960, 30);
             this.panel1.TabIndex = 3;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
@@ -68,7 +70,7 @@
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnClose.Location = new System.Drawing.Point(767, 0);
+            this.btnClose.Location = new System.Drawing.Point(930, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(30, 30);
             this.btnClose.TabIndex = 7;
@@ -76,54 +78,73 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // tabCtrlMain
+            // pnlControl
             // 
-            this.tabCtrlMain.Controls.Add(this.tabDashboard);
-            this.tabCtrlMain.Controls.Add(this.tabCategory);
-            this.tabCtrlMain.Location = new System.Drawing.Point(0, 30);
-            this.tabCtrlMain.Name = "tabCtrlMain";
-            this.tabCtrlMain.SelectedIndex = 0;
-            this.tabCtrlMain.Size = new System.Drawing.Size(811, 421);
-            this.tabCtrlMain.TabIndex = 4;
-            this.tabCtrlMain.SelectedIndexChanged += new System.EventHandler(this.tabCtrlMain_SelectedIndexChanged);
+            this.pnlControl.AutoSize = true;
+            this.pnlControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlControl.Controls.Add(this.btnLogout);
+            this.pnlControl.Controls.Add(this.btnToCategory);
+            this.pnlControl.Controls.Add(this.btnToDashBoard);
+            this.pnlControl.Location = new System.Drawing.Point(0, 29);
+            this.pnlControl.Name = "pnlControl";
+            this.pnlControl.Size = new System.Drawing.Size(154, 520);
+            this.pnlControl.TabIndex = 4;
             // 
-            // tabDashboard
+            // pnlContent
             // 
-            this.tabDashboard.Location = new System.Drawing.Point(4, 22);
-            this.tabDashboard.Name = "tabDashboard";
-            this.tabDashboard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDashboard.Size = new System.Drawing.Size(803, 395);
-            this.tabDashboard.TabIndex = 0;
-            this.tabDashboard.Text = "Dashboard";
-            this.tabDashboard.UseVisualStyleBackColor = true;
-            this.tabDashboard.Click += new System.EventHandler(this.tabDashboard_Click);
+            this.pnlContent.Location = new System.Drawing.Point(156, 29);
+            this.pnlContent.Name = "pnlContent";
+            this.pnlContent.Size = new System.Drawing.Size(800, 520);
+            this.pnlContent.TabIndex = 5;
             // 
-            // tabCategory
+            // btnToDashBoard
             // 
-            this.tabCategory.Location = new System.Drawing.Point(4, 22);
-            this.tabCategory.Name = "tabCategory";
-            this.tabCategory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCategory.Size = new System.Drawing.Size(803, 395);
-            this.tabCategory.TabIndex = 1;
-            this.tabCategory.Text = "Category";
-            this.tabCategory.UseVisualStyleBackColor = true;
-            this.tabCategory.Click += new System.EventHandler(this.tabCategory_Click);
+            this.btnToDashBoard.Location = new System.Drawing.Point(1, 124);
+            this.btnToDashBoard.Name = "btnToDashBoard";
+            this.btnToDashBoard.Size = new System.Drawing.Size(150, 45);
+            this.btnToDashBoard.TabIndex = 0;
+            this.btnToDashBoard.Text = "DASHBOARD";
+            this.btnToDashBoard.UseVisualStyleBackColor = true;
+            this.btnToDashBoard.Click += new System.EventHandler(this.btnToDashBoard_Click);
+            // 
+            // btnToCategory
+            // 
+            this.btnToCategory.Location = new System.Drawing.Point(0, 214);
+            this.btnToCategory.Name = "btnToCategory";
+            this.btnToCategory.Size = new System.Drawing.Size(150, 45);
+            this.btnToCategory.TabIndex = 1;
+            this.btnToCategory.Text = "CATEGORY";
+            this.btnToCategory.UseVisualStyleBackColor = true;
+            this.btnToCategory.Click += new System.EventHandler(this.btnToCategory_Click);
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(7, 479);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(104, 30);
+            this.btnLogout.TabIndex = 2;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.tabCtrlMain);
+            this.ClientSize = new System.Drawing.Size(960, 550);
+            this.Controls.Add(this.pnlContent);
+            this.Controls.Add(this.pnlControl);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabCtrlMain.ResumeLayout(false);
+            this.pnlControl.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -132,8 +153,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblMain;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.TabControl tabCtrlMain;
-        private System.Windows.Forms.TabPage tabDashboard;
-        private System.Windows.Forms.TabPage tabCategory;
+        private System.Windows.Forms.Panel pnlControl;
+        private System.Windows.Forms.Panel pnlContent;
+        private System.Windows.Forms.Button btnToCategory;
+        private System.Windows.Forms.Button btnToDashBoard;
+        private System.Windows.Forms.Button btnLogout;
     }
 }
