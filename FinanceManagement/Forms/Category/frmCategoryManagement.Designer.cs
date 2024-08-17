@@ -94,6 +94,7 @@
             this.cboCateType.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCateType.FormattingEnabled = true;
             this.cboCateType.Items.AddRange(new object[] {
+            "All",
             "Expense",
             "Income"});
             this.cboCateType.Location = new System.Drawing.Point(468, 15);

@@ -84,7 +84,7 @@ namespace FinanceManagement.Services
             }
         }
 
-        public static List<Category> GetAllCategories()
+        public static List<Category> GetAllCategories(string type = null)
         {
             List<Category> categories = new List<Category>();
 
@@ -95,12 +95,22 @@ namespace FinanceManagement.Services
                 {
                     conn.Open();
 
-                    // Query to get all categories
+                    // SQL query to get categories, with optional filtering by type
                     string query = "SELECT * FROM Categories";
+                    if (!string.IsNullOrEmpty(type))
+                    {
+                        query += " WHERE Type = @Type";
+                    }
 
                     // Creating SQL command
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
+                        if (!string.IsNullOrEmpty(type))
+                        {
+                            // Adding parameter to prevent SQL injection
+                            cmd.Parameters.AddWithValue("@Type", type);
+                        }
+
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -130,5 +140,6 @@ namespace FinanceManagement.Services
 
             return categories;
         }
+
     }
 }
