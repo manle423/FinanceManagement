@@ -47,6 +47,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmDashboard";
             this.Size = new System.Drawing.Size(800, 520);
+            this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

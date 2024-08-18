@@ -22,11 +22,16 @@ namespace FinanceManagement
         private void frmMain_Load(object sender, EventArgs e)
         {
             ShowUserControl(new frmDashboard());
+            btnClose.TabStop = false;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult check = MessageBox.Show("Are you sure you want to exit", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (check == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void tabDashboard_Click(object sender, EventArgs e)
@@ -84,6 +89,11 @@ namespace FinanceManagement
                 frmLogin frmLogin = new frmLogin();
                 frmLogin.Show();
             }
+        }
+
+        private void pnlContent_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

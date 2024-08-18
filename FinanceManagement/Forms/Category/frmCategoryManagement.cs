@@ -8,10 +8,18 @@ namespace FinanceManagement.Forms
 {
     public partial class frmCategoryManagement : UserControl
     {
+        string selectedId = "";
+        string selectedName = "";
+        string selectedType = "";
+        string selectedDescription = "";
+
         public frmCategoryManagement()
         {
             InitializeComponent();
             cboCateType.SelectedIndex = 0;
+            dgvCategories.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCategories.ReadOnly = true;
+
         }
 
         private void cboCateType_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,6 +96,66 @@ namespace FinanceManagement.Forms
         private void btnReload_Click(object sender, EventArgs e)
         {
             LoadCategoriesBasedOnType();
+        }
+
+        private void dgvCategories_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvCategories_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                selectedId = dgvCategories.Rows[e.RowIndex].Cells[0].Value.ToString();
+                selectedName = dgvCategories.Rows[e.RowIndex].Cells[1].Value.ToString();
+                selectedType = dgvCategories.Rows[e.RowIndex].Cells[2].Value.ToString();
+                selectedDescription = dgvCategories.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                // Gán dữ liệu vào các TextBox tương ứng
+                txtIDUpdate.Text = selectedId;
+                txtNameUpdate.Text = selectedName;
+                txtDescriptionUpdate.Text = selectedDescription;
+
+                if (cboCateTypeUpdate.Items.Contains(selectedType))
+                {
+                    cboCateTypeUpdate.SelectedItem = selectedType;
+                }
+                else
+                {
+                    cboCateTypeUpdate.Text = selectedType;
+                }
+
+            }
+        }
+
+        private void cboCateTypeUpdate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(selectedId);
+            if (CategoryService.DeleteCategory(id))
+            {
+                MessageBox.Show("Delete successfully");
+                LoadCategoriesBasedOnType();
+            }
+            else
+            {
+                MessageBox.Show("Error when delete category");
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

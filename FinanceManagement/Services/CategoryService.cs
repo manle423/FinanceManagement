@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using FinanceManagement.Models;
 using System.Collections.Generic;
+using FinanceManagement.Utils;
+using System.Data;
 
 namespace FinanceManagement.Services
 {
@@ -120,7 +122,7 @@ namespace FinanceManagement.Services
                                 {
                                     Id = reader.GetInt32(0),
                                     Name = reader.GetString(1),
-                                    Type = reader.GetString(2),
+                                    Type = StringHelper.CapitalizeFirstLetter(reader.GetString(2)),
                                     Description = reader.GetString(3),
                                     CreatedAt = reader.GetDateTime(4),
                                     UpdatedAt = reader.GetDateTime(5),
@@ -140,6 +142,80 @@ namespace FinanceManagement.Services
 
             return categories;
         }
+
+        public static bool DeleteCategory(int id)
+        {
+            try
+            {
+                if (IsCategoryReferenced(id))
+                {
+                    throw new Exception("Category is related to other tables!!!");
+                }
+
+                DatabaseConnection dbConnection = new DatabaseConnection();
+                using (SqlConnection conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    // SQL query to delete the category
+                    string deleteQuery = "DELETE FROM Categories WHERE Category_id = @CategoryId";
+                    using (SqlCommand deleteCmd = new SqlCommand(deleteQuery, conn))
+                    {
+                        deleteCmd.Parameters.Add("@CategoryId", SqlDbType.Int).Value = id;
+
+                        // Execute the query
+                        int result = deleteCmd.ExecuteNonQuery();
+
+                        // Return true if deletion was successful
+                        return result > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+
+        public static bool IsCategoryReferenced(int id)
+        {
+            try
+            {
+                DatabaseConnection dbConnection = new DatabaseConnection();
+                using (SqlConnection conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    // List tables should be check
+                    string[] tables = { "Transactions", "Budgets", "Recurring_Transactions" };
+
+                    foreach (var table in tables)
+                    {
+                        string checkQuery = $"SELECT COUNT(*) FROM {table} WHERE Category_id = @CategoryId";
+                        using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+                        {
+                            checkCmd.Parameters.Add("@CategoryId", SqlDbType.Int).Value = id;
+                            int count = (int)checkCmd.ExecuteScalar();
+
+                            if (count > 0)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
 
     }
 }

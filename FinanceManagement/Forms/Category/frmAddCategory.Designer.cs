@@ -49,7 +49,8 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(3, 3);
+            this.label2.Location = new System.Drawing.Point(4, 3);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(326, 23);
             this.label2.TabIndex = 8;
@@ -61,9 +62,10 @@
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.btnClose.Location = new System.Drawing.Point(470, 0);
+            this.btnClose.Location = new System.Drawing.Point(548, 0);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(30, 30);
+            this.btnClose.Size = new System.Drawing.Size(35, 35);
             this.btnClose.TabIndex = 9;
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = false;
@@ -76,8 +78,9 @@
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(500, 30);
+            this.panel1.Size = new System.Drawing.Size(583, 35);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouse_Down);
@@ -85,41 +88,47 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(146, 84);
+            this.txtName.Location = new System.Drawing.Point(170, 97);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 20);
+            this.txtName.Size = new System.Drawing.Size(228, 22);
             this.txtName.TabIndex = 1;
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(146, 183);
+            this.txtDescription.Location = new System.Drawing.Point(170, 211);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(100, 20);
+            this.txtDescription.Size = new System.Drawing.Size(228, 74);
             this.txtDescription.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(143, 68);
+            this.label1.Location = new System.Drawing.Point(167, 78);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(43, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "Name: ";
             // 
             // lblDes
             // 
             this.lblDes.AutoSize = true;
-            this.lblDes.Location = new System.Drawing.Point(143, 167);
+            this.lblDes.Location = new System.Drawing.Point(167, 193);
+            this.lblDes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDes.Name = "lblDes";
-            this.lblDes.Size = new System.Drawing.Size(66, 13);
+            this.lblDes.Size = new System.Drawing.Size(75, 15);
             this.lblDes.TabIndex = 4;
             this.lblDes.Text = "Description: ";
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(146, 230);
+            this.btnAdd.Location = new System.Drawing.Point(170, 293);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.Size = new System.Drawing.Size(88, 27);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -128,9 +137,10 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(267, 230);
+            this.btnCancel.Location = new System.Drawing.Point(312, 293);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(88, 27);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -139,9 +149,10 @@
             // rdoExpense
             // 
             this.rdoExpense.AutoSize = true;
-            this.rdoExpense.Location = new System.Drawing.Point(13, 19);
+            this.rdoExpense.Location = new System.Drawing.Point(15, 22);
+            this.rdoExpense.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rdoExpense.Name = "rdoExpense";
-            this.rdoExpense.Size = new System.Drawing.Size(66, 17);
+            this.rdoExpense.Size = new System.Drawing.Size(69, 19);
             this.rdoExpense.TabIndex = 7;
             this.rdoExpense.TabStop = true;
             this.rdoExpense.Text = "Expense";
@@ -151,9 +162,10 @@
             // rdoIncome
             // 
             this.rdoIncome.AutoSize = true;
-            this.rdoIncome.Location = new System.Drawing.Point(125, 19);
+            this.rdoIncome.Location = new System.Drawing.Point(146, 22);
+            this.rdoIncome.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rdoIncome.Name = "rdoIncome";
-            this.rdoIncome.Size = new System.Drawing.Size(60, 17);
+            this.rdoIncome.Size = new System.Drawing.Size(64, 19);
             this.rdoIncome.TabIndex = 8;
             this.rdoIncome.TabStop = true;
             this.rdoIncome.Text = "Income";
@@ -164,9 +176,11 @@
             // 
             this.grpCateType.Controls.Add(this.rdoExpense);
             this.grpCateType.Controls.Add(this.rdoIncome);
-            this.grpCateType.Location = new System.Drawing.Point(142, 115);
+            this.grpCateType.Location = new System.Drawing.Point(166, 133);
+            this.grpCateType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.grpCateType.Name = "grpCateType";
-            this.grpCateType.Size = new System.Drawing.Size(200, 49);
+            this.grpCateType.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.grpCateType.Size = new System.Drawing.Size(233, 57);
             this.grpCateType.TabIndex = 9;
             this.grpCateType.TabStop = false;
             this.grpCateType.Text = "Type";
@@ -174,10 +188,10 @@
             // frmAddCategory
             // 
             this.AcceptButton = this.btnAdd;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(500, 300);
+            this.ClientSize = new System.Drawing.Size(583, 346);
             this.Controls.Add(this.grpCateType);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
@@ -186,7 +200,9 @@
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "frmAddCategory";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
