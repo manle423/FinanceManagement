@@ -47,7 +47,7 @@ namespace FinanceManagement
                 }
                 else
                 {
-                    MessageBox.Show("Add Category failed. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    throw new Exception("Add Category failed. Please try again.");
                 }
             }
             catch (Exception ex)
