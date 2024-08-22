@@ -35,16 +35,16 @@
             this.dgvCategories = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlControl = new System.Windows.Forms.Panel();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtIDUpdate = new System.Windows.Forms.TextBox();
-            this.txtNameUpdate = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cboCateTypeUpdate = new System.Windows.Forms.ComboBox();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.txtDescriptionUpdate = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnUpdate = new System.Windows.Forms.Button();
+            this.cboCateTypeUpdate = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtNameUpdate = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtIDUpdate = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.pnlData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).BeginInit();
             this.pnlControl.SuspendLayout();
@@ -137,75 +137,15 @@
             this.pnlControl.Size = new System.Drawing.Size(794, 211);
             this.pnlControl.TabIndex = 1;
             // 
-            // btnDelete
+            // btnUpdate
             // 
-            this.btnDelete.Location = new System.Drawing.Point(285, 93);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(20, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "ID";
-            // 
-            // txtIDUpdate
-            // 
-            this.txtIDUpdate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIDUpdate.Location = new System.Drawing.Point(44, 16);
-            this.txtIDUpdate.Name = "txtIDUpdate";
-            this.txtIDUpdate.ReadOnly = true;
-            this.txtIDUpdate.Size = new System.Drawing.Size(34, 22);
-            this.txtIDUpdate.TabIndex = 4;
-            // 
-            // txtNameUpdate
-            // 
-            this.txtNameUpdate.Location = new System.Drawing.Point(78, 50);
-            this.txtNameUpdate.Name = "txtNameUpdate";
-            this.txtNameUpdate.Size = new System.Drawing.Size(161, 22);
-            this.txtNameUpdate.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(35, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Name";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(92, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 15);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Type";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            // 
-            // cboCateTypeUpdate
-            // 
-            this.cboCateTypeUpdate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboCateTypeUpdate.FormattingEnabled = true;
-            this.cboCateTypeUpdate.Items.AddRange(new object[] {
-            "Expense",
-            "Income"});
-            this.cboCateTypeUpdate.Location = new System.Drawing.Point(132, 18);
-            this.cboCateTypeUpdate.Name = "cboCateTypeUpdate";
-            this.cboCateTypeUpdate.Size = new System.Drawing.Size(107, 23);
-            this.cboCateTypeUpdate.TabIndex = 8;
-            this.cboCateTypeUpdate.SelectedIndexChanged += new System.EventHandler(this.cboCateTypeUpdate_SelectedIndexChanged);
+            this.btnUpdate.Location = new System.Drawing.Point(285, 43);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 26);
+            this.btnUpdate.TabIndex = 11;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // txtDescriptionUpdate
             // 
@@ -225,15 +165,75 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Description";
             // 
-            // btnUpdate
+            // cboCateTypeUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(285, 46);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 11;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.cboCateTypeUpdate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCateTypeUpdate.FormattingEnabled = true;
+            this.cboCateTypeUpdate.Items.AddRange(new object[] {
+            "Expense",
+            "Income"});
+            this.cboCateTypeUpdate.Location = new System.Drawing.Point(132, 18);
+            this.cboCateTypeUpdate.Name = "cboCateTypeUpdate";
+            this.cboCateTypeUpdate.Size = new System.Drawing.Size(107, 23);
+            this.cboCateTypeUpdate.TabIndex = 8;
+            this.cboCateTypeUpdate.SelectedIndexChanged += new System.EventHandler(this.cboCateTypeUpdate_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(92, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 15);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Type";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // txtNameUpdate
+            // 
+            this.txtNameUpdate.Location = new System.Drawing.Point(78, 50);
+            this.txtNameUpdate.Name = "txtNameUpdate";
+            this.txtNameUpdate.Size = new System.Drawing.Size(161, 22);
+            this.txtNameUpdate.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(35, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 15);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Name";
+            // 
+            // txtIDUpdate
+            // 
+            this.txtIDUpdate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIDUpdate.Location = new System.Drawing.Point(44, 16);
+            this.txtIDUpdate.Name = "txtIDUpdate";
+            this.txtIDUpdate.ReadOnly = true;
+            this.txtIDUpdate.Size = new System.Drawing.Size(34, 22);
+            this.txtIDUpdate.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(18, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(20, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "ID";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(285, 93);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmCategoryManagement
             // 

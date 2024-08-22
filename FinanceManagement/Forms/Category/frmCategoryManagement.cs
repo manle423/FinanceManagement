@@ -1,5 +1,6 @@
 ﻿using FinanceManagement.Models;
 using FinanceManagement.Services;
+using FinanceManagement.Utils;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -141,21 +142,56 @@ namespace FinanceManagement.Forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(selectedId);
-            if (CategoryService.DeleteCategory(id))
+            try
             {
-                MessageBox.Show("Delete successfully");
-                LoadCategoriesBasedOnType();
+                DialogResult check = MessageBox.Show("Are you sure you want to delete this category?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (check == DialogResult.Yes)
+                {
+                    int id = int.Parse(selectedId);
+                    if (CategoryService.DeleteCategory(id))
+                    {
+                        MessageBox.Show("Delete successfully");
+                        LoadCategoriesBasedOnType();
+                    }
+                    else
+                    {
+                        throw new Exception("Error when delete category");
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error when delete category");
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int id = int.Parse(txtIDUpdate.Text);
+                string nameUpdate = txtNameUpdate.Text.Trim();
+                string cateTypeUpdate = cboCateTypeUpdate.SelectedItem.ToString();
+                string descriptionUpdate = txtDescriptionUpdate.Text.Trim();
 
+                if (!ValidationHelper.IsNotEmpty(nameUpdate))
+                {
+                    throw new Exception("Name of category is required");
+                }
+                if (CategoryService.UpdateCategory(id, nameUpdate, cateTypeUpdate, descriptionUpdate))
+                {
+                    MessageBox.Show("Update category successfully", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadCategoriesBasedOnType();
+                }
+                else
+                {
+                    throw new Exception("Update failed");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

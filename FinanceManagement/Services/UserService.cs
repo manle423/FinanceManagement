@@ -13,46 +13,38 @@ namespace FinanceManagement.Services
 {
     internal class UserService
     {
+        // khai báo 1 lần dbConnection cho dễ dàng sử dụng
+        private static readonly DatabaseConnection dbConnection = new DatabaseConnection();
+
         public UserService() { }
 
+        // Đăng ký
         public static bool RegisterUser(string username, string email, string password)
         {
             try
             {
                 if (IsUsernameExists(username))
                 {
-                    throw new Exception("Username is exists please use another username");
+                    throw new Exception("Username already exists, please use another username");
                 }
                 if (IsEmailExists(email))
                 {
-                    throw new Exception("Email is exists please use another email");
+                    throw new Exception("Email already exists, please use another email");
                 }
 
-                //Hash the password
                 string hashedPassword = HashingHelper.HashPassword(password);
 
-                // Using the DatabaseConnection class to get the connection
-                DatabaseConnection dbConnection = new DatabaseConnection();
                 using (SqlConnection conn = dbConnection.GetConnection())
                 {
                     conn.Open();
-
-                    // SQL query to insert the new user
                     string query = "INSERT INTO Users (Username, Email, Password) VALUES (@Username, @Email, @Password)";
-
-                    // Creating SQL command
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Adding parameters to prevent SQL injection
                         cmd.Parameters.AddWithValue("@Username", username);
                         cmd.Parameters.AddWithValue("@Email", email);
-                        cmd.Parameters.AddWithValue("@Password", hashedPassword); // Use hashed password
+                        cmd.Parameters.AddWithValue("@Password", hashedPassword);
 
-                        // Execute the query
-                        int result = cmd.ExecuteNonQuery();
-
-                        // If the insertion was successful, result will be greater than 0
-                        return result > 0;
+                        return cmd.ExecuteNonQuery() > 0;
                     }
                 }
             }
@@ -63,26 +55,20 @@ namespace FinanceManagement.Services
             }
         }
 
+        // Xác thực người dùng
         public static bool ValidateUser(string username, string password)
         {
             try
             {
-                DatabaseConnection dbConnection = new DatabaseConnection();
                 using (SqlConnection conn = dbConnection.GetConnection())
                 {
                     conn.Open();
-
-                    // SQL query to get the hashed password for the given username
                     string query = "SELECT Password FROM Users WHERE Username = @Username";
-
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Username", username);
-
-                        // Retrieve the hashed password from the database
                         string storedHash = cmd.ExecuteScalar() as string;
 
-                        // Verify the input password against the stored hash
                         return HashingHelper.VerifyPassword(password, storedHash);
                     }
                 }
@@ -94,29 +80,31 @@ namespace FinanceManagement.Services
             }
         }
 
-        public static bool IsUsernameExists(string username)
+        // Kiểm tra xem username đã tồn tại chưa
+        private static bool IsUsernameExists(string username)
+        {
+            return IsFieldExists("Username", username);
+        }
+
+        // Kiểm tra xem email đã tồn tại chưa
+        private static bool IsEmailExists(string email)
+        {
+            return IsFieldExists("Email", email);
+        }
+
+        // Kiểm tra xem trường dữ liệu nào đó đã tồn tại chưa
+        private static bool IsFieldExists(string fieldName, string value)
         {
             try
             {
-                DatabaseConnection dbConnection = new DatabaseConnection();
                 using (SqlConnection conn = dbConnection.GetConnection())
                 {
                     conn.Open();
-
-                    // Query to check if the username exists
-                    string query = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
-
-                    // Creating SQL command
+                    string query = $"SELECT COUNT(*) FROM Users WHERE {fieldName} = @{fieldName}";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Adding parameters to prevent SQL injection
-                        cmd.Parameters.AddWithValue("@Username", username);
-
-                        // Execute the query and get the result
-                        int count = (int)cmd.ExecuteScalar();
-
-                        // Return true if count is greater than 0
-                        return count > 0;
+                        cmd.Parameters.AddWithValue($"@{fieldName}", value);
+                        return (int)cmd.ExecuteScalar() > 0;
                     }
                 }
             }
@@ -126,39 +114,5 @@ namespace FinanceManagement.Services
                 return false;
             }
         }
-
-        public static bool IsEmailExists(string email)
-        {
-            try
-            {
-                DatabaseConnection dbConnection = new DatabaseConnection();
-                using (SqlConnection conn = dbConnection.GetConnection())
-                {
-                    conn.Open();
-
-                    // Query to check if the email exists
-                    string query = "SELECT COUNT(*) FROM Users WHERE Email = @Email";
-
-                    // Creating SQL command
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        // Adding parameters to prevent SQL injection
-                        cmd.Parameters.AddWithValue("@Email", email);
-
-                        // Execute the query and get the result
-                        int count = (int)cmd.ExecuteScalar();
-
-                        // Return true if count is greater than 0
-                        return count > 0;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
-
     }
 }
