@@ -87,8 +87,6 @@ namespace FinanceManagement
             }
         }
 
-
-
         private void grpCateType_Enter(object sender, EventArgs e)
         {
         }
