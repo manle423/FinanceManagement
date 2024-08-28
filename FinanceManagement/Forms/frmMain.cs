@@ -1,4 +1,5 @@
 ﻿using FinanceManagement.Forms;
+using FinanceManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -88,10 +89,18 @@ namespace FinanceManagement
                 this.Hide();
                 frmLogin frmLogin = new frmLogin();
                 frmLogin.Show();
+
+                // Remove session
+                UserSession.Instance.ClearSession();
             }
         }
 
         private void pnlContent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
