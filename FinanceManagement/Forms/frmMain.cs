@@ -95,5 +95,10 @@ namespace FinanceManagement
         {
 
         }
+
+        private void btnRecurring_Click(object sender, EventArgs e)
+        {
+            UpdateMainContent(new frmRecurringTransactions(), "Finance Management | Dashboard");
+        }
     }
 }
