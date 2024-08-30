@@ -261,7 +261,6 @@ namespace FinanceManagement.Services
                     {
                         result = categoryName.ToString();
                     }
-                    MessageBox.Show(result);
                 }
             }
             return result;
