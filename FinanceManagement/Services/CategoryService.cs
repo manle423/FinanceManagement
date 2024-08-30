@@ -244,5 +244,28 @@ namespace FinanceManagement.Services
                 }
             }
         }
+
+        // Lấy tên của category khi có id (sử dụng khi hiển thị trong các bảng có khóa ngoại) 
+        public static string GetCategoryName(int id)
+        {
+            string result = "";
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+                const string query = "SELECT name FROM Categories WHERE category_id = @category_id";
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@category_id", id);
+                    object categoryName = command.ExecuteScalar();
+                    if (categoryName != null)
+                    {
+                        result = categoryName.ToString();
+                    }
+                    MessageBox.Show(result);
+                }
+            }
+            return result;
+        }
+
     }
 }
