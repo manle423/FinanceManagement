@@ -61,6 +61,7 @@
             this.pnlData.Name = "pnlData";
             this.pnlData.Size = new System.Drawing.Size(794, 337);
             this.pnlData.TabIndex = 0;
+            this.pnlData.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlData_Paint);
             // 
             // btnReload
             // 
@@ -94,7 +95,7 @@
             "Income"});
             this.cboCateType.Location = new System.Drawing.Point(468, 15);
             this.cboCateType.Name = "cboCateType";
-            this.cboCateType.Size = new System.Drawing.Size(121, 35);
+            this.cboCateType.Size = new System.Drawing.Size(121, 27);
             this.cboCateType.TabIndex = 3;
             this.cboCateType.SelectedIndexChanged += new System.EventHandler(this.cboCateType_SelectedIndexChanged);
             // 
@@ -116,9 +117,10 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(18, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(223, 36);
+            this.label2.Size = new System.Drawing.Size(145, 24);
             this.label2.TabIndex = 0;
             this.label2.Text = "CATEGORIES";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // pnlControl
             // 
@@ -137,6 +139,7 @@
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(797, 214);
             this.pnlControl.TabIndex = 1;
+            this.pnlControl.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlControl_Paint);
             // 
             // btnUpdate
             // 
@@ -155,6 +158,7 @@
             this.txtDescriptionUpdate.Name = "txtDescriptionUpdate";
             this.txtDescriptionUpdate.Size = new System.Drawing.Size(161, 84);
             this.txtDescriptionUpdate.TabIndex = 10;
+            this.txtDescriptionUpdate.TextChanged += new System.EventHandler(this.txtDescriptionUpdate_TextChanged);
             // 
             // label5
             // 
@@ -162,9 +166,10 @@
             this.label5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(3, 84);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(103, 22);
+            this.label5.Size = new System.Drawing.Size(69, 15);
             this.label5.TabIndex = 9;
             this.label5.Text = "Description";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // cboCateTypeUpdate
             // 
@@ -175,7 +180,7 @@
             "Income"});
             this.cboCateTypeUpdate.Location = new System.Drawing.Point(132, 18);
             this.cboCateTypeUpdate.Name = "cboCateTypeUpdate";
-            this.cboCateTypeUpdate.Size = new System.Drawing.Size(107, 30);
+            this.cboCateTypeUpdate.Size = new System.Drawing.Size(107, 23);
             this.cboCateTypeUpdate.TabIndex = 8;
             this.cboCateTypeUpdate.SelectedIndexChanged += new System.EventHandler(this.cboCateTypeUpdate_SelectedIndexChanged);
             // 
@@ -185,7 +190,7 @@
             this.label4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(92, 21);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 22);
+            this.label4.Size = new System.Drawing.Size(34, 15);
             this.label4.TabIndex = 7;
             this.label4.Text = "Type";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -194,8 +199,9 @@
             // 
             this.txtNameUpdate.Location = new System.Drawing.Point(78, 50);
             this.txtNameUpdate.Name = "txtNameUpdate";
-            this.txtNameUpdate.Size = new System.Drawing.Size(161, 30);
+            this.txtNameUpdate.Size = new System.Drawing.Size(161, 22);
             this.txtNameUpdate.TabIndex = 6;
+            this.txtNameUpdate.TextChanged += new System.EventHandler(this.txtNameUpdate_TextChanged);
             // 
             // label3
             // 
@@ -203,9 +209,10 @@
             this.label3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(35, 50);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 22);
+            this.label3.Size = new System.Drawing.Size(37, 15);
             this.label3.TabIndex = 5;
             this.label3.Text = "Name";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // txtIDUpdate
             // 
@@ -213,8 +220,9 @@
             this.txtIDUpdate.Location = new System.Drawing.Point(44, 16);
             this.txtIDUpdate.Name = "txtIDUpdate";
             this.txtIDUpdate.ReadOnly = true;
-            this.txtIDUpdate.Size = new System.Drawing.Size(34, 30);
+            this.txtIDUpdate.Size = new System.Drawing.Size(34, 22);
             this.txtIDUpdate.TabIndex = 4;
+            this.txtIDUpdate.TextChanged += new System.EventHandler(this.txtIDUpdate_TextChanged);
             // 
             // label1
             // 
@@ -222,9 +230,10 @@
             this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(18, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 22);
+            this.label1.Size = new System.Drawing.Size(20, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "ID";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnDelete
             // 
@@ -238,7 +247,7 @@
             // 
             // frmCategoryManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlControl);
             this.Controls.Add(this.pnlData);

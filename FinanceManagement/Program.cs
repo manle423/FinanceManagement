@@ -1,4 +1,5 @@
 ﻿using FinanceManagement.Forms;
+using FinanceManagement.Forms.Transaction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace FinanceManagement
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Application.Run(new frmStartUp());
         }
     }

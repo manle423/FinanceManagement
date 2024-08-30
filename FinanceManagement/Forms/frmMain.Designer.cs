@@ -36,6 +36,7 @@
             this.btnToCategory = new System.Windows.Forms.Button();
             this.btnToDashBoard = new System.Windows.Forms.Button();
             this.pnlContent = new System.Windows.Forms.Panel();
+            this.btnToTransactions = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlControl.SuspendLayout();
             this.SuspendLayout();
@@ -50,17 +51,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(960, 30);
             this.panel1.TabIndex = 3;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
             // lblMain
             // 
             this.lblMain.AutoSize = true;
-            this.lblMain.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMain.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblMain.Location = new System.Drawing.Point(3, 3);
             this.lblMain.Name = "lblMain";
-            this.lblMain.Size = new System.Drawing.Size(302, 23);
+            this.lblMain.Size = new System.Drawing.Size(331, 24);
             this.lblMain.TabIndex = 3;
             this.lblMain.Text = "Finance Management | Dashboard";
             // 
@@ -68,7 +70,7 @@
             // 
             this.btnClose.BackColor = System.Drawing.Color.Red;
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnClose.Location = new System.Drawing.Point(930, 0);
             this.btnClose.Name = "btnClose";
@@ -82,6 +84,7 @@
             // 
             this.pnlControl.AutoSize = true;
             this.pnlControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlControl.Controls.Add(this.btnToTransactions);
             this.pnlControl.Controls.Add(this.btnLogout);
             this.pnlControl.Controls.Add(this.btnToCategory);
             this.pnlControl.Controls.Add(this.btnToDashBoard);
@@ -128,6 +131,16 @@
             this.pnlContent.TabIndex = 5;
             this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
+            // btnToTransactions
+            // 
+            this.btnToTransactions.Location = new System.Drawing.Point(0, 307);
+            this.btnToTransactions.Name = "btnToTransactions";
+            this.btnToTransactions.Size = new System.Drawing.Size(150, 45);
+            this.btnToTransactions.TabIndex = 3;
+            this.btnToTransactions.Text = "TRANSACTIONS";
+            this.btnToTransactions.UseVisualStyleBackColor = true;
+            this.btnToTransactions.Click += new System.EventHandler(this.btnToTransactions_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,5 +172,6 @@
         private System.Windows.Forms.Button btnToCategory;
         private System.Windows.Forms.Button btnToDashBoard;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnToTransactions;
     }
 }

@@ -37,7 +37,7 @@ namespace FinanceManagement
                 {
                     throw new Exception("Name of category is required");
                 }
-
+                
                 bool isAdded = CategoryService.AddCategory(name, cateType, description);
 
                 if (isAdded)

@@ -1,4 +1,5 @@
 ﻿using FinanceManagement.Forms;
+using FinanceManagement.Forms.Transaction;
 using FinanceManagement.Services;
 using System;
 using System.Collections.Generic;
@@ -103,6 +104,11 @@ namespace FinanceManagement
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnToTransactions_Click(object sender, EventArgs e)
+        {
+            UpdateMainContent(new frmTransactionMain(), "Finance Management | Transactions");
         }
     }
 }
