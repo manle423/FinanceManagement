@@ -45,7 +45,7 @@
             this.pnlControl = new System.Windows.Forms.Panel();
             this.dtpDateUpdate = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtAmountUpdate = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pnlData = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
@@ -61,7 +61,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(786, 44);
+            this.btnUpdate.Location = new System.Drawing.Point(606, 44);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 26);
             this.btnUpdate.TabIndex = 6;
@@ -146,7 +146,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(786, 93);
+            this.btnDelete.Location = new System.Drawing.Point(606, 93);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 7;
@@ -156,7 +156,7 @@
             // btnReload
             // 
             this.btnReload.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReload.Location = new System.Drawing.Point(841, 21);
+            this.btnReload.Location = new System.Drawing.Point(716, 26);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(75, 23);
             this.btnReload.TabIndex = 8;
@@ -166,7 +166,7 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(760, 21);
+            this.btnAdd.Location = new System.Drawing.Point(716, 4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 5;
@@ -181,24 +181,26 @@
             this.dgvTransactions.MultiSelect = false;
             this.dgvTransactions.Name = "dgvTransactions";
             this.dgvTransactions.RowHeadersWidth = 62;
-            this.dgvTransactions.Size = new System.Drawing.Size(929, 284);
+            this.dgvTransactions.Size = new System.Drawing.Size(791, 284);
             this.dgvTransactions.TabIndex = 1;
+            this.dgvTransactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransactions_CellContentClick);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(18, 20);
+            this.label2.Location = new System.Drawing.Point(17, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(173, 24);
             this.label2.TabIndex = 0;
             this.label2.Text = "TRANSACTIONS";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // pnlControl
             // 
             this.pnlControl.Controls.Add(this.dtpDateUpdate);
             this.pnlControl.Controls.Add(this.label8);
-            this.pnlControl.Controls.Add(this.textBox1);
+            this.pnlControl.Controls.Add(this.txtAmountUpdate);
             this.pnlControl.Controls.Add(this.label7);
             this.pnlControl.Controls.Add(this.btnUpdate);
             this.pnlControl.Controls.Add(this.txtDescriptionUpdate);
@@ -211,14 +213,14 @@
             this.pnlControl.Controls.Add(this.label1);
             this.pnlControl.Controls.Add(this.btnDelete);
             this.pnlControl.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlControl.Location = new System.Drawing.Point(24, 344);
+            this.pnlControl.Location = new System.Drawing.Point(3, 343);
             this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(935, 214);
+            this.pnlControl.Size = new System.Drawing.Size(802, 214);
             this.pnlControl.TabIndex = 3;
             // 
             // dtpDateUpdate
             // 
-            this.dtpDateUpdate.Location = new System.Drawing.Point(390, 81);
+            this.dtpDateUpdate.Location = new System.Drawing.Point(373, 81);
             this.dtpDateUpdate.Name = "dtpDateUpdate";
             this.dtpDateUpdate.Size = new System.Drawing.Size(200, 22);
             this.dtpDateUpdate.TabIndex = 4;
@@ -227,24 +229,24 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(287, 84);
+            this.label8.Location = new System.Drawing.Point(270, 84);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(97, 15);
             this.label8.TabIndex = 14;
             this.label8.Text = "Transaction date";
             // 
-            // textBox1
+            // txtAmountUpdate
             // 
-            this.textBox1.Location = new System.Drawing.Point(390, 50);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 22);
-            this.textBox1.TabIndex = 3;
+            this.txtAmountUpdate.Location = new System.Drawing.Point(373, 50);
+            this.txtAmountUpdate.Name = "txtAmountUpdate";
+            this.txtAmountUpdate.Size = new System.Drawing.Size(200, 22);
+            this.txtAmountUpdate.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(333, 49);
+            this.label7.Location = new System.Drawing.Point(316, 49);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 15);
             this.label7.TabIndex = 12;
@@ -262,15 +264,16 @@
             this.pnlData.Controls.Add(this.btnAdd);
             this.pnlData.Controls.Add(this.dgvTransactions);
             this.pnlData.Controls.Add(this.label2);
-            this.pnlData.Location = new System.Drawing.Point(24, 1);
+            this.pnlData.Location = new System.Drawing.Point(3, 3);
             this.pnlData.Name = "pnlData";
-            this.pnlData.Size = new System.Drawing.Size(935, 337);
+            this.pnlData.Size = new System.Drawing.Size(802, 337);
             this.pnlData.TabIndex = 2;
+            this.pnlData.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlData_Paint);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(247, 26);
+            this.label9.Location = new System.Drawing.Point(203, 26);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(26, 13);
             this.label9.TabIndex = 18;
@@ -279,7 +282,7 @@
             // dtpStartDate
             // 
             this.dtpStartDate.CustomFormat = "dd";
-            this.dtpStartDate.Location = new System.Drawing.Point(299, 3);
+            this.dtpStartDate.Location = new System.Drawing.Point(255, 3);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(180, 20);
             this.dtpStartDate.TabIndex = 17;
@@ -288,7 +291,7 @@
             // dtpEndDate
             // 
             this.dtpEndDate.CustomFormat = "dd";
-            this.dtpEndDate.Location = new System.Drawing.Point(299, 24);
+            this.dtpEndDate.Location = new System.Drawing.Point(255, 24);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(180, 20);
             this.dtpEndDate.TabIndex = 14;
@@ -302,7 +305,7 @@
             "All",
             "Expense",
             "Income"});
-            this.cboType.Location = new System.Drawing.Point(623, 15);
+            this.cboType.Location = new System.Drawing.Point(579, 15);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(121, 27);
             this.cboType.TabIndex = 11;
@@ -316,7 +319,7 @@
             "All",
             "Expense",
             "Income"});
-            this.cboCategory.Location = new System.Drawing.Point(496, 15);
+            this.cboCategory.Location = new System.Drawing.Point(452, 15);
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Size = new System.Drawing.Size(121, 27);
             this.cboCategory.TabIndex = 10;
@@ -326,7 +329,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(247, 8);
+            this.label6.Location = new System.Drawing.Point(203, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(36, 13);
             this.label6.TabIndex = 6;
@@ -336,11 +339,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(971, 562);
             this.Controls.Add(this.pnlControl);
             this.Controls.Add(this.pnlData);
             this.Name = "frmTransactionMain";
-            this.Text = "frmTransactionMain";
+            this.Size = new System.Drawing.Size(800, 560);
             this.Load += new System.EventHandler(this.frmTransactionMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
             this.pnlControl.ResumeLayout(false);
@@ -371,7 +373,7 @@
         private System.Windows.Forms.Panel pnlData;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAmountUpdate;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cboType;
         private System.Windows.Forms.ComboBox cboCategory;

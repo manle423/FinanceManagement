@@ -85,34 +85,42 @@ namespace FinanceManagement.Forms.Transaction
         {
             List<Models.Transaction> transactions = TransactionService.GetAllTransactions(userId,startDate,endDate,category_id,type);
             //dgvTransactions.DataSource = transactions;
+            
             ConfigureDataGridView(transactions);
         }
         private void ConfigureDataGridView(List<Models.Transaction> transactions)
         {
             dgvTransactions.DataSource = transactions;
-            /*
-            // Điều chỉnh độ rộng của các cột
-            dgvTransactions.Columns["Id"].Width = 20;
-            dgvTransactions.Columns["Category_id"].Width = 150;
-            dgvTransactions.Columns["Amount"].Width = 100;
-            dgvTransactions.Columns["Transaction_date"].Width = 200;
-            dgvTransactions.Columns["Description"].Width = 200;
-            dgvTransactions.Columns["CreatedAt"].Width = 100;
-            dgvTransactions.Columns["UpdatedAt"].Width = 100;
+            
+            if (dgvTransactions.Columns["CategoryId"] != null)
+            {
+                // Điều chỉnh độ rộng của các cột
+                dgvTransactions.Columns["Id"].Width = 40;
+                dgvTransactions.Columns["CategoryId"].Width = 100;
+                dgvTransactions.Columns["Amount"].Width = 150;
+                dgvTransactions.Columns["TransactionDate"].Width = 100;
+                dgvTransactions.Columns["Description"].Width = 200;
+                dgvTransactions.Columns["CreatedAt"].Width = 100;
+                dgvTransactions.Columns["UpdatedAt"].Width = 100;
 
-            // Chỉnh lại tiêu đề
-            dgvTransactions.Columns["Id"].HeaderText = "ID";
-            dgvTransactions.Columns["Category_id"].HeaderText = "Category";
-            dgvTransactions.Columns["Amount"].HeaderText = "Amount";
-            dgvTransactions.Columns["Transaction_date"].HeaderText = "Transaction Date";
-            dgvTransactions.Columns["Description"].HeaderText = "Description";
-            dgvTransactions.Columns["CreatedAt"].HeaderText = "Created At";
-            dgvTransactions.Columns["UpdatedAt"].HeaderText = "Updated At";
+                // Chỉnh lại tiêu đề
+                dgvTransactions.Columns["Id"].HeaderText = "ID";
+                dgvTransactions.Columns["CategoryId"].HeaderText = "Category";
+                dgvTransactions.Columns["Amount"].HeaderText = "Amount";
+                dgvTransactions.Columns["TransactionDate"].HeaderText = "Transaction Date";
+                dgvTransactions.Columns["Description"].HeaderText = "Description";
+                dgvTransactions.Columns["CreatedAt"].HeaderText = "Created At";
+                dgvTransactions.Columns["UpdatedAt"].HeaderText = "Updated At";
 
-            // Chỉnh lại định dạng ngày/tháng/năm
-            dgvTransactions.Columns["Transaction_date"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvTransactions.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvTransactions.Columns["UpdatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";*/
+                // Chỉnh lại định dạng ngày/tháng/năm
+                dgvTransactions.Columns["TransactionDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvTransactions.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvTransactions.Columns["UpdatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
+
+                // Giấu đi userId
+                dgvTransactions.Columns["UserId"].Visible = false;
+            }
+            
         }
 
         private string GetSelectedCategoryType()
@@ -142,6 +150,21 @@ namespace FinanceManagement.Forms.Transaction
             selectedEndDate = dtpEndDate.Value.ToString();
             dtpStartDate.MaxDate = dtpEndDate.Value;
             LoadTransactionsBasedOnCriteria();
+        }
+
+        private void dgvTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlData_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
