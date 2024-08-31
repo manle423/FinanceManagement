@@ -78,7 +78,7 @@ namespace FinanceManagement.Forms.Transaction
 
         }
 
-        private void LoadCategoriesComboBox(ComboBox cboCategory)
+        public void LoadCategoriesComboBox(ComboBox cboCategory)
         {
             List<Category> categories = CategoryService.GetAllCategories(null);
             categories.Insert(0,new Category(-1, "All"));
@@ -116,10 +116,35 @@ namespace FinanceManagement.Forms.Transaction
             // Đưa danh sách Transactions vào dgv
             dgvTransactions.DataSource = transactions;
 
+            // Giấu cột CategoryId (cột này có index 3)
+            dgvTransactions.Columns["CategoryId"].Visible = false;
+
+            // Giấu đi userId
+            dgvTransactions.Columns["UserId"].Visible = false;
+            if (dgvTransactions.Columns["CategoryName"] == null)
+            {
+                // Thêm cột Category Name
+                DataGridViewTextBoxColumn categoryNameColumn = new DataGridViewTextBoxColumn();
+                categoryNameColumn.Name = "CategoryName";
+                categoryNameColumn.HeaderText = "Category";
+                dgvTransactions.Columns.Add(categoryNameColumn);
+                dgvTransactions.Columns["CategoryName"].DisplayIndex = 1;
+                
+            }
+
+            // Đưa các Catergory Name vào dgv
+            dgvTransactions.DataBindingComplete += (sender, e) =>
+            {
+                foreach (DataGridViewRow row in dgvTransactions.Rows)
+                {
+                    int categoryId = Convert.ToInt32(row.Cells["CategoryId"].Value);
+                    row.Cells["CategoryName"].Value = CategoryService.GetCategoryName(categoryId);
+                }
+            };
 
             // Điều chỉnh độ rộng của các cột
             dgvTransactions.Columns["Id"].Width = 40;
-
+            dgvTransactions.Columns["CategoryName"].Width = 100;
             dgvTransactions.Columns["Amount"].Width = 150;
             dgvTransactions.Columns["TransactionDate"].Width = 100;
             dgvTransactions.Columns["Description"].Width = 200;
@@ -140,32 +165,10 @@ namespace FinanceManagement.Forms.Transaction
             dgvTransactions.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvTransactions.Columns["UpdatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
-            // Giấu đi userId
-            dgvTransactions.Columns["UserId"].Visible = false;
+            
+            
 
-            if (dgvTransactions.Columns["CategoryName"] == null)
-            {
-                // Thêm cột Category Name
-                DataGridViewTextBoxColumn categoryNameColumn = new DataGridViewTextBoxColumn();
-                categoryNameColumn.Name = "CategoryName";
-                categoryNameColumn.HeaderText = "Category";
-                dgvTransactions.Columns.Add(categoryNameColumn);
-                dgvTransactions.Columns["CategoryName"].DisplayIndex = 1;
-                dgvTransactions.Columns["CategoryName"].Width = 100;
-            }
-
-            // Đưa các Catergory Name vào dgv
-            dgvTransactions.DataBindingComplete += (sender, e) =>
-            {
-                foreach (DataGridViewRow row in dgvTransactions.Rows)
-                {
-                    int categoryId = Convert.ToInt32(row.Cells["CategoryId"].Value);
-                    row.Cells["CategoryName"].Value = CategoryService.GetCategoryName(categoryId);
-                }
-            };
-
-            // Giấu cột CategoryId (cột này có index 3)
-            dgvTransactions.Columns["CategoryId"].Visible = false;
+            
         }
 
         private void AddCategoryColumn()
@@ -311,6 +314,11 @@ namespace FinanceManagement.Forms.Transaction
         {
             cboCategory.SelectedIndex = 0;
             LoadTransactionsBasedOnCriteria() ;
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            LoadTransactionsBasedOnCriteria();
         }
     }
 }
