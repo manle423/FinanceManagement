@@ -78,6 +78,7 @@ namespace FinanceManagement.Forms.Transaction
         private void LoadCategoriesComboBox(ComboBox cboCategory)
         {
             List<Category> categories = CategoryService.GetAllCategories(null);
+            categories.Insert(0,new Category(-1, "All"));
             cboCategory.DisplayMember = "Name";
             cboCategory.ValueMember = "Id";
             cboCategory.DataSource = categories;
@@ -296,6 +297,11 @@ namespace FinanceManagement.Forms.Transaction
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

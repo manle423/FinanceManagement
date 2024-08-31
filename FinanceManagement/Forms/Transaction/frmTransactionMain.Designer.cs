@@ -52,6 +52,8 @@
             this.cboType = new System.Windows.Forms.ComboBox();
             this.cboCategory = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
             this.pnlControl.SuspendLayout();
             this.pnlData.SuspendLayout();
@@ -59,7 +61,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(606, 44);
+            this.btnUpdate.Location = new System.Drawing.Point(668, 48);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 26);
             this.btnUpdate.TabIndex = 6;
@@ -72,7 +74,7 @@
             this.txtDescriptionUpdate.Location = new System.Drawing.Point(100, 84);
             this.txtDescriptionUpdate.Multiline = true;
             this.txtDescriptionUpdate.Name = "txtDescriptionUpdate";
-            this.txtDescriptionUpdate.Size = new System.Drawing.Size(161, 84);
+            this.txtDescriptionUpdate.Size = new System.Drawing.Size(552, 84);
             this.txtDescriptionUpdate.TabIndex = 2;
             // 
             // label5
@@ -94,7 +96,7 @@
             "Income"});
             this.cboCategoryUpdate.Location = new System.Drawing.Point(154, 18);
             this.cboCategoryUpdate.Name = "cboCategoryUpdate";
-            this.cboCategoryUpdate.Size = new System.Drawing.Size(107, 23);
+            this.cboCategoryUpdate.Size = new System.Drawing.Size(161, 23);
             this.cboCategoryUpdate.TabIndex = 0;
             // 
             // label4
@@ -128,7 +130,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(606, 93);
+            this.btnDelete.Location = new System.Drawing.Point(668, 94);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 7;
@@ -203,7 +205,7 @@
             // 
             // dtpDateUpdate
             // 
-            this.dtpDateUpdate.Location = new System.Drawing.Point(373, 81);
+            this.dtpDateUpdate.Location = new System.Drawing.Point(452, 21);
             this.dtpDateUpdate.Name = "dtpDateUpdate";
             this.dtpDateUpdate.Size = new System.Drawing.Size(200, 22);
             this.dtpDateUpdate.TabIndex = 4;
@@ -212,7 +214,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(270, 84);
+            this.label8.Location = new System.Drawing.Point(349, 24);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(97, 15);
             this.label8.TabIndex = 14;
@@ -222,21 +224,24 @@
             // 
             this.txtAmountUpdate.Location = new System.Drawing.Point(100, 56);
             this.txtAmountUpdate.Name = "txtAmountUpdate";
-            this.txtAmountUpdate.Size = new System.Drawing.Size(161, 22);
+            this.txtAmountUpdate.Size = new System.Drawing.Size(289, 22);
             this.txtAmountUpdate.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(21, 59);
+            this.label7.Location = new System.Drawing.Point(27, 59);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 15);
             this.label7.TabIndex = 12;
             this.label7.Text = "Amount";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // pnlData
             // 
+            this.pnlData.Controls.Add(this.label10);
+            this.pnlData.Controls.Add(this.label3);
             this.pnlData.Controls.Add(this.label9);
             this.pnlData.Controls.Add(this.dtpStartDate);
             this.pnlData.Controls.Add(this.dtpEndDate);
@@ -288,7 +293,7 @@
             "All",
             "Expense",
             "Income"});
-            this.cboType.Location = new System.Drawing.Point(579, 15);
+            this.cboType.Location = new System.Drawing.Point(579, 20);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(121, 27);
             this.cboType.TabIndex = 11;
@@ -302,7 +307,7 @@
             "All",
             "Expense",
             "Income"});
-            this.cboCategory.Location = new System.Drawing.Point(452, 15);
+            this.cboCategory.Location = new System.Drawing.Point(452, 19);
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Size = new System.Drawing.Size(121, 27);
             this.cboCategory.TabIndex = 10;
@@ -317,6 +322,24 @@
             this.label6.Size = new System.Drawing.Size(36, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "From: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(449, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Category: ";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(576, 4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 13);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Type: ";
             // 
             // frmTransactionMain
             // 
@@ -362,5 +385,7 @@
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label3;
     }
 }
