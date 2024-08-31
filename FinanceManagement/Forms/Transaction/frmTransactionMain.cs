@@ -18,8 +18,11 @@ namespace FinanceManagement.Forms.Transaction
     {
         int userId = UserSession.Instance.UserId;
         string username = UserSession.Instance.Username;
-
+        string selectedId = null;
         string selectedType = null;
+        string selectedDescription = null;
+        string selectedAmount = null;
+        string selectedTransactionDate =null;
         int selectedCategoryId = -1;
         string selectedStartDate = null;
         string selectedEndDate = null;
@@ -48,20 +51,22 @@ namespace FinanceManagement.Forms.Transaction
 
         private void frmTransactionMain_Load(object sender, EventArgs e)
         {
-            LoadCategoriesComboBox();
+            LoadCategoriesComboBox(cboCategory);
             LoadTransactionsBasedOnCriteria();
+
+            // Set viewing transactions during last month on default
+            dtpStartDate.Value = DateTime.Now.AddMonths(-1);
+            dtpEndDate.Value = dtpEndDate.MaxDate;
 
         }
 
-        private void LoadCategoriesComboBox()
+        private void LoadCategoriesComboBox(ComboBox cboCategory)
         {
             List<Category> categories = CategoryService.GetAllCategories(null);
             cboCategory.DisplayMember = "Name";
             cboCategory.ValueMember = "Id";
             cboCategory.DataSource = categories;
-            dtpStartDate.Value = DateTime.Now.AddMonths(-1);
-            dtpEndDate.Value = dtpEndDate.MaxDate;
-
+            
         }
 
         private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,7 +111,7 @@ namespace FinanceManagement.Forms.Transaction
             dgvTransactions.Columns["Id"].HeaderText = "ID";
             dgvTransactions.Columns["CategoryId"].HeaderText = "Category";
             dgvTransactions.Columns["Amount"].HeaderText = "Amount";
-            dgvTransactions.Columns["TransactionDate"].HeaderText = "Transaction Date";
+            dgvTransactions.Columns["TransactionDate"].HeaderText = "Date";
             dgvTransactions.Columns["Description"].HeaderText = "Description";
             dgvTransactions.Columns["CreatedAt"].HeaderText = "Created At";
             dgvTransactions.Columns["UpdatedAt"].HeaderText = "Updated At";
@@ -180,7 +185,27 @@ namespace FinanceManagement.Forms.Transaction
 
         private void dgvTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+        }
+        private void dgvTransactions_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                selectedId = dgvTransactions.Rows[e.RowIndex].Cells[1].Value.ToString();
+                LoadCategoriesComboBox(cboCategoryUpdate);
+                cboCategoryUpdate.SelectedItem = dgvTransactions.Rows[e.RowIndex].Cells[0].Value.ToString();
+                selectedAmount = dgvTransactions.Rows[e.RowIndex].Cells[4].Value.ToString();
+                selectedTransactionDate = dgvTransactions.Rows[e.RowIndex].Cells[5].Value.ToString();
+                selectedDescription = dgvTransactions.Rows[e.RowIndex].Cells[6].Value.ToString();
+
+                // Gán dữ liệu vào các TextBox tương ứng
+                txtIDUpdate.Text = selectedId;
+                txtAmountUpdate.Text = selectedAmount;
+                txtDescriptionUpdate.Text = selectedDescription;
+                dtpDateUpdate.Value = DateTime.Parse(selectedTransactionDate.ToString());
+
+
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -189,6 +214,11 @@ namespace FinanceManagement.Forms.Transaction
         }
 
         private void pnlData_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlControl_Paint(object sender, PaintEventArgs e)
         {
 
         }

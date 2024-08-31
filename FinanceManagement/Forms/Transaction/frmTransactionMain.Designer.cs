@@ -33,8 +33,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cboCategoryUpdate = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtNameUpdate = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtIDUpdate = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -108,23 +106,6 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Category";
             // 
-            // txtNameUpdate
-            // 
-            this.txtNameUpdate.Location = new System.Drawing.Point(100, 50);
-            this.txtNameUpdate.Name = "txtNameUpdate";
-            this.txtNameUpdate.Size = new System.Drawing.Size(161, 22);
-            this.txtNameUpdate.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(35, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Name";
-            // 
             // txtIDUpdate
             // 
             this.txtIDUpdate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -183,6 +164,7 @@
             this.dgvTransactions.RowHeadersWidth = 62;
             this.dgvTransactions.Size = new System.Drawing.Size(791, 284);
             this.dgvTransactions.TabIndex = 1;
+            this.dgvTransactions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransactions_CellClick);
             this.dgvTransactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransactions_CellContentClick);
             // 
             // label2
@@ -207,8 +189,6 @@
             this.pnlControl.Controls.Add(this.label5);
             this.pnlControl.Controls.Add(this.cboCategoryUpdate);
             this.pnlControl.Controls.Add(this.label4);
-            this.pnlControl.Controls.Add(this.txtNameUpdate);
-            this.pnlControl.Controls.Add(this.label3);
             this.pnlControl.Controls.Add(this.txtIDUpdate);
             this.pnlControl.Controls.Add(this.label1);
             this.pnlControl.Controls.Add(this.btnDelete);
@@ -217,6 +197,7 @@
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(802, 214);
             this.pnlControl.TabIndex = 3;
+            this.pnlControl.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlControl_Paint);
             // 
             // dtpDateUpdate
             // 
@@ -237,16 +218,16 @@
             // 
             // txtAmountUpdate
             // 
-            this.txtAmountUpdate.Location = new System.Drawing.Point(373, 50);
+            this.txtAmountUpdate.Location = new System.Drawing.Point(100, 56);
             this.txtAmountUpdate.Name = "txtAmountUpdate";
-            this.txtAmountUpdate.Size = new System.Drawing.Size(200, 22);
+            this.txtAmountUpdate.Size = new System.Drawing.Size(161, 22);
             this.txtAmountUpdate.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(316, 49);
+            this.label7.Location = new System.Drawing.Point(21, 59);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 15);
             this.label7.TabIndex = 12;
@@ -360,8 +341,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cboCategoryUpdate;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtNameUpdate;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtIDUpdate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnDelete;
