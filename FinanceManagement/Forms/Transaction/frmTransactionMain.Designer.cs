@@ -46,14 +46,14 @@
             this.txtAmountUpdate = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pnlData = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.cboType = new System.Windows.Forms.ComboBox();
             this.cboCategory = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
             this.pnlControl.SuspendLayout();
             this.pnlData.SuspendLayout();
@@ -258,6 +258,24 @@
             this.pnlData.TabIndex = 2;
             this.pnlData.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlData_Paint);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(576, 4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 13);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Type: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(449, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Category: ";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -298,6 +316,7 @@
             this.cboType.Size = new System.Drawing.Size(121, 27);
             this.cboType.TabIndex = 11;
             this.cboType.Text = "Type";
+            this.cboType.SelectedIndexChanged += new System.EventHandler(this.cboType_SelectedIndexChanged);
             // 
             // cboCategory
             // 
@@ -322,24 +341,6 @@
             this.label6.Size = new System.Drawing.Size(36, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "From: ";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(449, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "Category: ";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(576, 4);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(37, 13);
-            this.label10.TabIndex = 20;
-            this.label10.Text = "Type: ";
             // 
             // frmTransactionMain
             // 

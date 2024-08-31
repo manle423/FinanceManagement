@@ -86,7 +86,7 @@ namespace FinanceManagement.Services
 
                                 while (reader.Read())
                                 {
-                                    conditions.Add("category_id = " + reader.GetString(0));
+                                    conditions.Add("category_id = " + reader.GetInt32(0));
                                 }
 
                                 if (conditions.Count > 0)

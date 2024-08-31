@@ -44,7 +44,7 @@ namespace FinanceManagement.Forms.Transaction
         public frmTransactionMain()
         {
             InitializeComponent();
-            cboType.SelectedIndex = 0;
+            //cboType.SelectedIndex = 0;
             //cboCategory.SelectedIndex = 0;
             dtpStartDate.MinDate = DateTime.MinValue;
             dtpStartDate.MaxDate = DateTime.Now;
@@ -87,7 +87,7 @@ namespace FinanceManagement.Forms.Transaction
 
         private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            cboType.SelectedIndex = 0;
             LoadTransactionsBasedOnCriteria();
         }
 
@@ -172,7 +172,7 @@ namespace FinanceManagement.Forms.Transaction
 
         private string GetSelectedCategoryType()
         {
-            switch (cboCategory.SelectedIndex)
+            switch (cboType.SelectedIndex)
             {
                 case 0:
                     return null;
@@ -302,6 +302,12 @@ namespace FinanceManagement.Forms.Transaction
         private void label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cboType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cboCategory.SelectedIndex = 0;
+            LoadTransactionsBasedOnCriteria() ;
         }
     }
 }
