@@ -16,5 +16,22 @@ namespace FinanceManagement.Models
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        public Transaction()
+        {
+
+        }
+
+        public Transaction(int id, int userId, int categoryId, decimal amount, DateTime transactionDate, string description, DateTime createdAt, DateTime updatedAt)
+        {
+            Id = id;
+            UserId = userId;
+            CategoryId = categoryId;
+            Amount = amount;
+            TransactionDate = transactionDate;
+            Description = description;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+        }
     }
 }

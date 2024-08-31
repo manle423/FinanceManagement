@@ -27,6 +27,20 @@ namespace FinanceManagement.Forms.Transaction
         int selectedCategoryId = -1;
         string selectedStartDate = null;
         string selectedEndDate = null;
+
+        // Đối tượng trung gian
+        Models.Transaction transaction = new Models.Transaction();
+
+        private void GetTransactionData()
+        {
+            transaction.Id = int.Parse(txtIDUpdate.Text);
+            transaction.UserId = userId;
+            transaction.CategoryId = int.Parse(cboCategory.SelectedValue.ToString());
+            transaction.Amount = decimal.Parse(txtAmountUpdate.Text);
+            transaction.TransactionDate = dtpDateUpdate.Value;
+            
+        }
+
         public frmTransactionMain()
         {
             InitializeComponent();
@@ -96,6 +110,7 @@ namespace FinanceManagement.Forms.Transaction
         }
         private void ConfigureDataGridView(List<Models.Transaction> transactions)
         {
+            // Đưa danh sách Transactions vào dgv
             dgvTransactions.DataSource = transactions;
 
 
@@ -127,7 +142,7 @@ namespace FinanceManagement.Forms.Transaction
 
             if (dgvTransactions.Columns["CategoryName"] == null)
             {
-                // Add a new column for Category Name
+                // Thêm cột Category Name
                 DataGridViewTextBoxColumn categoryNameColumn = new DataGridViewTextBoxColumn();
                 categoryNameColumn.Name = "CategoryName";
                 categoryNameColumn.HeaderText = "Category";
@@ -136,7 +151,7 @@ namespace FinanceManagement.Forms.Transaction
                 dgvTransactions.Columns["CategoryName"].Width = 100;
             }
 
-            // Populate CategoryName column with category names
+            // Đưa các Catergory Name vào dgv
             dgvTransactions.DataBindingComplete += (sender, e) =>
             {
                 foreach (DataGridViewRow row in dgvTransactions.Rows)
@@ -146,7 +161,7 @@ namespace FinanceManagement.Forms.Transaction
                 }
             };
 
-            // Hide the original CategoryId column
+            // Giấu cột CategoryId (cột này có index 3)
             dgvTransactions.Columns["CategoryId"].Visible = false;
         }
 
@@ -192,9 +207,13 @@ namespace FinanceManagement.Forms.Transaction
 
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
+                //MessageBox.Show(e.ColumnIndex.ToString());
                 selectedId = dgvTransactions.Rows[e.RowIndex].Cells[1].Value.ToString();
                 LoadCategoriesComboBox(cboCategoryUpdate);
-                cboCategoryUpdate.SelectedItem = dgvTransactions.Rows[e.RowIndex].Cells[0].Value.ToString();
+                cboCategoryUpdate.SelectedValue = dgvTransactions.Rows[e.RowIndex].Cells[3].Value.ToString(); // hidden column
+                cboCategoryUpdate.Text = dgvTransactions.Rows[e.RowIndex].Cells[0].Value.ToString();
+                MessageBox.Show(cboCategoryUpdate.SelectedValue.ToString());
+                
                 selectedAmount = dgvTransactions.Rows[e.RowIndex].Cells[4].Value.ToString();
                 selectedTransactionDate = dgvTransactions.Rows[e.RowIndex].Cells[5].Value.ToString();
                 selectedDescription = dgvTransactions.Rows[e.RowIndex].Cells[6].Value.ToString();
@@ -233,11 +252,12 @@ namespace FinanceManagement.Forms.Transaction
         {
             try
             {
+                GetTransactionData();
                 DialogResult check = MessageBox.Show("Are you sure you want to delete this transaction?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (check == DialogResult.Yes)
                 {
                     int id = int.Parse(selectedId);
-                    if (TransactionService.DeleteTransaction(id))
+                    if (TransactionService.DeleteTransaction(transaction.Id))
                     {
                         MessageBox.Show("Delete successfully");
                         LoadTransactionsBasedOnCriteria();
