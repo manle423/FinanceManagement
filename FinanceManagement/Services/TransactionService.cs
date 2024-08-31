@@ -32,7 +32,7 @@ namespace FinanceManagement.Services
                 {
                     conn.Open();
 
-                    const string query = "INSERT INTO Transactions (user_id, category_id, amount, transactionDate, description) " +
+                    const string query = "INSERT INTO Transactions (user_id, category_id, amount, transaction_date, description) " +
                         "VALUES (@User_id, @Category_id, @Amount, @TransactionDate, @Description)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
