@@ -56,7 +56,10 @@ namespace FinanceManagement.Forms.Transaction
 
         private void btnToAddCate_Click(object sender, EventArgs e)
         {
-
+            using (frmAddTransaction frmAddTransaction = new frmAddTransaction())
+            {
+                frmAddTransaction.ShowDialog();
+            }
         }
 
         private void cboCateType_SelectedIndexChanged(object sender, EventArgs e)
