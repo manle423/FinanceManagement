@@ -3,6 +3,7 @@ using FinanceManagement.Models;
 using FinanceManagement.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -139,7 +140,31 @@ namespace FinanceManagement.Services
             return transactions;
         }
 
+        // Xoá transaction
+        public static bool DeleteTransaction(int id)
+        {
+            try
+            {
 
+                using (SqlConnection conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    const string deleteQuery = "DELETE FROM Transactions WHERE transaction_id = @transaction_id";
+                    using (SqlCommand deleteCmd = new SqlCommand(deleteQuery, conn))
+                    {
+                        deleteCmd.Parameters.Add("@transaction_id", SqlDbType.Int).Value = id;
+
+                        return deleteCmd.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
     }
 
 

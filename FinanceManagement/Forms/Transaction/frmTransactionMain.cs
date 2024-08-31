@@ -1,5 +1,6 @@
 ﻿using FinanceManagement.Models;
 using FinanceManagement.Services;
+using FinanceManagement.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -221,6 +222,36 @@ namespace FinanceManagement.Forms.Transaction
         private void pnlControl_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult check = MessageBox.Show("Are you sure you want to delete this transaction?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (check == DialogResult.Yes)
+                {
+                    int id = int.Parse(selectedId);
+                    if (TransactionService.DeleteTransaction(id))
+                    {
+                        MessageBox.Show("Delete successfully");
+                        LoadTransactionsBasedOnCriteria();
+                    }
+                    else
+                    {
+                        throw new Exception("Error when delete category");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
