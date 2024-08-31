@@ -17,6 +17,10 @@ namespace FinanceManagement.Services
         // khai báo 1 lần dbConnection cho dễ dàng sử dụng
         private static readonly DatabaseConnection dbConnection = new DatabaseConnection();
 
+        
+
+        
+
         // Hàm thêm transaction
         public static bool AddTransaction(int userId, int categoryId, decimal amount, 
             DateTime transactionDate, string description)
@@ -141,7 +145,7 @@ namespace FinanceManagement.Services
         }
 
         // Xoá transaction
-        public static bool DeleteTransaction(int id)
+        public static bool DeleteTransaction(Transaction transaction)
         {
             try
             {
@@ -153,7 +157,7 @@ namespace FinanceManagement.Services
                     const string deleteQuery = "DELETE FROM Transactions WHERE transaction_id = @transaction_id";
                     using (SqlCommand deleteCmd = new SqlCommand(deleteQuery, conn))
                     {
-                        deleteCmd.Parameters.Add("@transaction_id", SqlDbType.Int).Value = id;
+                        deleteCmd.Parameters.Add("@transaction_id", SqlDbType.Int).Value = transaction.Id;
 
                         return deleteCmd.ExecuteNonQuery() > 0;
                     }
@@ -163,6 +167,27 @@ namespace FinanceManagement.Services
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+        }
+
+        // Cập nhật transaction
+        public static bool UpdateTransaction(Transaction transaction)
+        {
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+
+                const string query = "UPDATE Transactions SET category_id = @Category_id, amount = @Amount, transaction_date = @Transaction_date, Description = @Description, updated_at = @Updated_at WHERE transaction_id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", transaction.Id);
+                    cmd.Parameters.AddWithValue("@Category_id", transaction.CategoryId);
+                    cmd.Parameters.AddWithValue("@Amount", transaction.Amount);
+                    cmd.Parameters.AddWithValue("@Transaction_date", transaction.TransactionDate);
+                    cmd.Parameters.AddWithValue("@Description", transaction.Description);
+                    cmd.Parameters.AddWithValue("@Updated_at", DateTime.Now);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
             }
         }
     }

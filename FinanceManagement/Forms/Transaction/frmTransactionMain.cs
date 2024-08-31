@@ -35,10 +35,10 @@ namespace FinanceManagement.Forms.Transaction
         {
             transaction.Id = int.Parse(txtIDUpdate.Text);
             transaction.UserId = userId;
-            transaction.CategoryId = int.Parse(cboCategory.SelectedValue.ToString());
+            transaction.CategoryId = int.Parse(cboCategoryUpdate.SelectedValue.ToString());
             transaction.Amount = decimal.Parse(txtAmountUpdate.Text);
             transaction.TransactionDate = dtpDateUpdate.Value;
-            
+            transaction.Description = txtDescriptionUpdate.Text;
         }
 
         public frmTransactionMain()
@@ -105,7 +105,6 @@ namespace FinanceManagement.Forms.Transaction
         {
             List<Models.Transaction> transactions = TransactionService.GetAllTransactions(userId, startDate, endDate, category_id, type);
             //dgvTransactions.DataSource = transactions;
-
             ConfigureDataGridView(transactions);
         }
         private void ConfigureDataGridView(List<Models.Transaction> transactions)
@@ -212,7 +211,7 @@ namespace FinanceManagement.Forms.Transaction
                 LoadCategoriesComboBox(cboCategoryUpdate);
                 cboCategoryUpdate.SelectedValue = dgvTransactions.Rows[e.RowIndex].Cells[3].Value.ToString(); // hidden column
                 cboCategoryUpdate.Text = dgvTransactions.Rows[e.RowIndex].Cells[0].Value.ToString();
-                MessageBox.Show(cboCategoryUpdate.SelectedValue.ToString());
+                //MessageBox.Show(cboCategoryUpdate.SelectedValue.ToString());
                 
                 selectedAmount = dgvTransactions.Rows[e.RowIndex].Cells[4].Value.ToString();
                 selectedTransactionDate = dgvTransactions.Rows[e.RowIndex].Cells[5].Value.ToString();
@@ -224,7 +223,7 @@ namespace FinanceManagement.Forms.Transaction
                 txtDescriptionUpdate.Text = selectedDescription;
                 dtpDateUpdate.Value = DateTime.Parse(selectedTransactionDate.ToString());
 
-
+                
             }
         }
 
@@ -245,7 +244,33 @@ namespace FinanceManagement.Forms.Transaction
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                
+                if (!ValidationHelper.IsNotEmpty(txtAmountUpdate.Text))
+                {
+                    
+                    throw new Exception("Transaction amount is required");
+                }
+                if (!ValidationHelper.IsNotEmpty(transaction.CategoryId.ToString()))
+                {
+                    throw new Exception("Transaction category is required");
+                }
+                GetTransactionData();
+                if (TransactionService.UpdateTransaction(transaction))
+                {
+                    MessageBox.Show("Update transaction successfully", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadTransactionsBasedOnCriteria();
+                }
+                else
+                {
+                    throw new Exception("Update failed");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -256,8 +281,7 @@ namespace FinanceManagement.Forms.Transaction
                 DialogResult check = MessageBox.Show("Are you sure you want to delete this transaction?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (check == DialogResult.Yes)
                 {
-                    int id = int.Parse(selectedId);
-                    if (TransactionService.DeleteTransaction(transaction.Id))
+                    if (TransactionService.DeleteTransaction(transaction))
                     {
                         MessageBox.Show("Delete successfully");
                         LoadTransactionsBasedOnCriteria();
