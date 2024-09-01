@@ -57,6 +57,15 @@ namespace FinanceManagement.Forms.Transaction
             
         }
 
+        Models.Transaction transaction = new Models.Transaction();
+        private void GetTransactionData()
+        {
+            transaction.UserId = userId;
+            transaction.CategoryId = int.Parse(cboCategory.SelectedValue.ToString());
+            transaction.Amount = decimal.Parse(txtAmount.Text);
+            transaction.TransactionDate = dtpTransactionDate.Value;
+            transaction.Description = txtDescription.Text;
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -67,12 +76,8 @@ namespace FinanceManagement.Forms.Transaction
                     throw new Exception("Transaction amount is required");
                 }
 
-                DateTime transactionDate = dtpTransactionDate.Value;
-                int categoryId = int.Parse(cboCategory.SelectedValue.ToString());
-                decimal amount = decimal.Parse(txtAmount.Text);
-                string description = txtDescription.Text;
-
-                bool isAdded = TransactionService.AddTransaction(userId,categoryId,amount,transactionDate,description);
+                GetTransactionData();
+                bool isAdded = TransactionService.AddTransaction(transaction);
 
                 if (isAdded)
                 {

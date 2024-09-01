@@ -22,8 +22,7 @@ namespace FinanceManagement.Services
         
 
         // Hàm thêm transaction
-        public static bool AddTransaction(int userId, int categoryId, decimal amount, 
-            DateTime transactionDate, string description)
+        public static bool AddTransaction(Transaction transaction)
         {
             try
             {
@@ -37,11 +36,11 @@ namespace FinanceManagement.Services
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@User_id", userId);
-                        cmd.Parameters.AddWithValue("@Category_id", categoryId);
-                        cmd.Parameters.AddWithValue("@Amount", amount);
-                        cmd.Parameters.AddWithValue("@TransactionDate", transactionDate);
-                        cmd.Parameters.AddWithValue("@Description", description);
+                        cmd.Parameters.AddWithValue("@User_id", transaction.UserId);
+                        cmd.Parameters.AddWithValue("@Category_id", transaction.CategoryId);
+                        cmd.Parameters.AddWithValue("@Amount", transaction.Amount);
+                        cmd.Parameters.AddWithValue("@TransactionDate", transaction.TransactionDate);
+                        cmd.Parameters.AddWithValue("@Description", transaction.Description);
 
                         return cmd.ExecuteNonQuery() > 0;
                     }
