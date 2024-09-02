@@ -211,6 +211,18 @@
     <Compile Include="Forms\frmDashboard.Designer.cs">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Goal\frmGoalManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Goal\frmGoalManagement.Designer.cs">
+      <DependentUpon>frmGoalManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Transaction\frmAddTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Transaction\frmAddTransaction.Designer.cs">
+      <DependentUpon>frmAddTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Transaction\frmTransactionMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -218,6 +230,7 @@
       <DependentUpon>frmTransactionMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Goal.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -228,6 +241,7 @@
       <DependentUpon>frmRegister.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\GoalService.cs" />
     <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\UserSession.cs" />
@@ -255,6 +269,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmStartup.resx">
       <DependentUpon>frmStartup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Goal\frmGoalManagement.resx">
+      <DependentUpon>frmGoalManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Transaction\frmAddTransaction.resx">
+      <DependentUpon>frmAddTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Transaction\frmTransactionMain.resx">
       <DependentUpon>frmTransactionMain.cs</DependentUpon>
