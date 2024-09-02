@@ -1,4 +1,5 @@
 ﻿using FinanceManagement.Forms;
+using FinanceManagement.Forms.Goal;
 using FinanceManagement.Forms.Transaction;
 using FinanceManagement.Services;
 using System;
@@ -109,6 +110,11 @@ namespace FinanceManagement
         private void btnToTransactions_Click(object sender, EventArgs e)
         {
             UpdateMainContent(new frmTransactionMain(), "Finance Management | Transactions");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UpdateMainContent(new frmGoalManagement(), "Finance Management | Goals");
         }
     }
 }

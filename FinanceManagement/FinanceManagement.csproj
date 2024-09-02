@@ -212,7 +212,7 @@
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Goal\frmGoalManagement.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Goal\frmGoalManagement.Designer.cs">
       <DependentUpon>frmGoalManagement.cs</DependentUpon>

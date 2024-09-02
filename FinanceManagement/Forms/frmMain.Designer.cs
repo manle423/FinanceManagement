@@ -32,11 +32,12 @@
             this.lblMain = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.btnToTransactions = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnToCategory = new System.Windows.Forms.Button();
             this.btnToDashBoard = new System.Windows.Forms.Button();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.btnToTransactions = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlControl.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +85,7 @@
             // 
             this.pnlControl.AutoSize = true;
             this.pnlControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlControl.Controls.Add(this.button1);
             this.pnlControl.Controls.Add(this.btnToTransactions);
             this.pnlControl.Controls.Add(this.btnLogout);
             this.pnlControl.Controls.Add(this.btnToCategory);
@@ -92,6 +94,16 @@
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(154, 520);
             this.pnlControl.TabIndex = 4;
+            // 
+            // btnToTransactions
+            // 
+            this.btnToTransactions.Location = new System.Drawing.Point(0, 307);
+            this.btnToTransactions.Name = "btnToTransactions";
+            this.btnToTransactions.Size = new System.Drawing.Size(150, 45);
+            this.btnToTransactions.TabIndex = 3;
+            this.btnToTransactions.Text = "TRANSACTIONS";
+            this.btnToTransactions.UseVisualStyleBackColor = true;
+            this.btnToTransactions.Click += new System.EventHandler(this.btnToTransactions_Click);
             // 
             // btnLogout
             // 
@@ -131,15 +143,15 @@
             this.pnlContent.TabIndex = 5;
             this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
-            // btnToTransactions
+            // button1
             // 
-            this.btnToTransactions.Location = new System.Drawing.Point(0, 307);
-            this.btnToTransactions.Name = "btnToTransactions";
-            this.btnToTransactions.Size = new System.Drawing.Size(150, 45);
-            this.btnToTransactions.TabIndex = 3;
-            this.btnToTransactions.Text = "TRANSACTIONS";
-            this.btnToTransactions.UseVisualStyleBackColor = true;
-            this.btnToTransactions.Click += new System.EventHandler(this.btnToTransactions_Click);
+            this.button1.Location = new System.Drawing.Point(0, 392);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 45);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "GOALS";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMain
             // 
@@ -173,5 +185,6 @@
         private System.Windows.Forms.Button btnToDashBoard;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnToTransactions;
+        private System.Windows.Forms.Button button1;
     }
 }

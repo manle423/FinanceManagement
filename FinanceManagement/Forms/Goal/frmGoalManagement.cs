@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinanceManagement.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +11,37 @@ using System.Windows.Forms;
 
 namespace FinanceManagement.Forms.Goal
 {
-    public partial class frmGoalManagement : Form
+    public partial class frmGoalManagement : UserControl
     {
+        int userId = UserSession.Instance.UserId;
+        string username = UserSession.Instance.Username;
         public frmGoalManagement()
         {
             InitializeComponent();
+            // Show goals that have deadline within next week
+            dtpStartDate.Value = DateTime.Now;
+            dtpEndDate.Value = DateTime.Now.AddDays(7);
+            dtpStartDate.MaxDate = dtpEndDate.Value;
+            dtpEndDate.MinDate = dtpStartDate.Value;
+            txtStartCurrentAmount.Text = txtStartTargetAmount.Text = "0";
+            txtEndTargetAmount.Text = txtEndCurrentAmount.Text = "99999999";
+            dgvGoals.ReadOnly = true;
+            dgvGoals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+
+        // Đối tượng trung gian
+        Models.Goal goal = new Models.Goal();
+
+        private void GetTransactionData()
+        {
+            goal.Id = int.Parse(txtIDUpdate.Text);
+            goal.UserId = userId;
+            goal.Deadline = dtpDeadlineUpdate.Value;
+            goal.CurrentAmount = decimal.Parse(txtCurrentAmountUpdate.Text);
+            goal.TargetAmount = decimal.Parse(txtTargetAmountUpdate.Text);
+            goal.Name = txtNameUpdate.Text;
+            goal.Description = txtDescriptionUpdate.Text;
         }
 
         private void pnlControl_Paint(object sender, PaintEventArgs e)
@@ -29,7 +56,8 @@ namespace FinanceManagement.Forms.Goal
 
         private void label10_Click(object sender, EventArgs e)
         {
-
+            txtStartTargetAmount.Enabled = (txtStartTargetAmount.Enabled) ? false : true;
+            txtEndTargetAmount.Enabled = (txtEndTargetAmount.Enabled) ? false : true;
         }
 
         private void txtAmountUpdate_TextChanged(object sender, EventArgs e)
@@ -39,12 +67,14 @@ namespace FinanceManagement.Forms.Goal
 
         private void label3_Click(object sender, EventArgs e)
         {
+            txtStartCurrentAmount.Enabled = (txtStartCurrentAmount.Enabled) ? false : true;
+            txtEndCurrentAmount.Enabled = (txtEndCurrentAmount.Enabled) ? false : true;
 
         }
 
         private void label9_Click(object sender, EventArgs e)
         {
-
+            dtpEndDate.Enabled = (dtpEndDate.Enabled) ? false : true;
         }
 
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
@@ -59,7 +89,7 @@ namespace FinanceManagement.Forms.Goal
 
         private void label6_Click(object sender, EventArgs e)
         {
-
+            dtpStartDate.Enabled = (dtpStartDate.Enabled) ? false : true;
         }
 
         private void label7_Click(object sender, EventArgs e)
