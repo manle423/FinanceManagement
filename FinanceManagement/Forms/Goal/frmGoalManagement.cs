@@ -1,4 +1,5 @@
 ﻿using FinanceManagement.Services;
+using FinanceManagement.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,6 +35,8 @@ namespace FinanceManagement.Forms.Goal
             
             dtpStartDate.MaxDate = dtpEndDate.Value;
             dtpEndDate.MinDate = dtpStartDate.Value;
+            dtpStartDate.Enabled = false;
+            dtpEndDate.Enabled = false;
             dgvGoals.ReadOnly = true;
             dgvGoals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -42,7 +45,7 @@ namespace FinanceManagement.Forms.Goal
         // Đối tượng trung gian
         Models.Goal goal = new Models.Goal();
 
-        private void GetTransactionData()
+        private void GetGoalData()
         {
             goal.Id = int.Parse(txtIDUpdate.Text);
             goal.UserId = userId;
@@ -89,8 +92,7 @@ namespace FinanceManagement.Forms.Goal
 
         private void label10_Click(object sender, EventArgs e)
         {
-            txtStartTargetAmount.Enabled = (txtStartTargetAmount.Enabled) ? false : true;
-            txtEndTargetAmount.Enabled = (txtEndTargetAmount.Enabled) ? false : true;
+
         }
 
         private void txtAmountUpdate_TextChanged(object sender, EventArgs e)
@@ -100,8 +102,7 @@ namespace FinanceManagement.Forms.Goal
 
         private void label3_Click(object sender, EventArgs e)
         {
-            txtStartCurrentAmount.Enabled = (txtStartCurrentAmount.Enabled) ? false : true;
-            txtEndCurrentAmount.Enabled = (txtEndCurrentAmount.Enabled) ? false : true;
+
 
         }
 
@@ -170,7 +171,45 @@ namespace FinanceManagement.Forms.Goal
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+                if (!ValidationHelper.IsNotEmpty(txtNameUpdate.Text))
+                {
+
+                    throw new Exception("Goal name is required");
+                }
+                if (!ValidationHelper.IsNotEmpty(txtCurrentAmountUpdate.Text))
+                {
+                    throw new Exception("Current amount is required");
+                }
+                if (!ValidationHelper.IsNotEmpty(txtTargetAmountUpdate.Text))
+                {
+                    throw new Exception("Target amount is required");
+                }
+                if (!ValidationHelper.IsValidDecimal(txtTargetAmountUpdate.Text))
+                {
+                    throw new Exception("Target amount input is not valid");
+                }
+                if (!ValidationHelper.IsValidDecimal(txtCurrentAmountUpdate.Text))
+                {
+                    throw new Exception("Current amount input is not valid");
+                }
+                GetGoalData();
+                if (GoalService.UpdateGoal(goal))
+                {
+                    MessageBox.Show("Update goal successfully", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadGoalsBasedOnCriteria();
+                }
+                else
+                {
+                    throw new Exception("Update failed");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void txtDescriptionUpdate_TextChanged(object sender, EventArgs e)
@@ -205,7 +244,27 @@ namespace FinanceManagement.Forms.Goal
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                GetGoalData();
+                DialogResult check = MessageBox.Show("Are you sure you want to delete this goal?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (check == DialogResult.Yes)
+                {
+                    if (GoalService.DeleteGoal(goal))
+                    {
+                        MessageBox.Show("Delete successfully");
+                        LoadGoalsBasedOnCriteria();
+                    }
+                    else
+                    {
+                        throw new Exception("Error when delete goal");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

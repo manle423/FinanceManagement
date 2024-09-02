@@ -31,5 +31,22 @@ namespace FinanceManagement.Utils
             string pattern = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
             return Regex.IsMatch(password, pattern);
         }
+
+        // Validate if a value is a valid decimal value
+        public static bool IsValidDecimal(string inputText)
+        {
+            if (decimal.TryParse(inputText, out decimal inputValue))
+            {
+                // Define the minimum and maximum values for a decimal
+                decimal minDecimalValue = decimal.MinValue;
+                decimal maxDecimalValue = decimal.MaxValue;
+
+                // Check if the input value is within the range of a decimal
+                return (inputValue >= minDecimalValue && inputValue <= maxDecimalValue);
+            }
+            // The input is not a valid decimal value
+            return false;
+            
+        }
     }
 }

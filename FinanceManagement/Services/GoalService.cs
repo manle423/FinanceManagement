@@ -86,7 +86,7 @@ namespace FinanceManagement.Services
             {
                 conn.Open();
 
-                const string query = "UPDATE Goal SET name = @name, target_amount = @target_amount, current_amount = @current_amount, deadline = @deadline, description = @description, updated_at = @Updated_at WHERE goal_id = @goal_id";
+                const string query = "UPDATE Goals SET name = @name, target_amount = @target_amount, current_amount = @current_amount, deadline = @deadline, description = @description, updated_at = @Updated_at WHERE goal_id = @goal_id";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@goal_id", goal.Id);
@@ -137,13 +137,12 @@ namespace FinanceManagement.Services
                             cmd.Parameters.AddWithValue("@endDate", endDate);
                         }
 
-                        MessageBox.Show(query);
                         
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                MessageBox.Show(query);
+
                                 goals.Add(new Goal
                                 {
                                     Id = reader.GetInt32(0),
