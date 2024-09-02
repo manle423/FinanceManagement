@@ -15,16 +15,18 @@ namespace FinanceManagement.Forms.Goal
     {
         int userId = UserSession.Instance.UserId;
         string username = UserSession.Instance.Username;
+        string selectedStartDate = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+        string selectedEndDate = DateTime.MaxValue.ToString("yyyy-MM-dd HH:mm:ss");
+        decimal selectedStartCurrentAmount = Decimal.MinValue;
+        decimal selectedEndCurrentAmount = Decimal.MaxValue;
+        decimal selectedStartTargetAmount = Decimal.MinValue;
+        decimal selectedEndTargetAmount = Decimal.MaxValue;
         public frmGoalManagement()
         {
             InitializeComponent();
-            // Show goals that have deadline within next week
-            dtpStartDate.Value = DateTime.Now;
-            dtpEndDate.Value = DateTime.Now.AddDays(7);
+            
             dtpStartDate.MaxDate = dtpEndDate.Value;
             dtpEndDate.MinDate = dtpStartDate.Value;
-            txtStartCurrentAmount.Text = txtStartTargetAmount.Text = "0";
-            txtEndTargetAmount.Text = txtEndCurrentAmount.Text = "99999999";
             dgvGoals.ReadOnly = true;
             dgvGoals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -44,6 +46,30 @@ namespace FinanceManagement.Forms.Goal
             goal.Description = txtDescriptionUpdate.Text;
         }
 
+        private void LoadGoalsBasedOnCriteria()
+        {
+ 
+            selectedStartDate = (dtpStartDate.Enabled) ? dtpStartDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+
+            selectedEndDate = (dtpEndDate.Enabled) ? dtpEndDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : DateTime.MaxValue.ToString("yyyy-MM-dd HH:mm:ss");
+            selectedStartCurrentAmount = (!string.IsNullOrEmpty(txtStartCurrentAmount.Text)) ? decimal.Parse(txtStartCurrentAmount.Text) : Decimal.MinValue;
+            selectedEndCurrentAmount = (!string.IsNullOrEmpty(txtEndCurrentAmount.Text)) ? decimal.Parse(txtEndCurrentAmount.Text) : Decimal.MaxValue;
+            selectedStartTargetAmount = (!string.IsNullOrEmpty(txtStartTargetAmount.Text)) ? decimal.Parse(txtStartTargetAmount.Text) : Decimal.MinValue;
+            selectedEndTargetAmount = (!string.IsNullOrEmpty(txtEndTargetAmount.Text)) ? decimal.Parse(txtEndTargetAmount.Text) : Decimal.MaxValue;
+
+            LoadGoals(userId,selectedStartDate,selectedEndDate,selectedStartCurrentAmount,selectedEndCurrentAmount,selectedStartTargetAmount,selectedEndTargetAmount);
+        }
+        private void LoadGoals(int userId, string startDate, string endDate, decimal startCurrentAmount, decimal endCurrentAmount, decimal startTargetAmount, decimal endTargetAmount) 
+        {
+            List<Models.Goal> goals = GoalService.GetAllGoals(userId,startDate,endDate,startTargetAmount,endTargetAmount,startCurrentAmount,endCurrentAmount);
+            ConfigureDataGridView(goals);
+
+        }
+
+        private void ConfigureDataGridView(List<Models.Goal> goals)
+        {
+            dgvGoals.DataSource = goals;
+        }
         private void pnlControl_Paint(object sender, PaintEventArgs e)
         {
 
@@ -75,21 +101,29 @@ namespace FinanceManagement.Forms.Goal
         private void label9_Click(object sender, EventArgs e)
         {
             dtpEndDate.Enabled = (dtpEndDate.Enabled) ? false : true;
+            selectedEndDate = (dtpEndDate.Enabled) ? dtpEndDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : DateTime.MaxValue.ToString("yyyy-MM-dd HH:mm:ss");
+            LoadGoalsBasedOnCriteria();
         }
 
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
         {
-
+            selectedStartDate = dtpStartDate.Value.ToString();
+            dtpEndDate.MinDate = dtpStartDate.Value;
+            LoadGoalsBasedOnCriteria();
         }
 
         private void dtpEndDate_ValueChanged(object sender, EventArgs e)
         {
-
+            selectedEndDate = dtpEndDate.Value.ToString();
+            dtpStartDate.MaxDate = dtpEndDate.Value;
+            LoadGoalsBasedOnCriteria();
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
             dtpStartDate.Enabled = (dtpStartDate.Enabled) ? false : true;
+            selectedStartDate = (dtpStartDate.Enabled) ? dtpStartDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+            LoadGoalsBasedOnCriteria();
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -99,7 +133,7 @@ namespace FinanceManagement.Forms.Goal
 
         private void btnReload_Click(object sender, EventArgs e)
         {
-
+            LoadGoalsBasedOnCriteria();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -170,6 +204,11 @@ namespace FinanceManagement.Forms.Goal
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmGoalManagement_Load(object sender, EventArgs e)
+        {
+            LoadGoalsBasedOnCriteria();
         }
     }
 }

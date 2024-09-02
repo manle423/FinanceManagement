@@ -407,6 +407,7 @@
             this.Controls.Add(this.pnlControl);
             this.Name = "frmGoalManagement";
             this.Size = new System.Drawing.Size(800, 560);
+            this.Load += new System.EventHandler(this.frmGoalManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGoals)).EndInit();
             this.pnlData.ResumeLayout(false);
             this.pnlData.PerformLayout();

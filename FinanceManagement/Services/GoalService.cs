@@ -1,6 +1,7 @@
 ﻿using FinanceManagement.Data;
 using FinanceManagement.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -109,7 +110,7 @@ namespace FinanceManagement.Services
                 using (SqlConnection conn = dbConnection.GetConnection())
                 {
                     conn.Open();
-                    string query = "SELECT goal_id, name, target_amount, current_amount, deadline, description, created_at, updated_at FROM Goals WHERE " +
+                    string query = "SELECT goal_id, name, target_amount, current_amount, deadline, description, created_at, updated_at FROM Goals WHERE user_id = @user_id AND " +
                         "target_amount >= @startTargetAmount AND target_amount <= @endTargetAmount AND " +
                         "current_amount >= @startCurrentAmount AND current_amount <= @endCurrentAmount ";
                     if (!string.IsNullOrEmpty(startDate))
@@ -122,6 +123,7 @@ namespace FinanceManagement.Services
                     }
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
+                        cmd.Parameters.AddWithValue("@user_id", user_id);
                         cmd.Parameters.AddWithValue("@startTargetAmount",startTargetAmount);
                         cmd.Parameters.AddWithValue("@endTargetAmount", endTargetAmount);
                         cmd.Parameters.AddWithValue("@startCurrentAmount", startCurrentAmount);
@@ -135,10 +137,13 @@ namespace FinanceManagement.Services
                             cmd.Parameters.AddWithValue("@endDate", endDate);
                         }
 
+                        MessageBox.Show(query);
+                        
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
+                                MessageBox.Show(query);
                                 goals.Add(new Goal
                                 {
                                     Id = reader.GetInt32(0),
