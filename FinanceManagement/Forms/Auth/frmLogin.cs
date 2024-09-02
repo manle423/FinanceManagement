@@ -58,6 +58,10 @@ namespace FinanceManagement
                 //this.Hide();
                 //dashboardForm.Show();
 
+                // Start session
+                int userId = UserService.GetUserId(username);
+                UserSession.Instance.SetUser(userId, username);
+
                 frmMain main = new frmMain();
                 this.Hide();
                 main.Show();

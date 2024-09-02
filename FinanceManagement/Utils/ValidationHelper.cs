@@ -31,5 +31,12 @@ namespace FinanceManagement.Utils
             string pattern = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
             return Regex.IsMatch(password, pattern);
         }
+
+        // Validate if StartDate < EndDate
+        public static bool IsStartDateLessThanEndDate(DateTime startDate, DateTime endDate)
+        {
+            return startDate <= endDate;
+        }
+
     }
 }

@@ -32,7 +32,10 @@ namespace FinanceManagement.Forms
         {
             using (frmAddCategory frmAddCategory = new frmAddCategory())
             {
-                frmAddCategory.ShowDialog();
+                if (frmAddCategory.ShowDialog() == DialogResult.OK)
+                {
+                    LoadCategoriesBasedOnType();
+                }
             }
         }
 

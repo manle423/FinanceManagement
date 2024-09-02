@@ -80,6 +80,30 @@ namespace FinanceManagement.Services
             }
         }
 
+        // Lấy ID của người dùng
+        public static int GetUserId(string username)
+        {
+            try
+            {
+                using (SqlConnection conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT user_id FROM Users WHERE Username = @Username";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        int userId = (int)cmd.ExecuteScalar();
+                        return userId;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+        }
+
         // Kiểm tra xem username đã tồn tại chưa
         private static bool IsUsernameExists(string username)
         {

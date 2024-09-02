@@ -107,5 +107,40 @@ namespace FinanceManagement
         {
 
         }
+
+        private void frmAddCategory_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grpCateType_Enter_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDescription_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmAddCategory_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
