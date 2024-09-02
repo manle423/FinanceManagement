@@ -21,6 +21,13 @@ namespace FinanceManagement.Forms.Goal
         decimal selectedEndCurrentAmount = Decimal.MaxValue;
         decimal selectedStartTargetAmount = Decimal.MinValue;
         decimal selectedEndTargetAmount = Decimal.MaxValue;
+
+        string selectedId = null;
+        string selectedName = null;
+        string selectedDescription = null;
+        string selectedDeadline = null;
+        string selectedCurrentAmount = null;
+        string selectedTargetAmount = null;
         public frmGoalManagement()
         {
             InitializeComponent();
@@ -209,6 +216,31 @@ namespace FinanceManagement.Forms.Goal
         private void frmGoalManagement_Load(object sender, EventArgs e)
         {
             LoadGoalsBasedOnCriteria();
+        }
+
+        private void dgvGoals_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // id, user id, name, target_amount, current_maount, deadline, description, createdat, updatedat
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+
+                selectedId = dgvGoals.Rows[e.RowIndex].Cells[0].Value.ToString();
+                selectedName = dgvGoals.Rows[e.RowIndex].Cells[2].Value.ToString();
+                selectedTargetAmount = dgvGoals.Rows[e.RowIndex].Cells[3].Value.ToString();
+                selectedCurrentAmount = dgvGoals.Rows[e.RowIndex].Cells[4].Value.ToString();
+                selectedDeadline = dgvGoals.Rows[e.RowIndex].Cells[5].Value.ToString();
+                selectedDescription = dgvGoals.Rows[e.RowIndex].Cells[6].Value.ToString();
+                // Gán dữ liệu vào các TextBox tương ứng
+                
+                txtIDUpdate.Text = selectedId;
+                txtNameUpdate.Text = selectedName;
+                txtTargetAmountUpdate.Text = selectedTargetAmount;
+                txtCurrentAmountUpdate.Text = selectedCurrentAmount;
+                txtDescriptionUpdate.Text = selectedDescription;
+                dtpDeadlineUpdate.Value = DateTime.Parse(selectedDeadline);
+             
+
+            }
         }
     }
 }

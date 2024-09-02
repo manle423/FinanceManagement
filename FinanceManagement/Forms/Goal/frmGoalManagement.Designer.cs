@@ -196,6 +196,7 @@
             this.dgvGoals.RowHeadersWidth = 62;
             this.dgvGoals.Size = new System.Drawing.Size(794, 276);
             this.dgvGoals.TabIndex = 1;
+            this.dgvGoals.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGoals_CellClick);
             this.dgvGoals.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransactions_CellContentClick);
             // 
             // pnlData
