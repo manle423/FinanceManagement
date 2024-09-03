@@ -32,11 +32,11 @@
             this.lblMain = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.btnToBudget = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnToCategory = new System.Windows.Forms.Button();
             this.btnToDashBoard = new System.Windows.Forms.Button();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.btnToBudget = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlControl.SuspendLayout();
             this.SuspendLayout();
@@ -67,6 +67,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.BackColor = System.Drawing.Color.Red;
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -91,6 +92,16 @@
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(154, 520);
             this.pnlControl.TabIndex = 4;
+            // 
+            // btnToBudget
+            // 
+            this.btnToBudget.Location = new System.Drawing.Point(0, 109);
+            this.btnToBudget.Name = "btnToBudget";
+            this.btnToBudget.Size = new System.Drawing.Size(150, 45);
+            this.btnToBudget.TabIndex = 3;
+            this.btnToBudget.Text = "BUDGET";
+            this.btnToBudget.UseVisualStyleBackColor = true;
+            this.btnToBudget.Click += new System.EventHandler(this.btnToBudget_Click);
             // 
             // btnLogout
             // 
@@ -129,16 +140,6 @@
             this.pnlContent.Size = new System.Drawing.Size(800, 520);
             this.pnlContent.TabIndex = 5;
             this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
-            // 
-            // btnToBudget
-            // 
-            this.btnToBudget.Location = new System.Drawing.Point(0, 109);
-            this.btnToBudget.Name = "btnToBudget";
-            this.btnToBudget.Size = new System.Drawing.Size(150, 45);
-            this.btnToBudget.TabIndex = 3;
-            this.btnToBudget.Text = "BUDGET";
-            this.btnToBudget.UseVisualStyleBackColor = true;
-            this.btnToBudget.Click += new System.EventHandler(this.btnToBudget_Click);
             // 
             // frmMain
             // 

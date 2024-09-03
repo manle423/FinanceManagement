@@ -2,6 +2,7 @@
 using FinanceManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -109,5 +110,50 @@ namespace FinanceManagement.Services
             return budgets;
         }
 
+        // Hàm xoá budget
+        public static bool DeleteBudget(Budget budget)
+        {
+            try
+            {
+                using (SqlConnection conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    const string deleteQuery = "DELETE FROM Budgets WHERE budget_id = @budget_id";
+                    using (SqlCommand deleteCmd = new SqlCommand(deleteQuery, conn))
+                    {
+                        deleteCmd.Parameters.Add("@budget_id", SqlDbType.Int).Value = budget.Id;
+
+                        return deleteCmd.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        // Hàm cập nhật budget
+        public static bool UpdateBudget(Budget budget)
+        {
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+
+                const string query = "UPDATE Budgets SET category_id = @Category_id, amount = @Amount, start_date = @Start_Date, end_date = @End_Date, updated_at = @Updated_at WHERE budget_id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", budget.Id);
+                    cmd.Parameters.AddWithValue("@Category_id", budget.CategoryId);
+                    cmd.Parameters.AddWithValue("@Amount", budget.Amount);
+                    cmd.Parameters.AddWithValue("@Start_Date", budget.StartDate);
+                    cmd.Parameters.AddWithValue("@End_date", budget.EndDate);
+                    cmd.Parameters.AddWithValue("@Updated_at", DateTime.Now);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
     }
 }
