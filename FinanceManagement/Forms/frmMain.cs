@@ -1,4 +1,5 @@
 ﻿using FinanceManagement.Forms;
+using FinanceManagement.Services;
 using FinanceManagement.Forms.Budget;
 using System;
 using System.Collections.Generic;
@@ -89,6 +90,9 @@ namespace FinanceManagement
                 this.Hide();
                 frmLogin frmLogin = new frmLogin();
                 frmLogin.Show();
+
+                // Remove session
+                UserSession.Instance.ClearSession();
             }
         }
 
