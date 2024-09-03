@@ -131,6 +131,7 @@
             // 
             this.txtCurrentAmountUpdate.Location = new System.Drawing.Point(111, 47);
             this.txtCurrentAmountUpdate.Name = "txtCurrentAmountUpdate";
+            this.txtCurrentAmountUpdate.ReadOnly = true;
             this.txtCurrentAmountUpdate.Size = new System.Drawing.Size(212, 22);
             this.txtCurrentAmountUpdate.TabIndex = 3;
             this.txtCurrentAmountUpdate.TextChanged += new System.EventHandler(this.txtAmountUpdate_TextChanged);
