@@ -78,8 +78,41 @@ namespace FinanceManagement.Forms.Goal
 
         private void ConfigureDataGridView(List<Models.Goal> goals)
         {
+            // id, user id, name, target_amount, current_maount, deadline, description, createdat, updatedat
+
+            // Đưa dữ liệu vào bảng
             dgvGoals.DataSource = goals;
-        }
+
+            // Giấu cột user_id
+            dgvGoals.Columns["UserId"].Visible = false;
+
+            // Điều chỉnh độ rộng của các cột
+            dgvGoals.Columns["Id"].Width = 30;
+            dgvGoals.Columns["TargetAmount"].Width = 110;
+            dgvGoals.Columns["CurrentAmount"].Width = 110;
+            dgvGoals.Columns["Deadline"].Width = 85;
+            dgvGoals.Columns["Description"].Width = 200;
+            dgvGoals.Columns["CreatedAt"].Width = 85;
+            dgvGoals.Columns["UpdatedAt"].Width = 85;
+            dgvGoals.Columns["Name"].Width = 120;
+
+            // Chỉnh lại định dạng ngày/tháng/năm
+            dgvGoals.Columns["Deadline"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvGoals.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvGoals.Columns["UpdatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
+
+            // Chỉnh lại tiêu đề
+            
+            dgvGoals.Columns["Id"].HeaderText = "ID";
+            dgvGoals.Columns["TargetAmount"].HeaderText = "Target Amount";
+            dgvGoals.Columns["CurrentAmount"].HeaderText = "Current Amount";
+            dgvGoals.Columns["Deadline"].HeaderText = "Deadline";
+            dgvGoals.Columns["Description"].HeaderText = "Description";
+            dgvGoals.Columns["CreatedAt"].HeaderText = "Created At";
+            dgvGoals.Columns["UpdatedAt"].HeaderText = "Updated At";
+
+            
+        }   
         private void pnlControl_Paint(object sender, PaintEventArgs e)
         {
 
@@ -146,7 +179,10 @@ namespace FinanceManagement.Forms.Goal
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
+            using (frmAddGoal frmAddGoal = new frmAddGoal())
+            {
+                frmAddGoal.ShowDialog();
+            }
         }
 
         private void label8_Click(object sender, EventArgs e)

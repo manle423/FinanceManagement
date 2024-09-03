@@ -194,7 +194,7 @@
             this.dgvGoals.MultiSelect = false;
             this.dgvGoals.Name = "dgvGoals";
             this.dgvGoals.RowHeadersWidth = 62;
-            this.dgvGoals.Size = new System.Drawing.Size(794, 276);
+            this.dgvGoals.Size = new System.Drawing.Size(800, 276);
             this.dgvGoals.TabIndex = 1;
             this.dgvGoals.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGoals_CellClick);
             this.dgvGoals.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransactions_CellContentClick);
@@ -387,7 +387,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(350, 50);
+            this.label13.Location = new System.Drawing.Point(365, 50);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(84, 15);
             this.label13.TabIndex = 17;

@@ -28,12 +28,11 @@ namespace FinanceManagement.Services
                 {
                     conn.Open();
 
-                    const string query = "INSERT INTO Goals (goal_id, user_id, name, target_amount, current_amount, deadline, description) " +
-                        "VALUES (@goal_id, @user_id, @name,@target_amount, @current_amount, @deadline, @Description)";
+                    const string query = "INSERT INTO Goals (user_id, name, target_amount, current_amount, deadline, description) " +
+                        "VALUES (@user_id, @name,@target_amount, @current_amount, @deadline, @Description)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@goal_id", goal.Id);
                         cmd.Parameters.AddWithValue ("@user_id", goal.UserId);
                         cmd.Parameters.AddWithValue("@name", goal.Name);
                         cmd.Parameters.AddWithValue("@target_amount", goal.TargetAmount);
