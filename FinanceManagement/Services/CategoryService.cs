@@ -231,7 +231,7 @@ namespace FinanceManagement.Services
             {
                 conn.Open();
 
-                const string query = "UPDATE Categories SET Name = @Name, Type = @Type, Description = @Description WHERE Category_id = @Id";
+                const string query = "UPDATE Categories SET Name = @Name, Type = @Type, Description = @Description, Updated_at = @UpdatedAT WHERE Category_id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -239,6 +239,7 @@ namespace FinanceManagement.Services
                     cmd.Parameters.AddWithValue("@Name", name);
                     cmd.Parameters.AddWithValue("@Type", type);
                     cmd.Parameters.AddWithValue("@Description", description);
+                    cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
 
                     return cmd.ExecuteNonQuery() > 0;
                 }

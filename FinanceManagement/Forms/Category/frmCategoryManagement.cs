@@ -147,6 +147,10 @@ namespace FinanceManagement.Forms
         {
             try
             {
+                if (!ValidationHelper.IsNotEmpty(txtIDUpdate.Text))
+                {
+                    throw new Exception("Please choose Category");
+                }
                 DialogResult check = MessageBox.Show("Are you sure you want to delete this category?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (check == DialogResult.Yes)
                 {
@@ -154,6 +158,7 @@ namespace FinanceManagement.Forms
                     if (CategoryService.DeleteCategory(id))
                     {
                         MessageBox.Show("Delete successfully");
+                        ClearUpdateField();
                         LoadCategoriesBasedOnType();
                     }
                     else
@@ -177,13 +182,20 @@ namespace FinanceManagement.Forms
                 string cateTypeUpdate = cboCateTypeUpdate.SelectedItem.ToString();
                 string descriptionUpdate = txtDescriptionUpdate.Text.Trim();
 
+                if (!ValidationHelper.IsNotEmpty(id.ToString()))
+                {
+                    throw new Exception("Please choose Category for update");
+                }
+
                 if (!ValidationHelper.IsNotEmpty(nameUpdate))
                 {
                     throw new Exception("Name of category is required");
                 }
+
                 if (CategoryService.UpdateCategory(id, nameUpdate, cateTypeUpdate, descriptionUpdate))
                 {
                     MessageBox.Show("Update category successfully", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearUpdateField();
                     LoadCategoriesBasedOnType();
                 }
                 else
@@ -195,6 +207,13 @@ namespace FinanceManagement.Forms
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ClearUpdateField()
+        {
+            txtIDUpdate.Clear();
+            txtNameUpdate.Clear();
+            txtDescriptionUpdate.Clear();
         }
     }
 }

@@ -39,6 +39,8 @@ namespace FinanceManagement.Forms.Budget
             dtpStartDate.CustomFormat = "dd/MM/yyyy";
             dtpEndDate.CustomFormat = "dd/MM/yyyy";
 
+            ClearUpdateField();
+
             LoadCategories();
             LoadBudgetData();
         }
@@ -122,6 +124,7 @@ namespace FinanceManagement.Forms.Budget
 
         private void GetBudgetDataFromUI()
         {
+            _budget.Id = int.Parse(txtIDUpdate.Text);
             _budget.UserId = _userId;
             _budget.CategoryId = int.Parse(cboCategoryUpdate.SelectedValue.ToString());
             _budget.Amount = decimal.Parse(txtAmountUpdate.Text);
@@ -169,6 +172,11 @@ namespace FinanceManagement.Forms.Budget
             {
                 GetBudgetDataFromUI();
 
+                if (!ValidationHelper.IsNotEmpty(txtIDUpdate.Text))
+                {
+                    throw new Exception("Please choose Budget");
+                }
+
                 if (ConfirmDelete())
                 {
                     if (BudgetService.DeleteBudget(_budget))
@@ -195,6 +203,11 @@ namespace FinanceManagement.Forms.Budget
 
         private void ValidateBudgetData()
         {
+            if (!ValidationHelper.IsNotEmpty(txtIDUpdate.Text))
+            {
+                throw new Exception("Please choose Budget to edit");
+            }
+
             if (!ValidationHelper.IsNotEmpty(txtAmountUpdate.Text))
             {
                 throw new Exception("Budget amount is required");
@@ -236,6 +249,16 @@ namespace FinanceManagement.Forms.Budget
             {
                 ShowError("Please enter a valid number.");
             }
+        }
+
+        private void ClearUpdateField()
+        {
+            txtIDUpdate.Clear();
+            txtAmountUpdate.Clear();
+            dtpStartDate.Value = DateTime.Now;
+            dtpEndDate.Value = DateTime.Now;
+
+            cboCategoryUpdate.SelectedIndex = -1;
         }
     }
 }
