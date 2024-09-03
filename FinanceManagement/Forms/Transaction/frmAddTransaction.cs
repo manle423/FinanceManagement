@@ -22,11 +22,16 @@ namespace FinanceManagement.Forms.Transaction
         public frmAddTransaction()
         {
             InitializeComponent();
+            
         }
+
 
         private void frmAddTransaction_Load(object sender, EventArgs e)
         {
             LoadCategoriesComboBox(cboCategory);
+            LoadGoalsComboBox(cboGoal);
+
+
         }
         public void LoadCategoriesComboBox(ComboBox cboCategory)
         {
@@ -34,6 +39,14 @@ namespace FinanceManagement.Forms.Transaction
             cboCategory.DisplayMember = "Name";
             cboCategory.ValueMember = "Id";
             cboCategory.DataSource = categories;
+        }
+
+        public void LoadGoalsComboBox(ComboBox cboGoal)
+        {
+            List<Models.Goal> goals = GoalService.GetAllGoals(userId);
+            cboGoal.DisplayMember = "Name";
+            cboGoal.ValueMember = "Id";
+            cboGoal.DataSource = goals;
         }
 
         private void ClearForm()
@@ -54,7 +67,8 @@ namespace FinanceManagement.Forms.Transaction
 
         private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            cboGoal.Enabled = (CategoryService.GetCategoryType(int.Parse(cboCategory.SelectedValue.ToString())).ToLower() == "income") ? true : false;
+            txtAmountToGoal.Enabled = cboGoal.Enabled;
         }
 
         Models.Transaction transaction = new Models.Transaction();
@@ -66,6 +80,14 @@ namespace FinanceManagement.Forms.Transaction
             transaction.TransactionDate = dtpTransactionDate.Value;
             transaction.Description = txtDescription.Text;
         }
+
+        Models.Goal goal = new Models.Goal();
+        private void GetGoalData(int id)
+        {
+            goal = GoalService.GetGoalById(id);
+
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -75,13 +97,39 @@ namespace FinanceManagement.Forms.Transaction
                 {
                     throw new Exception("Transaction amount is required");
                 }
+               
 
                 GetTransactionData();
+                if (cboGoal.Enabled)
+                {
+                    decimal amountToGoal = decimal.Parse(txtAmountToGoal.Text);
+                    if (transaction.Amount < amountToGoal)
+                    {
+                        throw new Exception("Goal amount exceed transaction amount");
+                    }
+                    GetGoalData(int.Parse(cboGoal.SelectedValue.ToString()));
+                    goal.CurrentAmount += amountToGoal;
+                    transaction.Amount -= amountToGoal;
+                    transaction.Description += $" ({amountToGoal} has been deducted from this transaction for goal {goal.Name})";
+                   
+                }
+
                 bool isAdded = TransactionService.AddTransaction(transaction);
 
                 if (isAdded)
                 {
-                    MessageBox.Show("Add Transaction successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (cboGoal.Enabled)
+                    {
+                        bool isGoalAdded = GoalService.UpdateGoal(goal);
+                        if (isGoalAdded)
+                        {
+                            MessageBox.Show("Add Transaction successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Update Goal amount failed. Please try again.");
+                    }
                     ClearForm();
                 }
                 else
@@ -93,6 +141,11 @@ namespace FinanceManagement.Forms.Transaction
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cboGoal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

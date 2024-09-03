@@ -41,6 +41,10 @@
             this.txtDescription = new System.Windows.Forms.RichTextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.cboGoal = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtAmountToGoal = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -152,7 +156,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(163, 350);
+            this.btnAdd.Location = new System.Drawing.Point(160, 437);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 34);
             this.btnAdd.TabIndex = 11;
@@ -162,7 +166,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(312, 350);
+            this.btnCancel.Location = new System.Drawing.Point(312, 437);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 34);
             this.btnCancel.TabIndex = 12;
@@ -170,11 +174,49 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // cboGoal
+            // 
+            this.cboGoal.FormattingEnabled = true;
+            this.cboGoal.Location = new System.Drawing.Point(200, 325);
+            this.cboGoal.Name = "cboGoal";
+            this.cboGoal.Size = new System.Drawing.Size(243, 27);
+            this.cboGoal.TabIndex = 14;
+            this.cboGoal.SelectedIndexChanged += new System.EventHandler(this.cboGoal_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(134, 328);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(45, 19);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Goal: ";
+            // 
+            // txtAmountToGoal
+            // 
+            this.txtAmountToGoal.Location = new System.Drawing.Point(200, 373);
+            this.txtAmountToGoal.Name = "txtAmountToGoal";
+            this.txtAmountToGoal.Size = new System.Drawing.Size(243, 26);
+            this.txtAmountToGoal.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(70, 376);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(109, 19);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Amount to goal: ";
+            // 
             // frmAddTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 404);
+            this.ClientSize = new System.Drawing.Size(544, 492);
+            this.Controls.Add(this.txtAmountToGoal);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.cboGoal);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtDescription);
@@ -215,5 +257,9 @@
         private System.Windows.Forms.RichTextBox txtDescription;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ComboBox cboGoal;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtAmountToGoal;
+        private System.Windows.Forms.Label label7;
     }
 }

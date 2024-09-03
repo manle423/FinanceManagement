@@ -266,5 +266,26 @@ namespace FinanceManagement.Services
             return result;
         }
 
+        // Lấy type của category khi có id (sử dụng khi hiển thị trong các bảng có khóa ngoại) 
+        public static string GetCategoryType(int id)
+        {
+            string result = "";
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+                const string query = "SELECT type FROM Categories WHERE category_id = @category_id";
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@category_id", id);
+                    object categoryName = command.ExecuteScalar();
+                    if (categoryName != null)
+                    {
+                        result = categoryName.ToString();
+                    }
+                }
+            }
+            return result;
+        }
+
     }
 }

@@ -166,5 +166,49 @@ namespace FinanceManagement.Services
             }
             return goals;
         }
+
+        // Lấy goal theo id
+        public static Goal GetGoalById(int id)
+        {
+            try
+            {
+                using (SqlConnection conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    const string query = "SELECT * FROM Goals WHERE goal_id = @goal_id";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@goal_id", SqlDbType.Int).Value =id;
+
+                        using (SqlDataReader  reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                return new Goal
+                                {
+                                    Id = reader.GetInt32(0),
+                                    UserId = reader.GetInt32(1),
+                                    Name = reader.GetString(2),
+                                    TargetAmount = reader.GetDecimal(3),
+                                    CurrentAmount = reader.GetDecimal(4),
+                                    Deadline = reader.GetDateTime(5),
+                                    Description = reader.GetString(6),
+                                    CreatedAt = reader.GetDateTime(7),
+                                    UpdatedAt = reader.GetDateTime(8)
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            return null;
+        }
+
     }
 }
