@@ -69,7 +69,6 @@
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(794, 211);
             this.pnlControl.TabIndex = 7;
-            this.pnlControl.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlControl_Paint);
             // 
             // label7
             // 
@@ -111,6 +110,7 @@
             this.btnUpdate.TabIndex = 11;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // txtAmountUpdate
             // 
@@ -176,6 +176,7 @@
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnReload
             // 
@@ -186,6 +187,7 @@
             this.btnReload.TabIndex = 11;
             this.btnReload.Text = "Reload";
             this.btnReload.UseVisualStyleBackColor = true;
+            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
             // btnToAddBudget
             // 
@@ -217,7 +219,6 @@
             this.dgvBudgets.Size = new System.Drawing.Size(788, 287);
             this.dgvBudgets.TabIndex = 8;
             this.dgvBudgets.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBudgets_CellClick);
-            this.dgvBudgets.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBudgets_CellContentClick);
             // 
             // label2
             // 

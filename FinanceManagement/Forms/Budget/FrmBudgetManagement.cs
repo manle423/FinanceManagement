@@ -2,12 +2,6 @@
 using FinanceManagement.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FinanceManagement.Utils;
 
@@ -15,16 +9,124 @@ namespace FinanceManagement.Forms.Budget
 {
     public partial class FrmBudgetManagement : UserControl
     {
-        int userId = UserSession.Instance.UserId;
-        string selectedId = "";
-        string selectedCategory = "";
-        string selectedAmount = "";
-        DateTime selectedStartDate = DateTime.MinValue;
-        DateTime selectedEndDate = DateTime.MinValue;
+        private int _userId = UserSession.Instance.UserId;
+        private Models.Budget _budget = new Models.Budget();
 
         public FrmBudgetManagement()
         {
             InitializeComponent();
+            InitializeDataGridView();
+        }
+
+        private void FrmBudgetManagement_Load(object sender, EventArgs e)
+        {
+            LoadForm();
+        }
+
+        private void InitializeDataGridView()
+        {
+            dgvBudgets.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBudgets.ReadOnly = true;
+            dgvBudgets.CellClick += dgvBudgets_CellClick;
+            dgvBudgets.CellFormatting += DgvBudgets_CellFormatting;
+        }
+
+        private void LoadForm()
+        {
+            dtpStartDate.Format = DateTimePickerFormat.Custom;
+            dtpEndDate.Format = DateTimePickerFormat.Custom;
+
+            dtpStartDate.CustomFormat = "dd/MM/yyyy";
+            dtpEndDate.CustomFormat = "dd/MM/yyyy";
+
+            LoadCategories();
+            LoadBudgetData();
+        }
+
+        private void LoadCategories()
+        {
+            List<Category> categories = CategoryService.GetAllCategories();
+
+            List<Category> categoriesForUpdate = new List<Category>(categories);
+
+            categories.Insert(0, new Category { Id = 0, Name = "All" });
+
+            cboCategory.DataSource = categories;
+            cboCategory.DisplayMember = "Name";
+            cboCategory.ValueMember = "Id";
+
+            cboCategoryUpdate.DataSource = categoriesForUpdate;
+            cboCategoryUpdate.DisplayMember = "Name";
+            cboCategoryUpdate.ValueMember = "Id";
+        }
+
+
+        private void LoadBudgetData(int? categoryId = null)
+        {
+            List<Models.Budget> budgets = BudgetService.GetAllBudgets(_userId, categoryId);
+            dgvBudgets.DataSource = budgets;
+
+            dgvBudgets.Columns["Id"].HeaderText = "ID";
+            dgvBudgets.Columns["CategoryName"].HeaderText = "Category Name";
+            dgvBudgets.Columns["Amount"].HeaderText = "Amount";
+            dgvBudgets.Columns["StartDate"].HeaderText = "Start Date";
+            dgvBudgets.Columns["EndDate"].HeaderText = "End Date";
+
+            dgvBudgets.Columns["Id"].DisplayIndex = 0;
+            dgvBudgets.Columns["CategoryName"].DisplayIndex = 1;
+            dgvBudgets.Columns["Amount"].DisplayIndex = 2;
+            dgvBudgets.Columns["StartDate"].DisplayIndex = 3;
+            dgvBudgets.Columns["EndDate"].DisplayIndex = 4;
+
+            dgvBudgets.Columns["UserId"].Visible = false;
+            dgvBudgets.Columns["CategoryId"].Visible = false;
+            dgvBudgets.Columns["CreatedAt"].Visible = false;
+            dgvBudgets.Columns["UpdatedAt"].Visible = false;
+        }
+
+        private void dgvBudgets_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                _budget.Id = Convert.ToInt32(dgvBudgets.Rows[e.RowIndex].Cells["Id"].Value);
+                txtIDUpdate.Text = _budget.Id.ToString();
+
+                txtAmountUpdate.Text = dgvBudgets.Rows[e.RowIndex].Cells["Amount"].Value.ToString();
+                dtpStartDate.Value = Convert.ToDateTime(dgvBudgets.Rows[e.RowIndex].Cells["StartDate"].Value);
+                dtpEndDate.Value = Convert.ToDateTime(dgvBudgets.Rows[e.RowIndex].Cells["EndDate"].Value);
+
+                cboCategoryUpdate.SelectedValue = dgvBudgets.Rows[e.RowIndex].Cells["CategoryId"].Value;
+            }
+        }
+
+        private void DgvBudgets_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvBudgets.Columns[e.ColumnIndex].Name == "Amount" && e.Value != null)
+            {
+                if (decimal.TryParse(e.Value.ToString(), out decimal amount))
+                {
+                    e.Value = string.Format("{0:N0}", amount);
+                    e.FormattingApplied = true;
+                }
+            }
+        }
+
+        private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboCategory.SelectedValue != null)
+            {
+                int? selectedCategoryId = cboCategory.SelectedValue as int?;
+                LoadBudgetData(selectedCategoryId);
+            }
+        }
+
+        private void GetBudgetDataFromUI()
+        {
+            _budget.UserId = _userId;
+            _budget.CategoryId = int.Parse(cboCategoryUpdate.SelectedValue.ToString());
+            _budget.Amount = decimal.Parse(txtAmountUpdate.Text);
+            _budget.StartDate = dtpStartDate.Value;
+            _budget.EndDate = dtpEndDate.Value;
         }
 
         private void btnToAddBudget_Click(object sender, EventArgs e)
@@ -38,116 +140,85 @@ namespace FinanceManagement.Forms.Budget
             }
         }
 
-        private void LoadForm()
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            dtpStartDate.Format = DateTimePickerFormat.Custom;
-            dtpEndDate.Format = DateTimePickerFormat.Custom;
-
-            dtpStartDate.CustomFormat = "dd/MM/yyyy";
-            dtpEndDate.CustomFormat = "dd/MM/yyyy";
-
-            LoadBudgetData();
-            LoadCategories();
-            LoadCategoriesInUpdateView();
-        }
-
-        private void FrmBudgetManagement_Load(object sender, EventArgs e)
-        {
-            LoadForm();
-        }
-
-        private void LoadBudgetData(int? categoryId = null)
-        {
-            List<FinanceManagement.Models.Budget> budgets = BudgetService.GetAllBudgets(userId);
-
-            dgvBudgets.DataSource = budgets;
-
-            dgvBudgets.Columns["Id"].HeaderText = "ID";
-            //dgvBudgets.Columns["UserId"].HeaderText = "User ID";
-            //dgvBudgets.Columns["CategoryId"].HeaderText = "Category ID";
-            dgvBudgets.Columns["CategoryName"].HeaderText = "Category Name";
-            dgvBudgets.Columns["Amount"].HeaderText = "Amount";
-            dgvBudgets.Columns["StartDate"].HeaderText = "Start Date";
-            dgvBudgets.Columns["EndDate"].HeaderText = "End Date";
-            //dgvBudgets.Columns["CreatedAt"].HeaderText = "Created At";
-            //dgvBudgets.Columns["UpdatedAt"].HeaderText = "Updated At";
-
-            // Set the order of columns
-            dgvBudgets.Columns["Id"].DisplayIndex = 0;
-            dgvBudgets.Columns["CategoryName"].DisplayIndex = 1;
-            dgvBudgets.Columns["Amount"].DisplayIndex = 2;
-            dgvBudgets.Columns["StartDate"].DisplayIndex = 3;
-            dgvBudgets.Columns["EndDate"].DisplayIndex = 4;
-
-            //Hide column that is not neccessary
-            dgvBudgets.Columns["UserId"].Visible = false;
-            dgvBudgets.Columns["CategoryId"].Visible = false;
-            dgvBudgets.Columns["CreatedAt"].Visible = false;
-            dgvBudgets.Columns["UpdatedAt"].Visible = false;
-        }
-
-
-
-        private void dgvBudgets_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            try
             {
-                selectedId = dgvBudgets.Rows[e.RowIndex].Cells["Id"].Value.ToString();
-                selectedCategory = dgvBudgets.Rows[e.RowIndex].Cells["CategoryName"].Value.ToString();
-                selectedAmount = dgvBudgets.Rows[e.RowIndex].Cells["Amount"].Value.ToString();
-                selectedStartDate = Convert.ToDateTime(dgvBudgets.Rows[e.RowIndex].Cells["StartDate"].Value);
-                selectedEndDate = Convert.ToDateTime(dgvBudgets.Rows[e.RowIndex].Cells["EndDate"].Value);
+                ValidateBudgetData();
+                GetBudgetDataFromUI();
 
-                // Gán dữ liệu vào các TextBox tương ứng
-                txtIDUpdate.Text = selectedId;
-                txtAmountUpdate.Text = selectedAmount;
-                dtpStartDate.Value = selectedStartDate;
-                dtpEndDate.Value = selectedEndDate;
-
-                if (cboCategoryUpdate.Items.Contains(selectedCategory))
+                if (BudgetService.UpdateBudget(_budget))
                 {
-                    cboCategoryUpdate.SelectedItem = selectedCategory;
+                    ShowMessage("Update Budget successfully", "Notification", MessageBoxIcon.Information);
+                    LoadForm();
                 }
                 else
                 {
-                    cboCategoryUpdate.Text = selectedCategory;
+                    throw new Exception("Update failed");
                 }
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex.Message);
             }
         }
 
-        private void dgvBudgets_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
+                GetBudgetDataFromUI();
 
+                if (ConfirmDelete())
+                {
+                    if (BudgetService.DeleteBudget(_budget))
+                    {
+                        ShowMessage("Delete successfully", "Notification", MessageBoxIcon.Information);
+                        LoadForm();
+                    }
+                    else
+                    {
+                        throw new Exception("Delete failed");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex.Message);
+            }
         }
 
-        private void pnlControl_Paint(object sender, PaintEventArgs e)
+        private bool ConfirmDelete()
         {
-
+            return MessageBox.Show("Are you sure you want to delete this budget?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
-        private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
+        private void ValidateBudgetData()
         {
-            int? selectedCategoryId = cboCategory.SelectedValue as int?;
+            if (!ValidationHelper.IsNotEmpty(txtAmountUpdate.Text))
+            {
+                throw new Exception("Budget amount is required");
+            }
 
-            LoadBudgetData(selectedCategoryId);
+            if (!ValidationHelper.IsNotEmpty(cboCategoryUpdate.SelectedValue.ToString()))
+            {
+                throw new Exception("Budget category is required");
+            }
         }
 
-        private void LoadCategories()
+        private void ShowMessage(string message, string title, MessageBoxIcon icon)
         {
-            List<Category> categories = CategoryService.GetAllCategories();
-
-            cboCategory.DataSource = categories;
-            cboCategory.DisplayMember = "Name";
-            cboCategory.ValueMember = "Id";
+            MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
         }
 
-        private void LoadCategoriesInUpdateView()
+        private void ShowError(string message)
         {
-            List<Category> categories = CategoryService.GetAllCategories();
+            ShowMessage($"An error occurred: {message}", "Error", MessageBoxIcon.Error);
+        }
 
-            cboCategoryUpdate.DataSource = categories;
-            cboCategoryUpdate.DisplayMember = "Name";
-            cboCategoryUpdate.ValueMember = "Id";
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            LoadForm();
         }
 
         private void txtAmountUpdate_TextChanged(object sender, EventArgs e)
@@ -163,7 +234,7 @@ namespace FinanceManagement.Forms.Budget
             }
             else
             {
-                MessageBox.Show("Please enter a valid number.", "Format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Please enter a valid number.");
             }
         }
     }

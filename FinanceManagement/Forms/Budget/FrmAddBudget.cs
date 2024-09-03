@@ -21,6 +21,9 @@ namespace FinanceManagement.Forms.Budget
         public FrmAddBudget()
         {
             InitializeComponent();
+            btnAdd.TabStop = false;
+            btnCancel.TabStop = false;
+            btnClose.TabStop = false;
             AcceptButton = btnAdd;
             CancelButton = btnCancel;
         }
