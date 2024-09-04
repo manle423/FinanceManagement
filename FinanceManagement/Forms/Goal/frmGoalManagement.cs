@@ -102,7 +102,6 @@ namespace FinanceManagement.Forms.Goal
             dgvGoals.Columns["UpdatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             // Chỉnh lại tiêu đề
-            
             dgvGoals.Columns["Id"].HeaderText = "ID";
             dgvGoals.Columns["TargetAmount"].HeaderText = "Target Amount";
             dgvGoals.Columns["CurrentAmount"].HeaderText = "Current Amount";
@@ -111,7 +110,38 @@ namespace FinanceManagement.Forms.Goal
             dgvGoals.Columns["CreatedAt"].HeaderText = "Created At";
             dgvGoals.Columns["UpdatedAt"].HeaderText = "Updated At";
 
-            
+            // Chỉnh màu dựa trên trạng thái hoàn thành goal
+            dgvGoals.CellFormatting += (sender, e) =>
+            {
+                if (e.RowIndex >= 0)
+                {
+                    decimal currentAmount = Convert.ToDecimal(dgvGoals["CurrentAmount", e.RowIndex].Value);
+                    decimal targetAmount = Convert.ToDecimal(dgvGoals["TargetAmount", e.RowIndex].Value);
+                    DateTime deadline = DateTime.Parse(dgvGoals["Deadline", e.RowIndex].Value.ToString());
+                    
+                    // Kiểm tra xem đã quá hạn chưa
+                    if (deadline < DateTime.Now && currentAmount < targetAmount)
+                    {
+                        e.CellStyle.ForeColor = Color.Red;
+                        
+                    }
+
+                    // Kiểm tra xem đã hoàn thành chưa
+                    else if (currentAmount > targetAmount)
+                    {
+                        e.CellStyle.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        e.CellStyle.ForeColor = Color.Black;
+                    }
+
+
+                    
+                }
+            };
+
+
         }   
         private void pnlControl_Paint(object sender, PaintEventArgs e)
         {
@@ -319,14 +349,15 @@ namespace FinanceManagement.Forms.Goal
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
 
+
                 selectedId = dgvGoals.Rows[e.RowIndex].Cells[0].Value.ToString();
                 selectedName = dgvGoals.Rows[e.RowIndex].Cells[2].Value.ToString();
                 selectedTargetAmount = dgvGoals.Rows[e.RowIndex].Cells[3].Value.ToString();
                 selectedCurrentAmount = dgvGoals.Rows[e.RowIndex].Cells[4].Value.ToString();
                 selectedDeadline = dgvGoals.Rows[e.RowIndex].Cells[5].Value.ToString();
                 selectedDescription = dgvGoals.Rows[e.RowIndex].Cells[6].Value.ToString();
+
                 // Gán dữ liệu vào các TextBox tương ứng
-                
                 txtIDUpdate.Text = selectedId;
                 txtNameUpdate.Text = selectedName;
                 txtTargetAmountUpdate.Text = selectedTargetAmount;
