@@ -55,6 +55,7 @@
             this.label2.Size = new System.Drawing.Size(357, 24);
             this.label2.TabIndex = 8;
             this.label2.Text = "Finance Management | Add Category";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnClose
             // 
@@ -93,6 +94,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(228, 22);
             this.txtName.TabIndex = 1;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // txtDescription
             // 
@@ -102,6 +104,7 @@
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(228, 74);
             this.txtDescription.TabIndex = 2;
+            this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
             // 
             // label1
             // 
@@ -112,6 +115,7 @@
             this.label1.Size = new System.Drawing.Size(43, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "Name: ";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblDes
             // 
@@ -184,6 +188,7 @@
             this.grpCateType.TabIndex = 9;
             this.grpCateType.TabStop = false;
             this.grpCateType.Text = "Type";
+            this.grpCateType.Enter += new System.EventHandler(this.grpCateType_Enter_1);
             // 
             // frmAddCategory
             // 
@@ -207,7 +212,9 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddCategory";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAddCategory_FormClosed);
             this.Load += new System.EventHandler(this.AddCategory_Load);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmAddCategory_MouseMove);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.grpCateType.ResumeLayout(false);

@@ -2,6 +2,7 @@
 using FinanceManagement.Forms.Goal;
 using FinanceManagement.Forms.Transaction;
 using FinanceManagement.Services;
+using FinanceManagement.Forms.Budget;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -97,12 +98,12 @@ namespace FinanceManagement
             }
         }
 
-        private void pnlContent_Paint(object sender, PaintEventArgs e)
+        private void btnToBudget_Click(object sender, EventArgs e)
         {
-
+            UpdateMainContent(new FrmBudgetManagement(), "Finance Management | Budget");
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void pnlContent_Paint(object sender, PaintEventArgs e)
         {
 
         }
@@ -116,5 +117,6 @@ namespace FinanceManagement
         {
             UpdateMainContent(new frmGoalManagement(), "Finance Management | Goals");
         }
+
     }
 }

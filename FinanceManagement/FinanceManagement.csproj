@@ -175,6 +175,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DatabaseConnection.cs" />
+    <Compile Include="Forms\Budget\FrmAddBudget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Budget\FrmAddBudget.Designer.cs">
+      <DependentUpon>FrmAddBudget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Budget\FrmBudgetManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Budget\FrmBudgetManagement.Designer.cs">
+      <DependentUpon>FrmBudgetManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Category\frmAddCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,6 +247,7 @@
     <Compile Include="Forms\Transaction\frmTransactionMain.Designer.cs">
       <DependentUpon>frmTransactionMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Budget.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Goal.cs" />
     <Compile Include="Models\Transaction.cs" />
@@ -246,6 +259,7 @@
     <Compile Include="Forms\Auth\frmRegister.Designer.cs">
       <DependentUpon>frmRegister.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\BudgetService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\GoalService.cs" />
     <Compile Include="Services\TransactionService.cs" />
@@ -254,6 +268,12 @@
     <Compile Include="Utils\HashingHelper.cs" />
     <Compile Include="Utils\StringHelper.cs" />
     <Compile Include="Utils\ValidationHelper.cs" />
+    <EmbeddedResource Include="Forms\Budget\FrmAddBudget.resx">
+      <DependentUpon>FrmAddBudget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Budget\FrmBudgetManagement.resx">
+      <DependentUpon>FrmBudgetManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Category\frmAddCategory.resx">
       <DependentUpon>frmAddCategory.cs</DependentUpon>
     </EmbeddedResource>

@@ -32,6 +32,7 @@
             this.lblMain = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.btnToBudget = new System.Windows.Forms.Button();
             this.btnToTransactions = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnToCategory = new System.Windows.Forms.Button();
@@ -69,6 +70,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.BackColor = System.Drawing.Color.Red;
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -87,6 +89,7 @@
             this.pnlControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pnlControl.Controls.Add(this.button1);
             this.pnlControl.Controls.Add(this.btnToTransactions);
+            this.pnlControl.Controls.Add(this.btnToBudget);
             this.pnlControl.Controls.Add(this.btnLogout);
             this.pnlControl.Controls.Add(this.btnToCategory);
             this.pnlControl.Controls.Add(this.btnToDashBoard);
@@ -105,6 +108,16 @@
             this.btnToTransactions.UseVisualStyleBackColor = true;
             this.btnToTransactions.Click += new System.EventHandler(this.btnToTransactions_Click);
             // 
+            // btnToBudget
+            // 
+            this.btnToBudget.Location = new System.Drawing.Point(0, 109);
+            this.btnToBudget.Name = "btnToBudget";
+            this.btnToBudget.Size = new System.Drawing.Size(150, 45);
+            this.btnToBudget.TabIndex = 3;
+            this.btnToBudget.Text = "BUDGET";
+            this.btnToBudget.UseVisualStyleBackColor = true;
+            this.btnToBudget.Click += new System.EventHandler(this.btnToBudget_Click);
+            // 
             // btnLogout
             // 
             this.btnLogout.Location = new System.Drawing.Point(7, 479);
@@ -117,7 +130,7 @@
             // 
             // btnToCategory
             // 
-            this.btnToCategory.Location = new System.Drawing.Point(0, 214);
+            this.btnToCategory.Location = new System.Drawing.Point(1, 58);
             this.btnToCategory.Name = "btnToCategory";
             this.btnToCategory.Size = new System.Drawing.Size(150, 45);
             this.btnToCategory.TabIndex = 1;
@@ -127,7 +140,7 @@
             // 
             // btnToDashBoard
             // 
-            this.btnToDashBoard.Location = new System.Drawing.Point(1, 124);
+            this.btnToDashBoard.Location = new System.Drawing.Point(1, 7);
             this.btnToDashBoard.Name = "btnToDashBoard";
             this.btnToDashBoard.Size = new System.Drawing.Size(150, 45);
             this.btnToDashBoard.TabIndex = 0;
@@ -184,6 +197,7 @@
         private System.Windows.Forms.Button btnToCategory;
         private System.Windows.Forms.Button btnToDashBoard;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnToBudget;
         private System.Windows.Forms.Button btnToTransactions;
         private System.Windows.Forms.Button button1;
     }

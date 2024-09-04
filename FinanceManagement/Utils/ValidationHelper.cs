@@ -32,6 +32,13 @@ namespace FinanceManagement.Utils
             return Regex.IsMatch(password, pattern);
         }
 
+        // Validate if StartDate < EndDate
+        public static bool IsStartDateLessThanEndDate(DateTime startDate, DateTime endDate)
+        {
+            return startDate <= endDate;
+        }
+
+
         // Validate if a value is a valid decimal value
         public static bool IsValidDecimal(string inputText)
         {
