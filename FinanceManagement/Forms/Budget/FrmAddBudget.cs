@@ -122,7 +122,7 @@ namespace FinanceManagement.Forms.Budget
 
         private void LoadCategories()
         {
-            List<Category> categories = CategoryService.GetAllCategories();
+            List<Category> categories = CategoryService.GetAllCategories("expense");
             cboCategory.DataSource = categories;
             cboCategory.DisplayMember = "Name";
             cboCategory.ValueMember = "Id";

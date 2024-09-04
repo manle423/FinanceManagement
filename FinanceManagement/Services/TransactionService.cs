@@ -26,6 +26,28 @@ namespace FinanceManagement.Services
         {
             try
             {
+                // Kiểm tra ngân sách hiện tại
+                Budget currentBudget = BudgetService.GetCurrentBudget(transaction.UserId, transaction.CategoryId, transaction.TransactionDate);
+                
+                if (currentBudget != null)
+                {
+                    decimal newTotalSpent = currentBudget.TotalSpent + transaction.Amount;
+                    decimal budgetPercentage = (newTotalSpent / currentBudget.Amount) * 100;
+
+                    if (budgetPercentage > 150)
+                    {
+                        MessageBox.Show("Warning: This transaction will exceed 150% of the budget for this category.", "Budget Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                    else if (budgetPercentage > 100)
+                    {
+                        DialogResult result = MessageBox.Show($"This transaction will exceed the budget for this category by {budgetPercentage - 100:F2}%. Do you want to proceed?", "Budget Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.No)
+                        {
+                            return false;
+                        }
+                    }
+                }
 
                 using (SqlConnection conn = dbConnection.GetConnection())
                 {

@@ -13,6 +13,11 @@ namespace FinanceManagement.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public string CategoryName { get; set; }
+        
+        public decimal TotalSpent { get; set; }
+        public decimal RemainingBudget { get; set; }
+        public decimal BudgetProgressPercentage { get; set; }
+        public string BudgetStatus { get; set; }
 
         public Budget() { }
 
