@@ -22,7 +22,9 @@ namespace FinanceManagement.Forms.Transaction
         public frmAddTransaction()
         {
             InitializeComponent();
-            
+            this.AcceptButton = btnAdd;
+            this.CancelButton = btnCancel;
+
         }
 
 
@@ -53,6 +55,7 @@ namespace FinanceManagement.Forms.Transaction
         {
             txtAmount.Clear();
             txtDescription.Clear();
+            txtAmountToGoal.Clear();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

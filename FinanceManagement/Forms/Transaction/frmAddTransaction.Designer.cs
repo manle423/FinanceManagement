@@ -82,7 +82,8 @@
             this.btnClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(35, 35);
-            this.btnClose.TabIndex = 9;
+            this.btnClose.TabIndex = 10;
+            this.btnClose.TabStop = false;
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -101,7 +102,7 @@
             this.dtpTransactionDate.Location = new System.Drawing.Point(200, 81);
             this.dtpTransactionDate.Name = "dtpTransactionDate";
             this.dtpTransactionDate.Size = new System.Drawing.Size(243, 26);
-            this.dtpTransactionDate.TabIndex = 4;
+            this.dtpTransactionDate.TabIndex = 0;
             // 
             // label3
             // 
@@ -118,7 +119,7 @@
             this.cboCategory.Location = new System.Drawing.Point(200, 129);
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Size = new System.Drawing.Size(243, 27);
-            this.cboCategory.TabIndex = 6;
+            this.cboCategory.TabIndex = 1;
             this.cboCategory.SelectedIndexChanged += new System.EventHandler(this.cboCategory_SelectedIndexChanged);
             // 
             // label4
@@ -135,7 +136,7 @@
             this.txtAmount.Location = new System.Drawing.Point(200, 176);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(243, 26);
-            this.txtAmount.TabIndex = 8;
+            this.txtAmount.TabIndex = 2;
             // 
             // label5
             // 
@@ -151,7 +152,7 @@
             this.txtDescription.Location = new System.Drawing.Point(200, 223);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(243, 86);
-            this.txtDescription.TabIndex = 10;
+            this.txtDescription.TabIndex = 3;
             this.txtDescription.Text = "";
             // 
             // btnAdd
@@ -159,7 +160,7 @@
             this.btnAdd.Location = new System.Drawing.Point(160, 437);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 34);
-            this.btnAdd.TabIndex = 11;
+            this.btnAdd.TabIndex = 6;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -169,7 +170,7 @@
             this.btnCancel.Location = new System.Drawing.Point(312, 437);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 34);
-            this.btnCancel.TabIndex = 12;
+            this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -180,7 +181,7 @@
             this.cboGoal.Location = new System.Drawing.Point(200, 325);
             this.cboGoal.Name = "cboGoal";
             this.cboGoal.Size = new System.Drawing.Size(243, 27);
-            this.cboGoal.TabIndex = 14;
+            this.cboGoal.TabIndex = 4;
             this.cboGoal.SelectedIndexChanged += new System.EventHandler(this.cboGoal_SelectedIndexChanged);
             // 
             // label6
@@ -197,7 +198,7 @@
             this.txtAmountToGoal.Location = new System.Drawing.Point(200, 373);
             this.txtAmountToGoal.Name = "txtAmountToGoal";
             this.txtAmountToGoal.Size = new System.Drawing.Size(243, 26);
-            this.txtAmountToGoal.TabIndex = 16;
+            this.txtAmountToGoal.TabIndex = 5;
             // 
             // label7
             // 
