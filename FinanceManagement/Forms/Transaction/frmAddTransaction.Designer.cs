@@ -234,6 +234,7 @@
             this.Name = "frmAddTransaction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Finance Management | Add Transaction";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAddTransaction_FormClosed);
             this.Load += new System.EventHandler(this.frmAddTransaction_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -227,6 +227,7 @@
             this.txtAmountUpdate.Name = "txtAmountUpdate";
             this.txtAmountUpdate.Size = new System.Drawing.Size(289, 22);
             this.txtAmountUpdate.TabIndex = 3;
+            this.txtAmountUpdate.TextChanged += new System.EventHandler(this.txtAmountUpdate_TextChanged);
             // 
             // label7
             // 

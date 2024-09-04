@@ -121,21 +121,39 @@ namespace FinanceManagement.Forms.Transaction
                     if (cboGoal.Enabled)
                     {
                         bool isGoalAdded = GoalService.UpdateGoal(goal);
-                        if (isGoalAdded)
+                        if (!isGoalAdded)
                         {
-                            MessageBox.Show("Add Transaction successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            throw new Exception("Update Goal amount failed. Please try again.");
                         }
                     }
-                    else
-                    {
-                        throw new Exception("Update Goal amount failed. Please try again.");
-                    }
+                    MessageBox.Show("Add Transaction successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearForm();
                 }
                 else
                 {
                     throw new Exception("Add Transaction failed. Please try again.");
                 }
+
+                //if (isAdded)
+                //{
+                //    if (cboGoal.Enabled)
+                //    {
+                //        bool isGoalAdded = GoalService.UpdateGoal(goal);
+                //        if (isGoalAdded)
+                //        {
+                //            MessageBox.Show("Add Transaction successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //        }
+                //    }
+                //    else
+                //    {
+                //        throw new Exception("Update Goal amount failed. Please try again.");
+                //    }
+                //    ClearForm();
+                //}
+                //else
+                //{
+                //    throw new Exception("Add Transaction failed. Please try again.");
+                //}
             }
             catch (Exception ex)
             {
@@ -146,6 +164,11 @@ namespace FinanceManagement.Forms.Transaction
         private void cboGoal_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmAddTransaction_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
         }
     }
 }

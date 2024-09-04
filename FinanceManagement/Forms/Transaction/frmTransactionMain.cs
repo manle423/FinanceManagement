@@ -58,7 +58,10 @@ namespace FinanceManagement.Forms.Transaction
         {
             using (frmAddTransaction frmAddTransaction = new frmAddTransaction())
             {
-                frmAddTransaction.ShowDialog();
+                if (frmAddTransaction.ShowDialog() == DialogResult.OK)
+                {
+                    LoadTransactionsBasedOnCriteria();
+                }
             }
         }
 
@@ -319,6 +322,23 @@ namespace FinanceManagement.Forms.Transaction
         private void btnReload_Click(object sender, EventArgs e)
         {
             LoadTransactionsBasedOnCriteria();
+        }
+
+        private void txtAmountUpdate_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAmountUpdate.Text == "")
+                return;
+
+            string input = txtAmountUpdate.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtAmountUpdate.Text = string.Format("{0:N0}", value);
+                txtAmountUpdate.SelectionStart = txtAmountUpdate.Text.Length;
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid number.", "Format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FinanceManagement.Services;
+﻿using FinanceManagement.Forms.Budget;
+using FinanceManagement.Services;
 using FinanceManagement.Utils;
 using System;
 using System.Collections.Generic;
@@ -160,7 +161,19 @@ namespace FinanceManagement.Forms.Goal
 
         private void txtAmountUpdate_TextChanged(object sender, EventArgs e)
         {
+            if (txtCurrentAmountUpdate.Text == "")
+                return;
 
+            string input = txtCurrentAmountUpdate.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtCurrentAmountUpdate.Text = string.Format("{0:N0}", value);
+                txtCurrentAmountUpdate.SelectionStart = txtCurrentAmountUpdate.Text.Length;
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid number.", "Format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -211,7 +224,12 @@ namespace FinanceManagement.Forms.Goal
         {
             using (frmAddGoal frmAddGoal = new frmAddGoal())
             {
-                frmAddGoal.ShowDialog();
+
+                if (frmAddGoal.ShowDialog() == DialogResult.OK)
+                {
+                    LoadGoalsBasedOnCriteria();
+                }
+                
             }
         }
 
@@ -380,6 +398,28 @@ namespace FinanceManagement.Forms.Goal
         }
 
         private void label9_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTargetAmountUpdate_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTargetAmountUpdate.Text == "")
+                return;
+
+            string input = txtTargetAmountUpdate.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtTargetAmountUpdate.Text = string.Format("{0:N0}", value);
+                txtTargetAmountUpdate.SelectionStart = txtTargetAmountUpdate.Text.Length;
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid number.", "Format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void prgGoalTrack_Click(object sender, EventArgs e)
         {
 
         }

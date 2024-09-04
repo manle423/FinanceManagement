@@ -85,5 +85,27 @@ namespace FinanceManagement.Forms.Goal
         {
             this.Close();
         }
+
+        private void frmAddGoal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private void txtTargetAmount_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTargetAmount.Text == "")
+                return;
+
+            string input = txtTargetAmount.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtTargetAmount.Text = string.Format("{0:N0}", value);
+                txtTargetAmount.SelectionStart = txtTargetAmount.Text.Length;
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid number.", "Format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

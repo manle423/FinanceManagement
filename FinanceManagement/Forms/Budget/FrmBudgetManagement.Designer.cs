@@ -46,12 +46,18 @@
             this.cboCategory = new System.Windows.Forms.ComboBox();
             this.dgvBudgets = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblBudgetTrackValue = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.prgBudgetTrack = new System.Windows.Forms.ProgressBar();
             this.pnlControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBudgets)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlControl
             // 
+            this.pnlControl.Controls.Add(this.lblBudgetTrackValue);
+            this.pnlControl.Controls.Add(this.label3);
+            this.pnlControl.Controls.Add(this.prgBudgetTrack);
             this.pnlControl.Controls.Add(this.label7);
             this.pnlControl.Controls.Add(this.label6);
             this.pnlControl.Controls.Add(this.dtpEndDate);
@@ -73,7 +79,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 118);
+            this.label7.Location = new System.Drawing.Point(341, 103);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 15);
             this.label7.TabIndex = 14;
@@ -82,7 +88,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 90);
+            this.label6.Location = new System.Drawing.Point(341, 68);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 15);
             this.label6.TabIndex = 14;
@@ -90,21 +96,21 @@
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(78, 112);
+            this.dtpEndDate.Location = new System.Drawing.Point(403, 97);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(223, 22);
             this.dtpEndDate.TabIndex = 13;
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Location = new System.Drawing.Point(78, 84);
+            this.dtpStartDate.Location = new System.Drawing.Point(407, 62);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(223, 22);
             this.dtpStartDate.TabIndex = 12;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(337, 44);
+            this.btnUpdate.Location = new System.Drawing.Point(662, 62);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 26);
             this.btnUpdate.TabIndex = 11;
@@ -114,7 +120,7 @@
             // 
             // txtAmountUpdate
             // 
-            this.txtAmountUpdate.Location = new System.Drawing.Point(78, 51);
+            this.txtAmountUpdate.Location = new System.Drawing.Point(78, 100);
             this.txtAmountUpdate.Name = "txtAmountUpdate";
             this.txtAmountUpdate.Size = new System.Drawing.Size(223, 22);
             this.txtAmountUpdate.TabIndex = 10;
@@ -124,7 +130,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(21, 55);
+            this.label5.Location = new System.Drawing.Point(21, 104);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 15);
             this.label5.TabIndex = 9;
@@ -134,7 +140,7 @@
             // 
             this.cboCategoryUpdate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCategoryUpdate.FormattingEnabled = true;
-            this.cboCategoryUpdate.Location = new System.Drawing.Point(194, 15);
+            this.cboCategoryUpdate.Location = new System.Drawing.Point(194, 64);
             this.cboCategoryUpdate.Name = "cboCategoryUpdate";
             this.cboCategoryUpdate.Size = new System.Drawing.Size(107, 23);
             this.cboCategoryUpdate.TabIndex = 8;
@@ -143,7 +149,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(132, 19);
+            this.label4.Location = new System.Drawing.Point(132, 68);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 15);
             this.label4.TabIndex = 7;
@@ -152,7 +158,7 @@
             // txtIDUpdate
             // 
             this.txtIDUpdate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIDUpdate.Location = new System.Drawing.Point(78, 14);
+            this.txtIDUpdate.Location = new System.Drawing.Point(78, 63);
             this.txtIDUpdate.Name = "txtIDUpdate";
             this.txtIDUpdate.ReadOnly = true;
             this.txtIDUpdate.Size = new System.Drawing.Size(34, 22);
@@ -162,7 +168,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(52, 19);
+            this.label1.Location = new System.Drawing.Point(52, 68);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 15);
             this.label1.TabIndex = 3;
@@ -170,7 +176,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(337, 82);
+            this.btnDelete.Location = new System.Drawing.Point(662, 99);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 2;
@@ -230,6 +236,34 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "BUDGETS";
             // 
+            // lblBudgetTrackValue
+            // 
+            this.lblBudgetTrackValue.AutoSize = true;
+            this.lblBudgetTrackValue.BackColor = System.Drawing.SystemColors.Control;
+            this.lblBudgetTrackValue.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBudgetTrackValue.Location = new System.Drawing.Point(409, 23);
+            this.lblBudgetTrackValue.Name = "lblBudgetTrackValue";
+            this.lblBudgetTrackValue.Size = new System.Drawing.Size(24, 15);
+            this.lblBudgetTrackValue.TabIndex = 20;
+            this.lblBudgetTrackValue.Text = "0%";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(62, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 15);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Progress: ";
+            // 
+            // prgBudgetTrack
+            // 
+            this.prgBudgetTrack.Location = new System.Drawing.Point(135, 15);
+            this.prgBudgetTrack.Name = "prgBudgetTrack";
+            this.prgBudgetTrack.Size = new System.Drawing.Size(569, 27);
+            this.prgBudgetTrack.TabIndex = 21;
+            // 
             // FrmBudgetManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,5 +305,8 @@
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblBudgetTrackValue;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ProgressBar prgBudgetTrack;
     }
 }

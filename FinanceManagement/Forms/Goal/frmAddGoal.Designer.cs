@@ -147,6 +147,7 @@
             this.txtTargetAmount.Name = "txtTargetAmount";
             this.txtTargetAmount.Size = new System.Drawing.Size(264, 26);
             this.txtTargetAmount.TabIndex = 11;
+            this.txtTargetAmount.TextChanged += new System.EventHandler(this.txtTargetAmount_TextChanged);
             // 
             // btnCancel
             // 
@@ -188,12 +189,13 @@
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmAddGoal";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddGoal";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAddGoal_FormClosed);
             this.Load += new System.EventHandler(this.frmAddGoal_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
