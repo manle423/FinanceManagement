@@ -57,9 +57,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.prgGoalTrack = new System.Windows.Forms.ProgressBar();
             this.txtTargetAmountUpdate = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtNameUpdate = new System.Windows.Forms.TextBox();
+            this.lblGoalTrackValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGoals)).BeginInit();
             this.pnlData.SuspendLayout();
             this.pnlControl.SuspendLayout();
@@ -129,7 +132,7 @@
             // 
             // txtCurrentAmountUpdate
             // 
-            this.txtCurrentAmountUpdate.Location = new System.Drawing.Point(111, 47);
+            this.txtCurrentAmountUpdate.Location = new System.Drawing.Point(114, 78);
             this.txtCurrentAmountUpdate.Name = "txtCurrentAmountUpdate";
             this.txtCurrentAmountUpdate.ReadOnly = true;
             this.txtCurrentAmountUpdate.Size = new System.Drawing.Size(212, 22);
@@ -140,7 +143,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 50);
+            this.label7.Location = new System.Drawing.Point(11, 81);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 15);
             this.label7.TabIndex = 12;
@@ -173,7 +176,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(395, 18);
+            this.label8.Location = new System.Drawing.Point(398, 49);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 15);
             this.label8.TabIndex = 14;
@@ -182,9 +185,9 @@
             // 
             // dtpDeadlineUpdate
             // 
-            this.dtpDeadlineUpdate.Location = new System.Drawing.Point(458, 12);
+            this.dtpDeadlineUpdate.Location = new System.Drawing.Point(461, 43);
             this.dtpDeadlineUpdate.Name = "dtpDeadlineUpdate";
-            this.dtpDeadlineUpdate.Size = new System.Drawing.Size(214, 22);
+            this.dtpDeadlineUpdate.Size = new System.Drawing.Size(219, 22);
             this.dtpDeadlineUpdate.TabIndex = 4;
             this.dtpDeadlineUpdate.ValueChanged += new System.EventHandler(this.dtpDateUpdate_ValueChanged);
             // 
@@ -284,7 +287,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(698, 43);
+            this.btnUpdate.Location = new System.Drawing.Point(708, 75);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 26);
             this.btnUpdate.TabIndex = 6;
@@ -294,10 +297,10 @@
             // 
             // txtDescriptionUpdate
             // 
-            this.txtDescriptionUpdate.Location = new System.Drawing.Point(106, 79);
+            this.txtDescriptionUpdate.Location = new System.Drawing.Point(114, 110);
             this.txtDescriptionUpdate.Multiline = true;
             this.txtDescriptionUpdate.Name = "txtDescriptionUpdate";
-            this.txtDescriptionUpdate.Size = new System.Drawing.Size(566, 84);
+            this.txtDescriptionUpdate.Size = new System.Drawing.Size(566, 56);
             this.txtDescriptionUpdate.TabIndex = 2;
             this.txtDescriptionUpdate.TextChanged += new System.EventHandler(this.txtDescriptionUpdate_TextChanged);
             // 
@@ -305,7 +308,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(17, 82);
+            this.label5.Location = new System.Drawing.Point(32, 113);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 15);
             this.label5.TabIndex = 9;
@@ -316,7 +319,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(112, 15);
+            this.label4.Location = new System.Drawing.Point(115, 46);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 15);
             this.label4.TabIndex = 7;
@@ -326,7 +329,7 @@
             // txtIDUpdate
             // 
             this.txtIDUpdate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIDUpdate.Location = new System.Drawing.Point(34, 11);
+            this.txtIDUpdate.Location = new System.Drawing.Point(67, 42);
             this.txtIDUpdate.Name = "txtIDUpdate";
             this.txtIDUpdate.ReadOnly = true;
             this.txtIDUpdate.Size = new System.Drawing.Size(34, 22);
@@ -337,7 +340,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 16);
+            this.label1.Location = new System.Drawing.Point(41, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 15);
             this.label1.TabIndex = 3;
@@ -346,7 +349,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(698, 89);
+            this.btnDelete.Location = new System.Drawing.Point(708, 114);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 7;
@@ -356,6 +359,9 @@
             // 
             // pnlControl
             // 
+            this.pnlControl.Controls.Add(this.lblGoalTrackValue);
+            this.pnlControl.Controls.Add(this.label6);
+            this.pnlControl.Controls.Add(this.prgGoalTrack);
             this.pnlControl.Controls.Add(this.txtTargetAmountUpdate);
             this.pnlControl.Controls.Add(this.label13);
             this.pnlControl.Controls.Add(this.txtNameUpdate);
@@ -373,22 +379,39 @@
             this.pnlControl.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlControl.Location = new System.Drawing.Point(-1, 346);
             this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(798, 214);
+            this.pnlControl.Size = new System.Drawing.Size(798, 197);
             this.pnlControl.TabIndex = 5;
             this.pnlControl.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlControl_Paint);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(38, 11);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 15);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Progress: ";
+            // 
+            // prgGoalTrack
+            // 
+            this.prgGoalTrack.Location = new System.Drawing.Point(111, 3);
+            this.prgGoalTrack.Name = "prgGoalTrack";
+            this.prgGoalTrack.Size = new System.Drawing.Size(569, 27);
+            this.prgGoalTrack.TabIndex = 18;
+            // 
             // txtTargetAmountUpdate
             // 
-            this.txtTargetAmountUpdate.Location = new System.Drawing.Point(458, 47);
+            this.txtTargetAmountUpdate.Location = new System.Drawing.Point(461, 78);
             this.txtTargetAmountUpdate.Name = "txtTargetAmountUpdate";
-            this.txtTargetAmountUpdate.Size = new System.Drawing.Size(214, 22);
+            this.txtTargetAmountUpdate.Size = new System.Drawing.Size(219, 22);
             this.txtTargetAmountUpdate.TabIndex = 16;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(365, 50);
+            this.label13.Location = new System.Drawing.Point(368, 81);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(84, 15);
             this.label13.TabIndex = 17;
@@ -396,10 +419,22 @@
             // 
             // txtNameUpdate
             // 
-            this.txtNameUpdate.Location = new System.Drawing.Point(155, 12);
+            this.txtNameUpdate.Location = new System.Drawing.Point(158, 43);
             this.txtNameUpdate.Name = "txtNameUpdate";
             this.txtNameUpdate.Size = new System.Drawing.Size(168, 22);
             this.txtNameUpdate.TabIndex = 15;
+            // 
+            // lblGoalTrackValue
+            // 
+            this.lblGoalTrackValue.AutoSize = true;
+            this.lblGoalTrackValue.BackColor = System.Drawing.SystemColors.Control;
+            this.lblGoalTrackValue.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGoalTrackValue.Location = new System.Drawing.Point(385, 11);
+            this.lblGoalTrackValue.Name = "lblGoalTrackValue";
+            this.lblGoalTrackValue.Size = new System.Drawing.Size(24, 15);
+            this.lblGoalTrackValue.TabIndex = 6;
+            this.lblGoalTrackValue.Text = "0%";
+            this.lblGoalTrackValue.Click += new System.EventHandler(this.label9_Click_1);
             // 
             // frmGoalManagement
             // 
@@ -408,7 +443,7 @@
             this.Controls.Add(this.pnlData);
             this.Controls.Add(this.pnlControl);
             this.Name = "frmGoalManagement";
-            this.Size = new System.Drawing.Size(800, 560);
+            this.Size = new System.Drawing.Size(800, 520);
             this.Load += new System.EventHandler(this.frmGoalManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGoals)).EndInit();
             this.pnlData.ResumeLayout(false);
@@ -453,5 +488,8 @@
         private System.Windows.Forms.TextBox txtNameUpdate;
         private System.Windows.Forms.TextBox txtTargetAmountUpdate;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ProgressBar prgGoalTrack;
+        private System.Windows.Forms.Label lblGoalTrackValue;
     }
 }

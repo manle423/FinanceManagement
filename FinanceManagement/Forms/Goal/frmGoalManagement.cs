@@ -120,7 +120,7 @@ namespace FinanceManagement.Forms.Goal
                     DateTime deadline = DateTime.Parse(dgvGoals["Deadline", e.RowIndex].Value.ToString());
                     
                     // Kiểm tra xem đã quá hạn chưa
-                    if (deadline < DateTime.Now && currentAmount < targetAmount)
+                    if (deadline.Date < DateTime.Today && currentAmount < targetAmount)
                     {
                         e.CellStyle.ForeColor = Color.Red;
                         
@@ -349,13 +349,23 @@ namespace FinanceManagement.Forms.Goal
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
 
-
+                // Lấy dữ liệu từ các cột
                 selectedId = dgvGoals.Rows[e.RowIndex].Cells[0].Value.ToString();
                 selectedName = dgvGoals.Rows[e.RowIndex].Cells[2].Value.ToString();
                 selectedTargetAmount = dgvGoals.Rows[e.RowIndex].Cells[3].Value.ToString();
                 selectedCurrentAmount = dgvGoals.Rows[e.RowIndex].Cells[4].Value.ToString();
                 selectedDeadline = dgvGoals.Rows[e.RowIndex].Cells[5].Value.ToString();
                 selectedDescription = dgvGoals.Rows[e.RowIndex].Cells[6].Value.ToString();
+
+                // Cập nhật progress bar
+                decimal targetAmount = Convert.ToDecimal(selectedTargetAmount);
+                decimal currentAmount = Convert.ToDecimal(selectedCurrentAmount);
+                prgGoalTrack.Minimum = 0;
+                prgGoalTrack.Maximum = 100;
+                int percentage = Convert.ToInt32((currentAmount / targetAmount) * 100);
+                percentage = (percentage > 100) ? 100 : percentage;
+                prgGoalTrack.Value = percentage;
+                lblGoalTrackValue.Text = percentage + "%";
 
                 // Gán dữ liệu vào các TextBox tương ứng
                 txtIDUpdate.Text = selectedId;
@@ -367,6 +377,11 @@ namespace FinanceManagement.Forms.Goal
              
 
             }
+        }
+
+        private void label9_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
