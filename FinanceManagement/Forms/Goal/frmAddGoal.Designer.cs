@@ -79,6 +79,7 @@
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(35, 35);
             this.btnClose.TabIndex = 9;
+            this.btnClose.TabStop = false;
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -88,7 +89,7 @@
             this.txtName.Location = new System.Drawing.Point(167, 81);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(264, 26);
-            this.txtName.TabIndex = 4;
+            this.txtName.TabIndex = 0;
             // 
             // label1
             // 
@@ -131,7 +132,7 @@
             this.txtDescription.Location = new System.Drawing.Point(167, 226);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(264, 100);
-            this.txtDescription.TabIndex = 9;
+            this.txtDescription.TabIndex = 3;
             this.txtDescription.Text = "";
             // 
             // dtpDeadline
@@ -139,14 +140,14 @@
             this.dtpDeadline.Location = new System.Drawing.Point(167, 122);
             this.dtpDeadline.Name = "dtpDeadline";
             this.dtpDeadline.Size = new System.Drawing.Size(264, 26);
-            this.dtpDeadline.TabIndex = 10;
+            this.dtpDeadline.TabIndex = 1;
             // 
             // txtTargetAmount
             // 
             this.txtTargetAmount.Location = new System.Drawing.Point(167, 176);
             this.txtTargetAmount.Name = "txtTargetAmount";
             this.txtTargetAmount.Size = new System.Drawing.Size(264, 26);
-            this.txtTargetAmount.TabIndex = 11;
+            this.txtTargetAmount.TabIndex = 2;
             this.txtTargetAmount.TextChanged += new System.EventHandler(this.txtTargetAmount_TextChanged);
             // 
             // btnCancel
@@ -154,7 +155,7 @@
             this.btnCancel.Location = new System.Drawing.Point(302, 367);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 34);
-            this.btnCancel.TabIndex = 14;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -164,7 +165,7 @@
             this.btnAdd.Location = new System.Drawing.Point(153, 367);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 34);
-            this.btnAdd.TabIndex = 13;
+            this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);

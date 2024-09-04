@@ -20,6 +20,8 @@ namespace FinanceManagement.Forms.Goal
         public frmAddGoal()
         {
             InitializeComponent();
+            this.AcceptButton = btnAdd;
+            this.CancelButton = btnCancel;
         }
 
         Models.Goal goal = new Models.Goal();
