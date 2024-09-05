@@ -124,13 +124,15 @@ namespace FinanceManagement.Forms.Goal
                     if (deadline.Date < DateTime.Today && currentAmount < targetAmount)
                     {
                         e.CellStyle.ForeColor = Color.Red;
+                        e.CellStyle.BackColor = Color.LightPink;
                         
                     }
 
                     // Kiểm tra xem đã hoàn thành chưa
-                    else if (currentAmount > targetAmount)
+                    else if (currentAmount >= targetAmount)
                     {
                         e.CellStyle.ForeColor = Color.Green;
+                        e.CellStyle.BackColor = Color.LightGreen;
                     }
                     else
                     {

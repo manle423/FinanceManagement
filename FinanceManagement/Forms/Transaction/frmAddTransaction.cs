@@ -24,6 +24,7 @@ namespace FinanceManagement.Forms.Transaction
             InitializeComponent();
             this.AcceptButton = btnAdd;
             this.CancelButton = btnCancel;
+            dtpTransactionDate.MaxDate = DateTime.Now;
 
         }
 
@@ -45,7 +46,7 @@ namespace FinanceManagement.Forms.Transaction
 
         public void LoadGoalsComboBox(ComboBox cboGoal)
         {
-            List<Models.Goal> goals = GoalService.GetAllGoals(userId);
+            List<Models.Goal> goals = GoalService.GetAllGoalsUncompleted(userId);
             cboGoal.DisplayMember = "Name";
             cboGoal.ValueMember = "Id";
             cboGoal.DataSource = goals;
@@ -111,10 +112,27 @@ namespace FinanceManagement.Forms.Transaction
                         throw new Exception("Goal amount exceed transaction amount");
                     }
                     GetGoalData(int.Parse(cboGoal.SelectedValue.ToString()));
+                    decimal remainingToGoal = (goal.TargetAmount - goal.CurrentAmount);
+                    if (remainingToGoal <= 0)
+                    {
+                        MessageBox.Show("This goal has already been achieved.", "Notice");
+                        return;
+                    }
+                    else if (remainingToGoal < amountToGoal)
+                    {
+                        
+                        MessageBox.Show("You only need '" + remainingToGoal + "' to achieve the goal. " +
+                            "The contribution amount has been set to this value.","Notice");
+           
+                        txtAmountToGoal.Text = remainingToGoal.ToString();
+                        return;
+                        
+                    }
+            
                     goal.CurrentAmount += amountToGoal;
                     transaction.Amount -= amountToGoal;
                     transaction.Description += $" ({amountToGoal} has been deducted from this transaction for goal {goal.Name})";
-                   
+                    
                 }
 
                 bool isAdded = TransactionService.AddTransaction(transaction);
@@ -172,6 +190,11 @@ namespace FinanceManagement.Forms.Transaction
         private void frmAddTransaction_FormClosed(object sender, FormClosedEventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void dtpTransactionDate_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

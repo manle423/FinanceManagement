@@ -167,6 +167,74 @@ namespace FinanceManagement.Services
             return goals;
         }
 
+        // Lấy ra tất cả goal 
+        public static List<Goal> GetAllGoalsUncompleted(int user_id, string startDate = null, string endDate = null, decimal startTargetAmount = Decimal.MinValue, decimal endTargetAmount = Decimal.MaxValue, decimal startCurrentAmount = Decimal.MinValue, decimal endCurrentAmount = Decimal.MaxValue)
+        {
+            List<Goal> goals = new List<Goal>();
+            try
+            {
+                using (SqlConnection conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT goal_id, name, target_amount, current_amount, deadline, description, created_at, updated_at FROM Goals WHERE user_id = @user_id AND " +
+                        "target_amount >= @startTargetAmount AND target_amount <= @endTargetAmount AND " +
+                        "current_amount >= @startCurrentAmount AND current_amount <= @endCurrentAmount " +
+                        "AND target_amount > current_amount"; // goal chưa hoàn thành
+                    if (!string.IsNullOrEmpty(startDate))
+                    {
+                        query += " AND deadline >= @startDate ";
+                    }
+                    if (!string.IsNullOrEmpty(endDate))
+                    {
+                        query += " AND deadline <= @endDate ";
+                    }
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@user_id", user_id);
+                        cmd.Parameters.AddWithValue("@startTargetAmount", startTargetAmount);
+                        cmd.Parameters.AddWithValue("@endTargetAmount", endTargetAmount);
+                        cmd.Parameters.AddWithValue("@startCurrentAmount", startCurrentAmount);
+                        cmd.Parameters.AddWithValue("@endCurrentAmount", endCurrentAmount);
+                        if (!string.IsNullOrEmpty(startDate))
+                        {
+                            cmd.Parameters.AddWithValue("@startDate", startDate);
+                        }
+                        if (!string.IsNullOrEmpty(endDate))
+                        {
+                            cmd.Parameters.AddWithValue("@endDate", endDate);
+                        }
+
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+
+                                goals.Add(new Goal
+                                {
+                                    Id = reader.GetInt32(0),
+                                    UserId = user_id,
+                                    Name = reader.GetString(1),
+                                    TargetAmount = reader.GetDecimal(2),
+                                    CurrentAmount = reader.GetDecimal(3),
+                                    Deadline = reader.GetDateTime(4),
+                                    Description = reader.GetString(5),
+                                    CreatedAt = reader.GetDateTime(6),
+                                    UpdatedAt = reader.GetDateTime(7)
+                                });
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return goals;
+        }
+
         // Lấy goal theo id
         public static Goal GetGoalById(int id)
         {
