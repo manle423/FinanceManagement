@@ -57,12 +57,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.lblGoalTrackValue = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.prgGoalTrack = new System.Windows.Forms.ProgressBar();
             this.txtTargetAmountUpdate = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtNameUpdate = new System.Windows.Forms.TextBox();
-            this.lblGoalTrackValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGoals)).BeginInit();
             this.pnlData.SuspendLayout();
             this.pnlControl.SuspendLayout();
@@ -134,7 +134,6 @@
             // 
             this.txtCurrentAmountUpdate.Location = new System.Drawing.Point(114, 78);
             this.txtCurrentAmountUpdate.Name = "txtCurrentAmountUpdate";
-            this.txtCurrentAmountUpdate.ReadOnly = true;
             this.txtCurrentAmountUpdate.Size = new System.Drawing.Size(212, 22);
             this.txtCurrentAmountUpdate.TabIndex = 3;
             this.txtCurrentAmountUpdate.TextChanged += new System.EventHandler(this.txtAmountUpdate_TextChanged);
@@ -383,6 +382,18 @@
             this.pnlControl.TabIndex = 5;
             this.pnlControl.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlControl_Paint);
             // 
+            // lblGoalTrackValue
+            // 
+            this.lblGoalTrackValue.AutoSize = true;
+            this.lblGoalTrackValue.BackColor = System.Drawing.SystemColors.Control;
+            this.lblGoalTrackValue.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGoalTrackValue.Location = new System.Drawing.Point(385, 11);
+            this.lblGoalTrackValue.Name = "lblGoalTrackValue";
+            this.lblGoalTrackValue.Size = new System.Drawing.Size(24, 15);
+            this.lblGoalTrackValue.TabIndex = 6;
+            this.lblGoalTrackValue.Text = "0%";
+            this.lblGoalTrackValue.Click += new System.EventHandler(this.label9_Click_1);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -423,18 +434,6 @@
             this.txtNameUpdate.Name = "txtNameUpdate";
             this.txtNameUpdate.Size = new System.Drawing.Size(168, 22);
             this.txtNameUpdate.TabIndex = 15;
-            // 
-            // lblGoalTrackValue
-            // 
-            this.lblGoalTrackValue.AutoSize = true;
-            this.lblGoalTrackValue.BackColor = System.Drawing.SystemColors.Control;
-            this.lblGoalTrackValue.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGoalTrackValue.Location = new System.Drawing.Point(385, 11);
-            this.lblGoalTrackValue.Name = "lblGoalTrackValue";
-            this.lblGoalTrackValue.Size = new System.Drawing.Size(24, 15);
-            this.lblGoalTrackValue.TabIndex = 6;
-            this.lblGoalTrackValue.Text = "0%";
-            this.lblGoalTrackValue.Click += new System.EventHandler(this.label9_Click_1);
             // 
             // frmGoalManagement
             // 

@@ -103,6 +103,7 @@
             this.dtpTransactionDate.Name = "dtpTransactionDate";
             this.dtpTransactionDate.Size = new System.Drawing.Size(243, 26);
             this.dtpTransactionDate.TabIndex = 0;
+            this.dtpTransactionDate.ValueChanged += new System.EventHandler(this.dtpTransactionDate_ValueChanged);
             // 
             // label3
             // 
