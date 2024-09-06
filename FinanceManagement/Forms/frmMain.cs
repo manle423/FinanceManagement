@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FinanceManagement.Forms.RecurringTransaction;
 
 namespace FinanceManagement
 {
@@ -118,5 +119,9 @@ namespace FinanceManagement
             UpdateMainContent(new frmGoalManagement(), "Finance Management | Goals");
         }
 
+        private void btnToRecurring_Click(object sender, EventArgs e)
+        {
+            UpdateMainContent(new frmRecurringTransactionManagement(), "Finance Management | Recurring Transactions");
+        }
     }
 }

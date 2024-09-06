@@ -17,10 +17,6 @@ namespace FinanceManagement.Services
         // khai báo 1 lần dbConnection cho dễ dàng sử dụng
         private static readonly DatabaseConnection dbConnection = new DatabaseConnection();
 
-        
-
-        
-
         // Hàm thêm transaction
         public static bool AddTransaction(Transaction transaction)
         {

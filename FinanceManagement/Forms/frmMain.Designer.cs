@@ -39,6 +39,7 @@
             this.btnToCategory = new System.Windows.Forms.Button();
             this.btnToDashBoard = new System.Windows.Forms.Button();
             this.pnlContent = new System.Windows.Forms.Panel();
+            this.btnToRecurring = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlControl.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +87,7 @@
             // 
             this.pnlControl.AutoSize = true;
             this.pnlControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlControl.Controls.Add(this.btnToRecurring);
             this.pnlControl.Controls.Add(this.button1);
             this.pnlControl.Controls.Add(this.btnToTransactions);
             this.pnlControl.Controls.Add(this.btnToBudget);
@@ -165,6 +167,16 @@
             this.pnlContent.TabIndex = 5;
             this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
+            // btnToRecurring
+            // 
+            this.btnToRecurring.Location = new System.Drawing.Point(1, 389);
+            this.btnToRecurring.Name = "btnToRecurring";
+            this.btnToRecurring.Size = new System.Drawing.Size(150, 45);
+            this.btnToRecurring.TabIndex = 5;
+            this.btnToRecurring.Text = "RECURRING";
+            this.btnToRecurring.UseVisualStyleBackColor = true;
+            this.btnToRecurring.Click += new System.EventHandler(this.btnToRecurring_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,5 +211,6 @@
         private System.Windows.Forms.Button btnToBudget;
         private System.Windows.Forms.Button btnToTransactions;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnToRecurring;
     }
 }
