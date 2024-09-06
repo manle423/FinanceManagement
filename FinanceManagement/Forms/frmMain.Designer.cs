@@ -32,13 +32,13 @@
             this.lblMain = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlControl = new System.Windows.Forms.Panel();
-            this.btnToBudget = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnToTransactions = new System.Windows.Forms.Button();
+            this.btnToBudget = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnToCategory = new System.Windows.Forms.Button();
             this.btnToDashBoard = new System.Windows.Forms.Button();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlControl.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +53,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(960, 30);
             this.panel1.TabIndex = 3;
-            
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
@@ -98,9 +97,19 @@
             this.pnlControl.Size = new System.Drawing.Size(154, 520);
             this.pnlControl.TabIndex = 4;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1, 318);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 45);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "GOALS";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnToTransactions
             // 
-            this.btnToTransactions.Location = new System.Drawing.Point(0, 307);
+            this.btnToTransactions.Location = new System.Drawing.Point(0, 242);
             this.btnToTransactions.Name = "btnToTransactions";
             this.btnToTransactions.Size = new System.Drawing.Size(150, 45);
             this.btnToTransactions.TabIndex = 3;
@@ -110,7 +119,7 @@
             // 
             // btnToBudget
             // 
-            this.btnToBudget.Location = new System.Drawing.Point(0, 109);
+            this.btnToBudget.Location = new System.Drawing.Point(0, 165);
             this.btnToBudget.Name = "btnToBudget";
             this.btnToBudget.Size = new System.Drawing.Size(150, 45);
             this.btnToBudget.TabIndex = 3;
@@ -130,7 +139,7 @@
             // 
             // btnToCategory
             // 
-            this.btnToCategory.Location = new System.Drawing.Point(1, 58);
+            this.btnToCategory.Location = new System.Drawing.Point(0, 83);
             this.btnToCategory.Name = "btnToCategory";
             this.btnToCategory.Size = new System.Drawing.Size(150, 45);
             this.btnToCategory.TabIndex = 1;
@@ -155,16 +164,6 @@
             this.pnlContent.Size = new System.Drawing.Size(800, 520);
             this.pnlContent.TabIndex = 5;
             this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(0, 392);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 45);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "GOALS";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMain
             // 
