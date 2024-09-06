@@ -235,6 +235,18 @@
     <Compile Include="Forms\Goal\frmGoalManagement.Designer.cs">
       <DependentUpon>frmGoalManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RecurringTransaction\frmAddRecurringTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RecurringTransaction\frmAddRecurringTransaction.Designer.cs">
+      <DependentUpon>frmAddRecurringTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RecurringTransaction\frmRecurringTransactionManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\RecurringTransaction\frmRecurringTransactionManagement.Designer.cs">
+      <DependentUpon>frmRecurringTransactionManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Transaction\frmAddTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,6 +262,7 @@
     <Compile Include="Models\Budget.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Goal.cs" />
+    <Compile Include="Models\RecurringTransaction.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -262,6 +275,7 @@
     <Compile Include="Services\BudgetService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\GoalService.cs" />
+    <Compile Include="Services\RecurringTransactionService.cs" />
     <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\UserSession.cs" />
@@ -301,6 +315,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Goal\frmGoalManagement.resx">
       <DependentUpon>frmGoalManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RecurringTransaction\frmAddRecurringTransaction.resx">
+      <DependentUpon>frmAddRecurringTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RecurringTransaction\frmRecurringTransactionManagement.resx">
+      <DependentUpon>frmRecurringTransactionManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Transaction\frmAddTransaction.resx">
       <DependentUpon>frmAddTransaction.cs</DependentUpon>
