@@ -113,7 +113,7 @@ namespace FinanceManagement.Services
 
                                 if (conditions.Count > 0)
                                 {
-                                    query += " AND " + string.Join(" OR ", conditions);
+                                    query += " AND (" + string.Join(" OR ", conditions) + ")";
                                 }
 
                             }
@@ -137,7 +137,6 @@ namespace FinanceManagement.Services
                             cmd.Parameters.AddWithValue("@enddate", enddate);
 
                         }
-
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
