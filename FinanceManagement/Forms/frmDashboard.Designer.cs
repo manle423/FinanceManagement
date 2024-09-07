@@ -28,26 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chtReport = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtpReportYear = new System.Windows.Forms.DateTimePicker();
             this.dtpReportMonth = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtCompletionRate = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtReportDiff = new System.Windows.Forms.TextBox();
             this.txtReportBudgets = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtReportGoals = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtTotalExpense = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtTotalIncome = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtTotalExpense = new System.Windows.Forms.TextBox();
-            this.txtReportDiff = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chtReport)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -55,16 +57,16 @@
             // 
             // chtReport
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chtReport.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtReport.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chtReport.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtReport.Legends.Add(legend1);
             this.chtReport.Location = new System.Drawing.Point(18, 102);
             this.chtReport.Name = "chtReport";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chtReport.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chtReport.Series.Add(series1);
             this.chtReport.Size = new System.Drawing.Size(462, 357);
             this.chtReport.TabIndex = 0;
             this.chtReport.Text = "chart1";
@@ -83,10 +85,11 @@
             // 
             this.dtpReportYear.CustomFormat = "yyyy";
             this.dtpReportYear.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpReportYear.Location = new System.Drawing.Point(253, 27);
+            this.dtpReportYear.Location = new System.Drawing.Point(270, 27);
             this.dtpReportYear.Name = "dtpReportYear";
             this.dtpReportYear.Size = new System.Drawing.Size(53, 20);
             this.dtpReportYear.TabIndex = 2;
+            this.dtpReportYear.ValueChanged += new System.EventHandler(this.dtpReportYear_ValueChanged);
             // 
             // dtpReportMonth
             // 
@@ -94,7 +97,8 @@
             this.dtpReportMonth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpReportMonth.Location = new System.Drawing.Point(172, 27);
             this.dtpReportMonth.Name = "dtpReportMonth";
-            this.dtpReportMonth.Size = new System.Drawing.Size(75, 20);
+            this.dtpReportMonth.ShowCheckBox = true;
+            this.dtpReportMonth.Size = new System.Drawing.Size(92, 20);
             this.dtpReportMonth.TabIndex = 1;
             this.dtpReportMonth.ValueChanged += new System.EventHandler(this.dtpReportMonth_ValueChanged);
             // 
@@ -109,6 +113,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.txtCompletionRate);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.txtReportDiff);
@@ -124,6 +130,54 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(281, 394);
             this.panel2.TabIndex = 2;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(202, 114);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(21, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "%: ";
+            // 
+            // txtCompletionRate
+            // 
+            this.txtCompletionRate.Location = new System.Drawing.Point(169, 111);
+            this.txtCompletionRate.Name = "txtCompletionRate";
+            this.txtCompletionRate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtCompletionRate.Size = new System.Drawing.Size(33, 20);
+            this.txtCompletionRate.TabIndex = 9;
+            this.txtCompletionRate.TextChanged += new System.EventHandler(this.txtCompletionRate_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(103, 68);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(17, 18);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "=";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(103, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(13, 18);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "-";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // txtReportDiff
+            // 
+            this.txtReportDiff.Location = new System.Drawing.Point(122, 66);
+            this.txtReportDiff.Name = "txtReportDiff";
+            this.txtReportDiff.ReadOnly = true;
+            this.txtReportDiff.Size = new System.Drawing.Size(130, 20);
+            this.txtReportDiff.TabIndex = 6;
             // 
             // txtReportBudgets
             // 
@@ -157,9 +211,29 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(16, 114);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(138, 13);
+            this.label3.Size = new System.Drawing.Size(161, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Goals close to achivement: ";
+            this.label3.Text = "Goals with completion rate over  ";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // txtTotalExpense
+            // 
+            this.txtTotalExpense.Location = new System.Drawing.Point(122, 40);
+            this.txtTotalExpense.Name = "txtTotalExpense";
+            this.txtTotalExpense.ReadOnly = true;
+            this.txtTotalExpense.Size = new System.Drawing.Size(130, 20);
+            this.txtTotalExpense.TabIndex = 1;
+            this.txtTotalExpense.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 43);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Total expense: ";
+            this.label5.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtTotalIncome
             // 
@@ -178,54 +252,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Total income: ";
             this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 43);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Total expense: ";
-            this.label5.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // txtTotalExpense
-            // 
-            this.txtTotalExpense.Location = new System.Drawing.Point(122, 40);
-            this.txtTotalExpense.Name = "txtTotalExpense";
-            this.txtTotalExpense.ReadOnly = true;
-            this.txtTotalExpense.Size = new System.Drawing.Size(130, 20);
-            this.txtTotalExpense.TabIndex = 1;
-            this.txtTotalExpense.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // txtReportDiff
-            // 
-            this.txtReportDiff.Location = new System.Drawing.Point(122, 66);
-            this.txtReportDiff.Name = "txtReportDiff";
-            this.txtReportDiff.ReadOnly = true;
-            this.txtReportDiff.Size = new System.Drawing.Size(130, 20);
-            this.txtReportDiff.TabIndex = 6;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(103, 27);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 18);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "-";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(103, 68);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(17, 18);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "=";
             // 
             // frmDashboard
             // 
@@ -265,5 +291,7 @@
         private System.Windows.Forms.TextBox txtReportDiff;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtCompletionRate;
     }
 }

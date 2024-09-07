@@ -167,7 +167,7 @@ namespace FinanceManagement.Services
             return goals;
         }
 
-        // Lấy ra tất cả goal 
+        // Lấy ra tất cả goal chưa hoàn thành
         public static List<Goal> GetAllGoalsUncompleted(int user_id, string startDate = null, string endDate = null, decimal startTargetAmount = Decimal.MinValue, decimal endTargetAmount = Decimal.MaxValue, decimal startCurrentAmount = Decimal.MinValue, decimal endCurrentAmount = Decimal.MaxValue)
         {
             List<Goal> goals = new List<Goal>();
@@ -180,6 +180,7 @@ namespace FinanceManagement.Services
                         "target_amount >= @startTargetAmount AND target_amount <= @endTargetAmount AND " +
                         "current_amount >= @startCurrentAmount AND current_amount <= @endCurrentAmount " +
                         "AND target_amount > current_amount"; // goal chưa hoàn thành
+
                     if (!string.IsNullOrEmpty(startDate))
                     {
                         query += " AND deadline >= @startDate ";

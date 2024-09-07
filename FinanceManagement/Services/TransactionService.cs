@@ -233,7 +233,23 @@ namespace FinanceManagement.Services
             List<Transaction> transactionsExpense = GetAllTransactions(user_id, startDate.ToString(), endDate.ToString(), -1, "Expense");
             decimal sumIncome = GetSumAmount(transactionsIncome);
             decimal sumExpense = GetSumAmount(transactionsExpense);
-            MessageBox.Show("Start: " + startDate + " End: " + endDate);
+            //MessageBox.Show("Start: " + startDate + " End: " + endDate);
+            res.Add(sumIncome);
+            res.Add(sumExpense);
+            return res;
+        }
+
+        // Lấy kết quả tính lời lãi trong năm
+        public static List<decimal> GetDifferenceYear(int user_id, DateTime year)
+        {
+            List<decimal> res = new List<decimal>();
+            DateTime startDate = new DateTime(year.Year, 1, 1);
+            DateTime endDate = new DateTime(year.Year, 12, 31);
+            List<Transaction> transactionsIncome = GetAllTransactions(user_id, startDate.ToString(), endDate.ToString(), -1, "Income");
+            List<Transaction> transactionsExpense = GetAllTransactions(user_id, startDate.ToString(), endDate.ToString(), -1, "Expense");
+            decimal sumIncome = GetSumAmount(transactionsIncome);
+            decimal sumExpense = GetSumAmount(transactionsExpense);
+            //MessageBox.Show("Start: " + startDate + " End: " + endDate);
             res.Add(sumIncome);
             res.Add(sumExpense);
             return res;
