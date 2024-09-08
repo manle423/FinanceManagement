@@ -1,4 +1,6 @@
-﻿using FinanceManagement.Services;
+﻿using FinanceManagement.Models;
+using FinanceManagement.Services;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -82,7 +84,8 @@ namespace FinanceManagement
                 double completion = ((double)goal.CurrentAmount / (double)goal.TargetAmount) * 100;
                 if (completion > Convert.ToDouble(txtCompletionRate.Text))
                 {
-                    txtReportGoals.Text += $"{goal.Name} - {goal.Deadline.ToShortDateString()} - {goal.TargetAmount - goal.CurrentAmount} needed\n";
+                    
+                    txtReportGoals.Text += $"{goal.Name} - {goal.Deadline.ToShortDateString()} - {string.Format("{0:N0}", goal.TargetAmount - goal.CurrentAmount)} needed\n";
                 }
 
             }
@@ -91,7 +94,7 @@ namespace FinanceManagement
             txtReportBudgets.Clear();
             foreach (Models.Budget budget in closeBudgets)
             {
-                txtReportBudgets.Text += $"{budget.CategoryName} - {budget.EndDate.ToShortDateString()} - {budget.RemainingBudget} left\n";
+                txtReportBudgets.Text += $"{budget.CategoryName} - {budget.EndDate.ToShortDateString()} - {string.Format("{0:N0}", budget.RemainingBudget)} left\n";
             }
 
             // Cập nhật đồ thị
@@ -121,7 +124,12 @@ namespace FinanceManagement
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            string input = txtTotalExpense.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtTotalExpense.Text = string.Format("{0:N0}", value);
+                txtTotalExpense.SelectionStart = txtTotalExpense.Text.Length;
+            }
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -156,6 +164,31 @@ namespace FinanceManagement
         private void Reload_Click(object sender, EventArgs e)
         {
             frmDashboard_Load(sender, e);
+        }
+
+        private void txtTotalIncome_TextChanged(object sender, EventArgs e)
+        {
+            string input = txtTotalIncome.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtTotalIncome.Text = string.Format("{0:N0}", value);
+                txtTotalIncome.SelectionStart = txtTotalIncome.Text.Length;
+            }
+        }
+
+        private void txtReportDiff_TextChanged(object sender, EventArgs e)
+        {
+            string input = txtReportDiff.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtReportDiff.Text = string.Format("{0:N0}", value);
+                txtReportDiff.SelectionStart = txtReportDiff.Text.Length;
+            }
+        }
+
+        private void txtReportGoals_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

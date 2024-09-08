@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtpReportYear = new System.Windows.Forms.DateTimePicker();
             this.dtpReportMonth = new System.Windows.Forms.DateTimePicker();
@@ -172,6 +172,7 @@
             this.txtReportDiff.ReadOnly = true;
             this.txtReportDiff.Size = new System.Drawing.Size(130, 20);
             this.txtReportDiff.TabIndex = 6;
+            this.txtReportDiff.TextChanged += new System.EventHandler(this.txtReportDiff_TextChanged);
             // 
             // txtReportBudgets
             // 
@@ -199,6 +200,7 @@
             this.txtReportGoals.Size = new System.Drawing.Size(334, 96);
             this.txtReportGoals.TabIndex = 3;
             this.txtReportGoals.Text = "";
+            this.txtReportGoals.TextChanged += new System.EventHandler(this.txtReportGoals_TextChanged);
             // 
             // label3
             // 
@@ -236,6 +238,7 @@
             this.txtTotalIncome.ReadOnly = true;
             this.txtTotalIncome.Size = new System.Drawing.Size(130, 20);
             this.txtTotalIncome.TabIndex = 1;
+            this.txtTotalIncome.TextChanged += new System.EventHandler(this.txtTotalIncome_TextChanged);
             // 
             // label2
             // 
@@ -250,11 +253,11 @@
             // chtIncomeExpense
             // 
             this.chtIncomeExpense.BorderlineColor = System.Drawing.SystemColors.Window;
-            chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.Name = "ChartArea1";
-            this.chtIncomeExpense.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtIncomeExpense.Legends.Add(legend1);
+            chartArea3.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea3.Name = "ChartArea1";
+            this.chtIncomeExpense.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chtIncomeExpense.Legends.Add(legend3);
             this.chtIncomeExpense.Location = new System.Drawing.Point(25, 102);
             this.chtIncomeExpense.Name = "chtIncomeExpense";
             this.chtIncomeExpense.Size = new System.Drawing.Size(372, 394);

@@ -138,6 +138,7 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(243, 26);
             this.txtAmount.TabIndex = 2;
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
             // label5
             // 
@@ -200,6 +201,7 @@
             this.txtAmountToGoal.Name = "txtAmountToGoal";
             this.txtAmountToGoal.Size = new System.Drawing.Size(243, 26);
             this.txtAmountToGoal.TabIndex = 5;
+            this.txtAmountToGoal.TextChanged += new System.EventHandler(this.txtAmountToGoal_TextChanged);
             // 
             // label7
             // 
