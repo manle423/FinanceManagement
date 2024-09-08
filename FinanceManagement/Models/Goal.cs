@@ -31,5 +31,9 @@ namespace FinanceManagement.Models
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
         }
+        public string ToString()
+        {
+            return this.Name + " - " + this.Deadline.ToShortDateString();
+        }
     }
 }

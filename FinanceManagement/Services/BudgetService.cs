@@ -198,6 +198,91 @@ namespace FinanceManagement.Services
             return budgets;
         }
 
+        public static List<Budget> GetCloseBudgetsWithTrack(int userId, DateTime startDate, DateTime endDate, double percent)
+        {
+            List<Budget> budgets = new List<Budget>();
+            try
+            {
+                using (SqlConnection conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    string query = @"
+                    WITH CTE AS (
+                        SELECT 
+                            b.budget_id,
+                            b.user_id,
+                            b.category_id,
+                            c.name AS category_name,
+                            b.amount AS budgeted_amount,
+                            b.start_date,
+                            b.end_date,
+                            b.created_at,
+                            b.updated_at,
+                            COALESCE(SUM(t.amount), 0) AS total_spent,
+                            (b.amount - COALESCE(SUM(t.amount), 0)) AS remaining_budget,
+                            ROUND((COALESCE(SUM(t.amount), 0) / b.amount) * 100, 2) AS budget_progress_percentage,
+                            CASE 
+                                WHEN COALESCE(SUM(t.amount), 0) >= b.amount THEN 'OVER BUDGET'
+                                WHEN COALESCE(SUM(t.amount), 0) < b.amount THEN 'UNDER BUDGET'
+                                ELSE 'ON TRACK'
+                            END AS budget_status
+                        FROM 
+                            budgets b
+                        LEFT JOIN 
+                            transactions t ON b.category_id = t.category_id 
+                            AND b.user_id = t.user_id
+                            AND t.transaction_date BETWEEN b.start_date AND b.end_date
+                        JOIN 
+                            categories c ON b.category_id = c.category_id
+                        WHERE b.user_id = @UserId AND b.start_date >= @StartDate AND b.end_date <= @EndDate
+                        GROUP BY 
+                            b.budget_id, b.user_id, b.category_id, c.name, b.amount, b.start_date, b.end_date, b.created_at, b.updated_at
+                    )
+                    SELECT * FROM CTE WHERE budget_progress_percentage >= @Percent AND budget_status = 'UNDER BUDGET';
+                    ";
+
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        cmd.Parameters.AddWithValue("@StartDate", startDate);
+                        cmd.Parameters.AddWithValue("@EndDate", endDate);
+                        cmd.Parameters.AddWithValue("@Percent", percent);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                budgets.Add(new Budget
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("budget_id")),
+                                    UserId = reader.GetInt32(reader.GetOrdinal("user_id")),
+                                    CategoryId = reader.GetInt32(reader.GetOrdinal("category_id")),
+                                    Amount = reader.GetDecimal(reader.GetOrdinal("budgeted_amount")),
+                                    StartDate = reader.GetDateTime(reader.GetOrdinal("start_date")),
+                                    EndDate = reader.GetDateTime(reader.GetOrdinal("end_date")),
+                                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("created_at")),
+                                    UpdatedAt = reader.GetDateTime(reader.GetOrdinal("updated_at")),
+                                    CategoryName = reader.GetString(reader.GetOrdinal("category_name")),
+                                    TotalSpent = reader.GetDecimal(reader.GetOrdinal("total_spent")),
+                                    RemainingBudget = reader.GetDecimal(reader.GetOrdinal("remaining_budget")),
+                                    BudgetProgressPercentage = reader.GetDecimal(reader.GetOrdinal("budget_progress_percentage")),
+                                    BudgetStatus = reader.GetString(reader.GetOrdinal("budget_status"))
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return budgets;
+        }
+
         // Hàm xoá budget
         public static bool DeleteBudget(Budget budget)
         {

@@ -104,7 +104,7 @@ namespace FinanceManagement.Forms.Transaction
                
 
                 GetTransactionData();
-                if (cboGoal.Enabled)
+                if (cboGoal.Enabled && txtAmountToGoal.Text != "")
                 {
                     decimal amountToGoal = decimal.Parse(txtAmountToGoal.Text);
                     if (transaction.Amount < amountToGoal)
@@ -139,7 +139,7 @@ namespace FinanceManagement.Forms.Transaction
 
                 if (isAdded)
                 {
-                    if (cboGoal.Enabled)
+                    if (cboGoal.Enabled && txtAmountToGoal.Text != "")
                     {
                         bool isGoalAdded = GoalService.UpdateGoal(goal);
                         if (!isGoalAdded)
@@ -195,6 +195,26 @@ namespace FinanceManagement.Forms.Transaction
         private void dtpTransactionDate_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+            string input = txtAmount.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtAmount.Text = string.Format("{0:N0}", value);
+                txtAmount.SelectionStart = txtAmount.Text.Length;
+            }
+        }
+
+        private void txtAmountToGoal_TextChanged(object sender, EventArgs e)
+        {
+            string input = txtAmountToGoal.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtAmountToGoal.Text = string.Format("{0:N0}", value);
+                txtAmountToGoal.SelectionStart = txtAmountToGoal.Text.Length;
+            }
         }
     }
 }
