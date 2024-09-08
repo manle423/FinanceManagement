@@ -44,5 +44,10 @@ namespace FinanceManagement.Models
             CreatedAt = DateTime.MinValue;
             UpdatedAt = DateTime.MinValue;
         }
+
+        public string ToString()
+        {
+            return this.CategoryName + " - " + this.Amount + " - " + this.EndDate;
+        }
     }
 }

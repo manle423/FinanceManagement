@@ -31,12 +31,15 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.chtReport = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtpReportYear = new System.Windows.Forms.DateTimePicker();
             this.dtpReportMonth = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtBudgetRemainingPercent = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtCompletionRate = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -50,26 +53,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtTotalIncome = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.chtReport)).BeginInit();
+            this.chtIncomeExpense = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.Reload = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chtIncomeExpense)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // chtReport
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chtReport.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtReport.Legends.Add(legend1);
-            this.chtReport.Location = new System.Drawing.Point(18, 102);
-            this.chtReport.Name = "chtReport";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chtReport.Series.Add(series1);
-            this.chtReport.Size = new System.Drawing.Size(462, 357);
-            this.chtReport.TabIndex = 0;
-            this.chtReport.Text = "chart1";
             // 
             // panel1
             // 
@@ -113,6 +104,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtBudgetRemainingPercent);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.txtCompletionRate);
             this.panel2.Controls.Add(this.label7);
@@ -126,11 +118,19 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.txtTotalIncome);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(498, 102);
+            this.panel2.Location = new System.Drawing.Point(422, 102);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(281, 394);
+            this.panel2.Size = new System.Drawing.Size(375, 394);
             this.panel2.TabIndex = 2;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // txtBudgetRemainingPercent
+            // 
+            this.txtBudgetRemainingPercent.Location = new System.Drawing.Point(178, 247);
+            this.txtBudgetRemainingPercent.Name = "txtBudgetRemainingPercent";
+            this.txtBudgetRemainingPercent.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtBudgetRemainingPercent.Size = new System.Drawing.Size(33, 20);
+            this.txtBudgetRemainingPercent.TabIndex = 10;
             // 
             // label8
             // 
@@ -184,7 +184,7 @@
             this.txtReportBudgets.Location = new System.Drawing.Point(15, 275);
             this.txtReportBudgets.Name = "txtReportBudgets";
             this.txtReportBudgets.ReadOnly = true;
-            this.txtReportBudgets.Size = new System.Drawing.Size(249, 96);
+            this.txtReportBudgets.Size = new System.Drawing.Size(334, 96);
             this.txtReportBudgets.TabIndex = 5;
             this.txtReportBudgets.Text = "";
             // 
@@ -193,16 +193,16 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(16, 250);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 13);
+            this.label4.Size = new System.Drawing.Size(251, 13);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Budgets running out: ";
+            this.label4.Text = "Budgets close to running out (>=                % used): ";
             // 
             // txtReportGoals
             // 
             this.txtReportGoals.Location = new System.Drawing.Point(15, 139);
             this.txtReportGoals.Name = "txtReportGoals";
             this.txtReportGoals.ReadOnly = true;
-            this.txtReportGoals.Size = new System.Drawing.Size(249, 96);
+            this.txtReportGoals.Size = new System.Drawing.Size(334, 96);
             this.txtReportGoals.TabIndex = 3;
             this.txtReportGoals.Text = "";
             // 
@@ -253,28 +253,73 @@
             this.label2.Text = "Total income: ";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // chtIncomeExpense
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chtIncomeExpense.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtIncomeExpense.Legends.Add(legend1);
+            this.chtIncomeExpense.Location = new System.Drawing.Point(80, 102);
+            this.chtIncomeExpense.Name = "chtIncomeExpense";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chtIncomeExpense.Series.Add(series1);
+            this.chtIncomeExpense.Size = new System.Drawing.Size(260, 200);
+            this.chtIncomeExpense.TabIndex = 0;
+            this.chtIncomeExpense.Text = "chart1";
+            // 
+            // chart1
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
+            this.chart1.Location = new System.Drawing.Point(80, 308);
+            this.chart1.Name = "chart1";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(260, 177);
+            this.chart1.TabIndex = 3;
+            this.chart1.Text = "chart1";
+            // 
+            // Reload
+            // 
+            this.Reload.Location = new System.Drawing.Point(658, 50);
+            this.Reload.Name = "Reload";
+            this.Reload.Size = new System.Drawing.Size(75, 23);
+            this.Reload.TabIndex = 4;
+            this.Reload.Text = "Reload";
+            this.Reload.UseVisualStyleBackColor = true;
+            this.Reload.Click += new System.EventHandler(this.Reload_Click);
+            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Reload);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.chtReport);
+            this.Controls.Add(this.chtIncomeExpense);
             this.Name = "frmDashboard";
             this.Size = new System.Drawing.Size(800, 520);
             this.Load += new System.EventHandler(this.frmDashboard_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.chtReport)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chtIncomeExpense)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataVisualization.Charting.Chart chtReport;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DateTimePicker dtpReportYear;
         private System.Windows.Forms.DateTimePicker dtpReportMonth;
@@ -293,5 +338,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtCompletionRate;
+        private System.Windows.Forms.TextBox txtBudgetRemainingPercent;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chtIncomeExpense;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button Reload;
     }
 }

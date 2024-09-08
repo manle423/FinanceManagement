@@ -17,10 +17,12 @@ namespace FinanceManagement
         string username = UserSession.Instance.Username;
         List<decimal> sumAmountReports = null;
         List<Models.Goal> unfinishedGoals = null;
+        List<Models.Budget> closeBudgets = null;
         public frmDashboard()
         {
             InitializeComponent();
             txtCompletionRate.Text = "80";
+            txtBudgetRemainingPercent.Text = "20";
             dtpReportMonth.Value = DateTime.Now;
             dtpReportYear.Value = DateTime.Now;
             
@@ -31,10 +33,12 @@ namespace FinanceManagement
         {
            
             DateTime reportYear = dtpReportYear.Value;
+            double percent = Convert.ToDouble(txtBudgetRemainingPercent.Text) / 100.0;
             if (dtpReportMonth.Checked == false)
             { // Tính tổng kết năm
                 sumAmountReports = TransactionService.GetDifferenceYear(userId, reportYear);
                 unfinishedGoals = GoalService.GetAllGoalsUncompleted(userId, reportYear.Year.ToString() + "-01-01", reportYear.Year.ToString() + "-12-31");
+                closeBudgets = BudgetService.GetCloseBudgetsWithTrack(userId, new DateTime(reportYear.Year,1,1), new DateTime(reportYear.Year,12,31),percent);
             }
             else // Tổng kết tháng
             {
@@ -43,8 +47,13 @@ namespace FinanceManagement
                 string daysInMonth = DateTime.DaysInMonth(reportYear.Year, reportMonth.Month).ToString();
                 sumAmountReports = TransactionService.GetDifferenceMonth(userId, reportMonth, reportYear);
                 unfinishedGoals = GoalService.GetAllGoalsUncompleted(userId, strMonthYear + "-01", strMonthYear + "-" + daysInMonth);
+                closeBudgets = BudgetService.GetCloseBudgetsWithTrack(userId, 
+                    new DateTime(reportYear.Year,reportMonth.Month , 1), 
+                    new DateTime(reportYear.Year, reportMonth.Month, int.Parse(daysInMonth)), 
+                    percent);
             }
 
+            // Hiển thị tổng thu/chi
             decimal sumIncome = sumAmountReports[0];
             decimal sumExpense = sumAmountReports[1];
             decimal difference = sumIncome - sumExpense;
@@ -52,15 +61,23 @@ namespace FinanceManagement
             txtTotalExpense.Text = sumExpense.ToString();
             txtReportDiff.Text = difference.ToString();
 
+            // Hiển thị các goal sắp đạt chỉ tiêu
             txtReportGoals.Clear();
             foreach (Models.Goal goal in unfinishedGoals)
             {
                 double completion = ((double)goal.CurrentAmount / (double)goal.TargetAmount) * 100;
-                if (completion > Convert.ToInt32(txtCompletionRate.Text))
+                if (completion > Convert.ToDouble(txtCompletionRate.Text))
                 {
-                    txtReportGoals.Text += goal.ToString() + "\n";
+                    txtReportGoals.Text += $"{goal.Name} - {goal.Deadline.ToShortDateString()} - {goal.TargetAmount - goal.CurrentAmount} needed\n";
                 }
 
+            }
+
+            // Hiển thị các khoản ngân sách sắp cạn kiệt
+            txtReportBudgets.Clear();
+            foreach (Models.Budget budget in closeBudgets)
+            {
+                txtReportBudgets.Text += $"{budget.CategoryName} - ends at {budget.EndDate.ToShortDateString()} - {budget.RemainingBudget} left\n";
             }
         }
 
@@ -86,6 +103,8 @@ namespace FinanceManagement
 
         private void dtpReportYear_ValueChanged(object sender, EventArgs e)
         {
+            //dtpReportMonth.MinDate = new DateTime(dtpReportYear.Value.Year, 1, 1);
+            //dtpReportMonth.MaxDate = new DateTime(dtpReportYear.Value.Year, 12, 31);
             frmDashboard_Load(sender,e);
 
             
@@ -102,6 +121,11 @@ namespace FinanceManagement
         }
 
         private void txtCompletionRate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Reload_Click(object sender, EventArgs e)
         {
             frmDashboard_Load(sender, e);
         }
