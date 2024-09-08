@@ -104,7 +104,7 @@ namespace FinanceManagement.Forms.Transaction
                
 
                 GetTransactionData();
-                if (cboGoal.Enabled)
+                if (cboGoal.Enabled && txtAmountToGoal.Text != "")
                 {
                     decimal amountToGoal = decimal.Parse(txtAmountToGoal.Text);
                     if (transaction.Amount < amountToGoal)
@@ -139,7 +139,7 @@ namespace FinanceManagement.Forms.Transaction
 
                 if (isAdded)
                 {
-                    if (cboGoal.Enabled)
+                    if (cboGoal.Enabled && txtAmountToGoal.Text != "")
                     {
                         bool isGoalAdded = GoalService.UpdateGoal(goal);
                         if (!isGoalAdded)

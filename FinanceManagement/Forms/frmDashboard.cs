@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace FinanceManagement
 {
@@ -18,6 +19,10 @@ namespace FinanceManagement
         List<decimal> sumAmountReports = null;
         List<Models.Goal> unfinishedGoals = null;
         List<Models.Budget> closeBudgets = null;
+        // Create a series for "Income" column
+        Series incomeSeries = new Series("Income");
+        // Create a series for "Expense" column
+        Series expenseSeries = new Series("Expense");
         public frmDashboard()
         {
             InitializeComponent();
@@ -25,8 +30,17 @@ namespace FinanceManagement
             txtBudgetRemainingPercent.Text = "20";
             dtpReportMonth.Value = DateTime.Now;
             dtpReportYear.Value = DateTime.Now;
-            
 
+            
+            //incomeSeries.Points.AddY(Convert.ToDouble(txtTotalIncome.Text));
+            incomeSeries.Color = System.Drawing.Color.Green; // Color for Income column
+
+            
+            //expenseSeries.Points.AddY(Convert.ToDouble(txtTotalExpense.Text));
+            expenseSeries.Color = System.Drawing.Color.Blue; // Color for Expense column
+
+            chtIncomeExpense.Series.Add(incomeSeries);
+            chtIncomeExpense.Series.Add(expenseSeries);
         }
 
         private void frmDashboard_Load(object sender, EventArgs e)
@@ -77,7 +91,21 @@ namespace FinanceManagement
             txtReportBudgets.Clear();
             foreach (Models.Budget budget in closeBudgets)
             {
-                txtReportBudgets.Text += $"{budget.CategoryName} - ends at {budget.EndDate.ToShortDateString()} - {budget.RemainingBudget} left\n";
+                txtReportBudgets.Text += $"{budget.CategoryName} - {budget.EndDate.ToShortDateString()} - {budget.RemainingBudget} left\n";
+            }
+
+            // Cập nhật đồ thị
+            // Update the data points of the series with new values from text boxes
+            if (double.TryParse(txtTotalIncome.Text, out double incomeValue))
+            {
+                incomeSeries.Points.Clear(); // Clear existing points
+                incomeSeries.Points.AddY(incomeValue);
+            }
+
+            if (double.TryParse(txtTotalExpense.Text, out double expenseValue))
+            {
+                expenseSeries.Points.Clear(); // Clear existing points
+                expenseSeries.Points.AddY(expenseValue);
             }
         }
 
