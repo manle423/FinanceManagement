@@ -100,7 +100,7 @@ namespace FinanceManagement.Forms.RecurringTransaction
                 return false;
             }
 
-            if (!decimal.TryParse(textBox1.Text, out _))
+            if (!decimal.TryParse(txtAmount.Text, out _))
             {
                 MessageBox.Show("Please enter a valid amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -143,7 +143,7 @@ namespace FinanceManagement.Forms.RecurringTransaction
             cboFrequency.SelectedIndexChanged -= cboFrequency_SelectedIndexChanged;
 
             cboCategory.SelectedIndex = -1;
-            textBox1.Clear();
+            txtAmount.Clear();
             
             // Reset dates
             dtpStartDate.Value = DateTime.Today;
@@ -190,7 +190,7 @@ namespace FinanceManagement.Forms.RecurringTransaction
                 {
                     UserId = userId,
                     CategoryId = (int)cboCategory.SelectedValue,
-                    Amount = decimal.Parse(textBox1.Text),
+                    Amount = decimal.Parse(txtAmount.Text),
                     StartDate = dtpStartDate.Value,
                     EndDate = dtpEndDate.Value,
                     Frequency = (eFrequency)cboFrequency.SelectedItem,
@@ -267,5 +267,21 @@ namespace FinanceManagement.Forms.RecurringTransaction
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAmount.Text == "")
+                return;
+
+            string input = txtAmount.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtAmount.Text = string.Format("{0:N0}", value);
+                txtAmount.SelectionStart = txtAmount.Text.Length;
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid number.", "Format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

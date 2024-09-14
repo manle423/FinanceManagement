@@ -168,10 +168,7 @@ namespace FinanceManagement.Forms.Transaction
             dgvTransactions.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvTransactions.Columns["UpdatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
-            
-            
-
-            
+            dgvTransactions.Columns["Amount"].DefaultCellStyle.Format = "N0";
         }
 
         private void AddCategoryColumn()

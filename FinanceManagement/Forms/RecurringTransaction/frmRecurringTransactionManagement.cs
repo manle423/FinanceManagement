@@ -342,5 +342,22 @@ namespace FinanceManagement.Forms.RecurringTransaction
             cboFrequency.Items.Clear();
             cboFrequency.Items.AddRange(Enum.GetNames(typeof(eFrequency)));
         }
+
+        private void txtAmountUpdate_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAmountUpdate.Text == "")
+                return;
+
+            string input = txtAmountUpdate.Text.Replace(",", "");
+            if (decimal.TryParse(input, out decimal value))
+            {
+                txtAmountUpdate.Text = string.Format("{0:N0}", value);
+                txtAmountUpdate.SelectionStart = txtAmountUpdate.Text.Length;
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid number.", "Format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

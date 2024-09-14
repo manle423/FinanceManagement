@@ -111,6 +111,9 @@ namespace FinanceManagement.Forms.Goal
             dgvGoals.Columns["CreatedAt"].HeaderText = "Created At";
             dgvGoals.Columns["UpdatedAt"].HeaderText = "Updated At";
 
+            dgvGoals.Columns["TargetAmount"].DefaultCellStyle.Format = "N0";
+            dgvGoals.Columns["CurrentAmount"].DefaultCellStyle.Format = "N0";
+
             // Chỉnh màu dựa trên trạng thái hoàn thành goal
             dgvGoals.CellFormatting += (sender, e) =>
             {

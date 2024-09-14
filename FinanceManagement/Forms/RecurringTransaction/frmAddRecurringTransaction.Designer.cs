@@ -43,7 +43,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtAmount = new System.Windows.Forms.TextBox();
             this.cboFrequency = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -196,12 +196,13 @@
             this.label6.TabIndex = 27;
             this.label6.Text = "Amount";
             // 
-            // textBox1
+            // txtAmount
             // 
-            this.textBox1.Location = new System.Drawing.Point(199, 192);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(247, 20);
-            this.textBox1.TabIndex = 18;
+            this.txtAmount.Location = new System.Drawing.Point(199, 192);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(247, 20);
+            this.txtAmount.TabIndex = 18;
+            this.txtAmount.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // cboFrequency
             // 
@@ -222,7 +223,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cboCategory);
@@ -262,7 +263,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.ComboBox cboFrequency;
     }
 }
