@@ -191,9 +191,9 @@ namespace FinanceManagement.Services
         {
             try
             {
-                if (IsDuplicateCategoryName(id, name))
+                if (IsCategoryExist(name))
                 {
-                    throw new Exception("Category name already exists for another category!");
+                    throw new Exception("Category name already exists");
                 }
 
                 return ExecuteUpdateCategory(id, name, type, description);
@@ -202,25 +202,6 @@ namespace FinanceManagement.Services
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
-            }
-        }
-
-        // Kiểm tra xem category đã tồn tại tên này ngoài nó hay chưa
-        private static bool IsDuplicateCategoryName(int id, string name)
-        {
-            using (SqlConnection conn = dbConnection.GetConnection())
-            {
-                conn.Open();
-
-                const string checkQuery = "SELECT COUNT(*) FROM Categories WHERE Name = @Name AND Category_id != @Id";
-
-                using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
-                {
-                    checkCmd.Parameters.AddWithValue("@Name", name);
-                    checkCmd.Parameters.AddWithValue("@Id", id);
-
-                    return (int)checkCmd.ExecuteScalar() > 0;
-                }
             }
         }
 
@@ -245,8 +226,6 @@ namespace FinanceManagement.Services
                 }
             }
         }
-
-
 
         // Lấy tên của category khi có id (sử dụng khi hiển thị trong các bảng có khóa ngoại) 
         public static string GetCategoryName(int id)
