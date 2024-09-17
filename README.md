@@ -35,8 +35,13 @@ php artisan migrate
 ```
 
 ### 3. **Run the Project**
-
-  Once the configuration is set up, you can run the project as usual. Follow the specific instructions provided in the project for running it.
+Open 2 terminal to run this project
+```bash
+php artisan serve
+```
+```bash
+npm run dev
+```
 
 ### 4. **Enjoy!**
 
