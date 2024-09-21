@@ -16,15 +16,18 @@ namespace FinanceManagement.Models
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public int? RecurringId { get; set; }
 
         public Transaction()
+
         {
 
         }
 
-        public Transaction(int id, int userId, int categoryId, decimal amount, DateTime transactionDate, string description, DateTime createdAt, DateTime updatedAt)
+        public Transaction(int id, int userId, int categoryId, decimal amount, DateTime transactionDate, string description, DateTime createdAt, DateTime updatedAt, int? recurringId)
         {
             Id = id;
+
             UserId = userId;
             CategoryId = categoryId;
             Amount = amount;
@@ -32,6 +35,7 @@ namespace FinanceManagement.Models
             Description = description;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
+            RecurringId = recurringId;
         }
     }
 }
