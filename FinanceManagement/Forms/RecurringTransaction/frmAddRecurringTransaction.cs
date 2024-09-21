@@ -197,12 +197,15 @@ namespace FinanceManagement.Forms.RecurringTransaction
                     Description = txtDescription.Text
                 };
 
-                bool isAdded = RecurringTransactionService.AddRecurringTransaction(recurringTransaction);
+                int newRecurringId = RecurringTransactionService.AddRecurringTransaction(recurringTransaction);
 
-                if (isAdded)
+                if (newRecurringId > 0)
                 {
+                    // Set the ID of the newly created recurring transaction
+                    recurringTransaction.Id = newRecurringId;
+
                     // Tạo các giao dịch định kỳ đã qua
-                    CreatePastTransactions(recurringTransaction);
+                    RecurringTransactionService.CreatePastTransactions(recurringTransaction);
 
                     MessageBox.Show("Recurring transaction added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearForm();
@@ -231,40 +234,6 @@ namespace FinanceManagement.Forms.RecurringTransaction
         private void frmAddRecurringTransaction_FormClosed(object sender, FormClosedEventArgs e)
         {
             DialogResult = DialogResult.OK;
-        }
-
-        private void CreatePastTransactions(Models.RecurringTransaction recurringTransaction)
-        {
-            DateTime startDate = recurringTransaction.StartDate;
-            DateTime currentDate = DateTime.Now;
-            int transactionCount = 1;
-
-            if (startDate > currentDate)
-            {
-                MessageBox.Show("Ngày bắt đầu lớn hơn ngày hiện tại. Không có giao dịch nào được tạo.");
-                return;
-            }
-
-            // Chạy vòng lặp cho đến khi đạt đến tháng hiện tại hoặc kết thúc
-            while (startDate <= currentDate)
-            {
-                // Tạo transaction mới cho mỗi tháng
-                Models.Transaction newTransaction = new Models.Transaction
-                {
-                    UserId = recurringTransaction.UserId,
-                    CategoryId = recurringTransaction.CategoryId,
-                    Amount = recurringTransaction.Amount,
-                    TransactionDate = startDate,
-                    Description = $"{recurringTransaction.Description} - Giao dịch định kỳ từ ngày {recurringTransaction.StartDate:dd/MM/yyyy}, lần {transactionCount}"
-                };
-
-                // Thêm transaction vào cơ sở dữ liệu
-                TransactionService.AddTransaction(newTransaction);
-
-                // Tăng ngày bắt đầu lên một tháng
-                startDate = startDate.AddMonths(1);
-                transactionCount++;
-            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

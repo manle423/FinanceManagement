@@ -50,8 +50,8 @@ namespace FinanceManagement.Services
                 {
                     conn.Open();
 
-                    const string query = "INSERT INTO Transactions (user_id, category_id, amount, transaction_date, description) " +
-                        "VALUES (@User_id, @Category_id, @Amount, @TransactionDate, @Description)";
+                    const string query = "INSERT INTO Transactions (user_id, category_id, amount, transaction_date, description, recurring_id) " +
+                        "VALUES (@User_id, @Category_id, @Amount, @TransactionDate, @Description, @RecurringId)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -60,6 +60,7 @@ namespace FinanceManagement.Services
                         cmd.Parameters.AddWithValue("@Amount", transaction.Amount);
                         cmd.Parameters.AddWithValue("@TransactionDate", transaction.TransactionDate);
                         cmd.Parameters.AddWithValue("@Description", transaction.Description);
+                        cmd.Parameters.AddWithValue("@RecurringId", transaction.RecurringId.HasValue ? (object)transaction.RecurringId.Value : DBNull.Value);
 
                         return cmd.ExecuteNonQuery() > 0;
                     }
@@ -241,6 +242,7 @@ namespace FinanceManagement.Services
             List<decimal> res = new List<decimal>();
             DateTime startDate = new DateTime(year.Year, 1, 1);
             DateTime endDate = new DateTime(year.Year, 12, 31);
+
             List<Transaction> transactionsIncome = GetAllTransactions(user_id, startDate.ToString(), endDate.ToString(), -1, "Income");
             List<Transaction> transactionsExpense = GetAllTransactions(user_id, startDate.ToString(), endDate.ToString(), -1, "Expense");
             decimal sumIncome = GetSumAmount(transactionsIncome);

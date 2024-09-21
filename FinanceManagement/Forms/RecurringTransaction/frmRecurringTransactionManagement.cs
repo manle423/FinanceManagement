@@ -105,37 +105,24 @@ namespace FinanceManagement.Forms.RecurringTransaction
             dgvRecurringTransactions.Columns["Amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
-
-
-        private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
+        private void dgvRecurringTransactions_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (cboCategory.SelectedIndex != -1)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                LoadRecurringTransactions();
-            }
-        }
+                DataGridViewRow row = dgvRecurringTransactions.Rows[e.RowIndex];
+                Models.RecurringTransaction selectedTransaction = (Models.RecurringTransaction)row.DataBoundItem;
+                LoadCategoriesComboBox(cboCategoryUpdate);
+                // Populate the textboxes and other controls with the selected transaction data
+                txtIDUpdate.Text = selectedTransaction.Id.ToString();
+                txtAmountUpdate.Text = selectedTransaction.Amount.ToString("N0");
+                dtpStartDate.Value = selectedTransaction.StartDate;
+                dtpEndDate.Value = selectedTransaction.EndDate;
+                cboCategoryUpdate.SelectedValue = selectedTransaction.CategoryId;
+                cboFrequency.SelectedItem = selectedTransaction.Frequency.ToString();
+                txtDescriptionUpdate.Text = selectedTransaction.Description;
 
-        private void cboType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboType.SelectedIndex != 0)
-            {
-                LoadRecurringTransactions();
-            }
-        }
-
-        private void btnReload_Click(object sender, EventArgs e)
-        {
-            LoadRecurringTransactions();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            using (frmAddRecurringTransaction frm = new frmAddRecurringTransaction())
-            {
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    LoadRecurringTransactions();
-                }
+                btnUpdate.Enabled = true;
+                btnDelete.Enabled = true;
             }
         }
 
@@ -165,33 +152,6 @@ namespace FinanceManagement.Forms.RecurringTransaction
                 {
                     MessageBox.Show("Failed to update recurring transaction.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtIDUpdate.Text))
-            {
-                int id = int.Parse(txtIDUpdate.Text);
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this recurring transaction?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                
-                if (result == DialogResult.Yes)
-                {
-                    if (RecurringTransactionService.DeleteRecurringTransaction(id, userId))
-                    {
-                        MessageBox.Show("Recurring transaction deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadRecurringTransactions();
-                        ClearUpdateFields();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to delete recurring transaction.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a recurring transaction to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -264,71 +224,7 @@ namespace FinanceManagement.Forms.RecurringTransaction
             btnDelete.Enabled = false;
         }
 
-        private void cboCategoryUpdate_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboFrequency_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void dtpEndDate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvRecurringTransactions_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                DataGridViewRow row = dgvRecurringTransactions.Rows[e.RowIndex];
-                Models.RecurringTransaction selectedTransaction = (Models.RecurringTransaction)row.DataBoundItem;
-                LoadCategoriesComboBox(cboCategoryUpdate);
-                // Populate the textboxes and other controls with the selected transaction data
-                txtIDUpdate.Text = selectedTransaction.Id.ToString();
-                txtAmountUpdate.Text = selectedTransaction.Amount.ToString("N0");
-                dtpStartDate.Value = selectedTransaction.StartDate;
-                dtpEndDate.Value = selectedTransaction.EndDate;
-                cboCategoryUpdate.SelectedValue = selectedTransaction.CategoryId;
-                cboFrequency.SelectedItem = selectedTransaction.Frequency.ToString();
-                txtDescriptionUpdate.Text = selectedTransaction.Description;
-
-
-                btnUpdate.Enabled = true;
-                btnDelete.Enabled = true;
-            }
-        }
-
-        private void dgvRecurringTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void pnlData_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void frmRecurringTransactionManagement_Load(object sender, EventArgs e)
-        {
-            LoadCategoriesComboBox(cboCategory);
-            LoadTypeComboBox();
-            LoadFrequencyComboBox();
-            LoadRecurringTransactions();
-
-            dtpStartDate.Format = DateTimePickerFormat.Custom;
-            dtpEndDate.Format = DateTimePickerFormat.Custom;
-
-            dtpStartDate.CustomFormat = "dd/MM/yyyy";
-            dtpEndDate.CustomFormat = "dd/MM/yyyy";
-        }
-
-        public void LoadCategoriesComboBox(ComboBox cboCategory)
+        private void LoadCategoriesComboBox(ComboBox cboCategory)
         {
             List<Category> categories = CategoryService.GetAllCategories(null);
             categories.Insert(0, new Category(-1, "All"));
@@ -358,6 +254,107 @@ namespace FinanceManagement.Forms.RecurringTransaction
             {
                 MessageBox.Show("Please enter a valid number.", "Format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboCategory.SelectedIndex != -1)
+            {
+                LoadRecurringTransactions();
+            }
+        }
+
+        private void cboType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboType.SelectedIndex != 0)
+            {
+                LoadRecurringTransactions();
+            }
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            LoadRecurringTransactions();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            using (frmAddRecurringTransaction frm = new frmAddRecurringTransaction())
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadRecurringTransactions();
+                }
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtIDUpdate.Text))
+            {
+                int id = int.Parse(txtIDUpdate.Text);
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this recurring transaction?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                
+                if (result == DialogResult.Yes)
+                {
+                    if (RecurringTransactionService.DeleteRecurringTransaction(id, userId))
+                    {
+                        MessageBox.Show("Recurring transaction deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadRecurringTransactions();
+                        ClearUpdateFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete recurring transaction.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a recurring transaction to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cboCategoryUpdate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboFrequency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void dtpEndDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvRecurringTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void pnlData_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void frmRecurringTransactionManagement_Load(object sender, EventArgs e)
+        {
+            LoadCategoriesComboBox(cboCategory);
+            LoadTypeComboBox();
+            LoadFrequencyComboBox();
+            LoadRecurringTransactions();
+
+            dtpStartDate.Format = DateTimePickerFormat.Custom;
+            dtpEndDate.Format = DateTimePickerFormat.Custom;
+
+            dtpStartDate.CustomFormat = "dd/MM/yyyy";
+            dtpEndDate.CustomFormat = "dd/MM/yyyy";
         }
     }
 }

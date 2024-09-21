@@ -11,7 +11,7 @@ namespace FinanceManagement.Services
     {
         private static readonly DatabaseConnection dbConnection = new DatabaseConnection();
 
-        public static bool AddRecurringTransaction(RecurringTransaction recurringTransaction)
+        public static int AddRecurringTransaction(RecurringTransaction recurringTransaction)
         {
             try
             {
@@ -21,7 +21,8 @@ namespace FinanceManagement.Services
 
                     const string query = @"INSERT INTO recurring_transactions 
                         (user_id, category_id, amount, start_date, end_date, frequency, description) 
-                        VALUES (@UserId, @CategoryId, @Amount, @StartDate, @EndDate, @Frequency, @Description)";
+                        VALUES (@UserId, @CategoryId, @Amount, @StartDate, @EndDate, @Frequency, @Description);
+                        SELECT SCOPE_IDENTITY();"; // Retrieve the ID of the newly inserted row
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -33,15 +34,53 @@ namespace FinanceManagement.Services
                         cmd.Parameters.AddWithValue("@Frequency", recurringTransaction.Frequency.ToString());
                         cmd.Parameters.AddWithValue("@Description", recurringTransaction.Description);
 
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        return rowsAffected > 0;
+                        // Get the ID
+                        int newId = Convert.ToInt32(cmd.ExecuteScalar());
+                        return newId;
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                return -1;
+            }
+        }
+
+        public static void CreatePastTransactions(RecurringTransaction recurringTransaction)
+        {
+            DateTime startDate = recurringTransaction.StartDate;
+            DateTime endDate = recurringTransaction.EndDate;
+            int transactionCount = 1;
+
+            // Chạy vòng lặp cho đến khi đạt đến ngày kết thúc
+            while (startDate <= endDate)
+            {
+                // Tạo transaction mới cho mỗi tháng hoặc năm dựa trên tần suất
+                Models.Transaction newTransaction = new Models.Transaction
+                {
+                    UserId = recurringTransaction.UserId,
+                    CategoryId = recurringTransaction.CategoryId,
+                    Amount = recurringTransaction.Amount,
+                    TransactionDate = startDate,
+                    Description = $"{recurringTransaction.Description} - Giao dịch định kỳ từ ngày {recurringTransaction.StartDate:dd/MM/yyyy}, lần {transactionCount}",
+                    RecurringId = recurringTransaction.Id
+                };
+
+                // Thêm transaction vào cơ sở dữ liệu
+                TransactionService.AddTransaction(newTransaction);
+
+                // Tăng ngày bắt đầu lên một tháng hoặc một năm dựa trên tần suất
+                switch (recurringTransaction.Frequency)
+                {
+                    case eFrequency.Monthly:
+                        startDate = startDate.AddMonths(1);
+                        break;
+                    case eFrequency.Yearly:
+                        startDate = startDate.AddYears(1);
+                        break;
+                }
+                transactionCount++;
             }
         }
 
@@ -122,10 +161,10 @@ namespace FinanceManagement.Services
                     conn.Open();
 
                     const string query = @"UPDATE recurring_transactions 
-                        SET category_id = @CategoryId, amount = @Amount, start_date = @StartDate, 
-                        end_date = @EndDate, frequency = @Frequency, description = @Description,
-                        updated_at = GETDATE()
-                        WHERE recurring_id = @Id AND user_id = @UserId";
+                SET category_id = @CategoryId, amount = @Amount, start_date = @StartDate, 
+                end_date = @EndDate, frequency = @Frequency, description = @Description,
+                updated_at = GETDATE()
+                WHERE recurring_id = @Id AND user_id = @UserId";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -139,7 +178,14 @@ namespace FinanceManagement.Services
                         cmd.Parameters.AddWithValue("@Description", recurringTransaction.Description);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
-                        return rowsAffected > 0;
+                        if (rowsAffected > 0)
+                        {
+                            // Delete all existing transactions and recreate them
+                            DeleteAllTransactions(recurringTransaction.Id);
+                            CreatePastTransactions(recurringTransaction);
+                            return true;
+                        }
+                        return false;
                     }
                 }
             }
@@ -174,6 +220,167 @@ namespace FinanceManagement.Services
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+        }
+
+        private static void HandleUpdatedTransactions(RecurringTransaction recurringTransaction)
+        {
+            DateTime originalStartDate = GetOriginalStartDate(recurringTransaction.Id);
+            DateTime originalEndDate = GetOriginalEndDate(recurringTransaction.Id);
+            DateTime newStartDate = recurringTransaction.StartDate;
+            DateTime newEndDate = recurringTransaction.EndDate;
+            decimal originalAmount = GetOriginalAmount(recurringTransaction.Id);
+            decimal newAmount = recurringTransaction.Amount;
+
+            if (newStartDate != originalStartDate)
+            {
+                // Case: Start date changed, delete all existing transactions and recreate them
+                DeleteAllTransactions(recurringTransaction.Id);
+                CreatePastTransactions(recurringTransaction);
+            }
+            else
+            {
+                if (newEndDate < originalEndDate)
+                {
+                    // Case: Reduce end date, delete excess transactions
+                    DeleteExcessTransactions(recurringTransaction.Id, newEndDate);
+                }
+                else if (newEndDate > originalEndDate)
+                {
+                    // Case: Increase end date, create additional transactions
+                    CreateAdditionalTransactions(recurringTransaction, originalEndDate);
+                }
+            }
+
+            if (newAmount != originalAmount)
+            {
+                // Case: Amount changed, update all existing transactions
+                UpdateTransactionAmounts(recurringTransaction.Id, newAmount);
+            }
+        }
+
+        private static DateTime GetOriginalStartDate(int recurringId)
+        {
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+
+                const string query = "SELECT start_date FROM recurring_transactions WHERE recurring_id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", recurringId);
+                    return (DateTime)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        private static DateTime GetOriginalEndDate(int recurringId)
+        {
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+
+                const string query = "SELECT end_date FROM recurring_transactions WHERE recurring_id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", recurringId);
+                    return (DateTime)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        private static decimal GetOriginalAmount(int recurringId)
+        {
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+
+                const string query = "SELECT amount FROM recurring_transactions WHERE recurring_id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", recurringId);
+                    return (decimal)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        private static void DeleteAllTransactions(int recurringId)
+        {
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+
+                const string query = "DELETE FROM transactions WHERE recurring_id = @RecurringId";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@RecurringId", recurringId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private static void DeleteExcessTransactions(int recurringId, DateTime newEndDate)
+        {
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+
+                const string query = "d";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@RecurringId", recurringId);
+                    cmd.Parameters.AddWithValue("@NewEndDate", newEndDate);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private static void CreateAdditionalTransactions(RecurringTransaction recurringTransaction, DateTime originalEndDate)
+        {
+            DateTime startDate = originalEndDate.AddMonths(1); // Start from the next month after the original end date
+            DateTime endDate = recurringTransaction.EndDate;
+            int transactionCount = 1;
+
+            while (startDate <= endDate)
+            {
+                Models.Transaction newTransaction = new Models.Transaction
+                {
+                    UserId = recurringTransaction.UserId,
+                    CategoryId = recurringTransaction.CategoryId,
+                    Amount = recurringTransaction.Amount,
+                    TransactionDate = startDate,
+                    Description = $"{recurringTransaction.Description} - Giao dịch định kỳ từ ngày {recurringTransaction.StartDate:dd/MM/yyyy}, lần {transactionCount}",
+                    RecurringId = recurringTransaction.Id
+                };
+
+                TransactionService.AddTransaction(newTransaction);
+
+                switch (recurringTransaction.Frequency)
+                {
+                    case eFrequency.Monthly:
+                        startDate = startDate.AddMonths(1);
+                        break;
+                    case eFrequency.Yearly:
+                        startDate = startDate.AddYears(1);
+                        break;
+                }
+                transactionCount++;
+            }
+        }
+
+        private static void UpdateTransactionAmounts(int recurringId, decimal newAmount)
+        {
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+
+                const string query = "UPDATE transactions SET amount = @NewAmount WHERE recurring_id = @RecurringId";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@NewAmount", newAmount);
+                    cmd.Parameters.AddWithValue("@RecurringId", recurringId);
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
     }
