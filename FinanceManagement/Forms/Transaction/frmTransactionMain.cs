@@ -48,7 +48,6 @@ namespace FinanceManagement.Forms.Transaction
             //cboCategory.SelectedIndex = 0;
             dtpStartDate.MinDate = DateTime.MinValue;
             dtpStartDate.MaxDate = DateTime.Now;
-            dtpEndDate.MaxDate = DateTime.Now;
             dtpEndDate.MinDate = dtpStartDate.Value;
             dgvTransactions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTransactions.ReadOnly = true;
@@ -77,7 +76,7 @@ namespace FinanceManagement.Forms.Transaction
 
             // Set viewing transactions during last month on default
             dtpStartDate.Value = DateTime.Now.AddMonths(-1);
-            dtpEndDate.Value = dtpEndDate.MaxDate;
+            dtpEndDate.Value = DateTime.Now;
 
         }
 
