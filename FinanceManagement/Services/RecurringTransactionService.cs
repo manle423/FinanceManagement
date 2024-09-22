@@ -304,7 +304,7 @@ namespace FinanceManagement.Services
             }
         }
 
-        private static void DeleteAllTransactions(int recurringId)
+        public static void DeleteAllTransactions(int recurringId)
         {
             using (SqlConnection conn = dbConnection.GetConnection())
             {
@@ -378,6 +378,21 @@ namespace FinanceManagement.Services
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@NewAmount", newAmount);
+                    cmd.Parameters.AddWithValue("@RecurringId", recurringId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void UpdateTransactionsRecurringIdToNull(int recurringId)
+        {
+            using (SqlConnection conn = dbConnection.GetConnection())
+            {
+                conn.Open();
+
+                const string query = "UPDATE transactions SET recurring_id = NULL WHERE recurring_id = @RecurringId";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
                     cmd.Parameters.AddWithValue("@RecurringId", recurringId);
                     cmd.ExecuteNonQuery();
                 }

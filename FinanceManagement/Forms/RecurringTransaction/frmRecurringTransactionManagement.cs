@@ -293,13 +293,30 @@ namespace FinanceManagement.Forms.RecurringTransaction
             if (!string.IsNullOrEmpty(txtIDUpdate.Text))
             {
                 int id = int.Parse(txtIDUpdate.Text);
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this recurring transaction?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                
+                DialogResult result = MessageBox.Show("Do you want to delete all related transactions as well?", "Confirm Delete", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
                 if (result == DialogResult.Yes)
                 {
+                    // Delete all related transactions
+                    RecurringTransactionService.DeleteAllTransactions(id);
                     if (RecurringTransactionService.DeleteRecurringTransaction(id, userId))
                     {
-                        MessageBox.Show("Recurring transaction deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Recurring transaction and all related transactions deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadRecurringTransactions();
+                        ClearUpdateFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete recurring transaction.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else if (result == DialogResult.No)
+                {
+                    // Update all related transactions to set recurring_id to null
+                    RecurringTransactionService.UpdateTransactionsRecurringIdToNull(id);
+                    if (RecurringTransactionService.DeleteRecurringTransaction(id, userId))
+                    {
+                        MessageBox.Show("Recurring transaction deleted successfully. Related transactions have been updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadRecurringTransactions();
                         ClearUpdateFields();
                     }
