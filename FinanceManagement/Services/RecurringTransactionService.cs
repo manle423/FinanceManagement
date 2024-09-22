@@ -2,7 +2,9 @@
 using FinanceManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace FinanceManagement.Services
@@ -67,8 +69,34 @@ namespace FinanceManagement.Services
                     RecurringId = recurringTransaction.Id
                 };
 
-                // Thêm transaction vào cơ sở dữ liệu
-                TransactionService.AddTransaction(newTransaction);
+                // Kiểm tra ngân sách hiện tại
+                Budget currentBudget = BudgetService.GetCurrentBudget(newTransaction.UserId, newTransaction.CategoryId, newTransaction.TransactionDate);
+                if (currentBudget != null)
+                {
+                    decimal newTotalSpent = currentBudget.TotalSpent + newTransaction.Amount;
+                    decimal budgetPercentage = (newTotalSpent / currentBudget.Amount) * 100;
+                    if (budgetPercentage > 100)
+                    {
+                        
+                        recurringTransaction.Description = recurringTransaction.Description + $" (originally planned until {recurringTransaction.EndDate:dd/MM/yyyy} but got changed due to lack of budget)";
+                        recurringTransaction.EndDate = newTransaction.TransactionDate.AddMonths(-1);
+                        UpdateRecurringTransaction(recurringTransaction);
+                        DialogResult result = MessageBox.Show($"Not enough budget for transactions from {newTransaction.TransactionDate:dd/MM/yyyy} onward. The recurring transactions afterwards " +
+                            $"will be canceled.", "Budget Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        startDate = endDate;
+                    }
+                    else
+                    {
+                        // Thêm transaction vào cơ sở dữ liệu
+                        TransactionService.AddTransaction(newTransaction, true);
+                    }
+                }
+                else
+                {
+                    // Thêm transaction vào cơ sở dữ liệu
+                    TransactionService.AddTransaction(newTransaction, true);
+                }
+                
 
                 // Tăng ngày bắt đầu lên một tháng hoặc một năm dựa trên tần suất
                 switch (recurringTransaction.Frequency)

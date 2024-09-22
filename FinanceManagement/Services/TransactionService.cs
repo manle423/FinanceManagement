@@ -19,7 +19,7 @@ namespace FinanceManagement.Services
         private static readonly DatabaseConnection dbConnection = new DatabaseConnection();
 
         // Hàm thêm transaction
-        public static bool AddTransaction(Transaction transaction)
+        public static bool AddTransaction(Transaction transaction, bool isRecurring = false)
         {
             try
             {
@@ -30,20 +30,23 @@ namespace FinanceManagement.Services
                 {
                     decimal newTotalSpent = currentBudget.TotalSpent + transaction.Amount;
                     decimal budgetPercentage = (newTotalSpent / currentBudget.Amount) * 100;
-
-                    if (budgetPercentage > 150)
+                    if (!isRecurring)
                     {
-                        MessageBox.Show("Warning: This transaction will exceed 150% of the budget for this category.", "Budget Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return false;
-                    }
-                    else if (budgetPercentage > 100)
-                    {
-                        DialogResult result = MessageBox.Show($"This transaction will exceed the budget for this category by {budgetPercentage - 100:F2}%. Do you want to proceed?", "Budget Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (result == DialogResult.No)
+                        if (budgetPercentage > 150)
                         {
+                            MessageBox.Show("Warning: This transaction will exceed 150% of the budget for this category.", "Budget Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return false;
                         }
+                        else if (budgetPercentage > 100)
+                        {
+                            DialogResult result = MessageBox.Show($"This transaction will exceed the budget for this category by {budgetPercentage - 100:F2}%. Do you want to proceed?", "Budget Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (result == DialogResult.No)
+                            {
+                                return false;
+                            }
+                        }
                     }
+                   
                 }
 
                 using (SqlConnection conn = dbConnection.GetConnection())
